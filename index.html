@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>出海罗盘 · ChinaEcom Atlas 2026</title>
-<meta name="description" content="2026中国电商与物流出海全景：TikTok Shop、Temu、SHEIN、速卖通、京东国际五大电商平台与菜鸟、顺丰、极兔、百世、京东产发五大物流商的全球化战略、困境与趋势。">
+<meta name="description" content="2026中国电商与物流出海全景：TikTok Shop、Temu、SHEIN、速卖通、京东国际与菜鸟、顺丰、极兔、百世、京东产发的全球化战略、困境与趋势。">
 <meta property="og:title" content="出海罗盘 · ChinaEcom Atlas 2026">
 <meta property="og:description" content="从TikTok Shop千亿美元GMV到菜鸟全球40+海外仓，深度解析中国电商与物流出海全景。">
 <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{font-family:-apple-system,'SF Pro Display','PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-/* ===== DECORATION ===== */
+/* DECORATION */
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(99,102,241,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.025) 1px,transparent 1px);background-size:48px 48px}
 .glow{position:fixed;border-radius:50%;filter:blur(100px);opacity:.12;pointer-events:none;z-index:0;animation:glow 25s ease-in-out infinite alternate;will-change:transform}
 .glow.g1{width:500px;height:500px;background:#6366f1;top:-150px;left:-80px}
@@ -24,7 +24,7 @@ a{color:inherit;text-decoration:none}
 .glow.g3{width:300px;height:300px;background:#ec4899;top:50%;left:60%;animation-delay:-6s}
 @keyframes glow{0%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-50px) scale(1.08)}100%{transform:translate(-30px,40px) scale(.92)}}
 @media(max-width:768px){.glow{display:none}}
-/* ===== NAV ===== */
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,16,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 1.5rem}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
 .nav-logo{font-weight:800;font-size:1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.02em}
@@ -36,7 +36,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,16,.88);
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-/* ===== HERO ===== */
+.lang-swt{position:relative;margin-left:.6rem}
+.lang-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.3rem .7rem;color:var(--text-dim);font-size:.72rem;cursor:pointer;display:flex;align-items:center;gap:.25rem;transition:border-color .25s}
+.lang-btn:hover{border-color:var(--accent)}
+.lang-dd{position:absolute;top:calc(100% + 4px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:none;min-width:110px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:10}
+.lang-opt{display:block;padding:.45rem .9rem;font-size:.75rem;color:var(--text-dim);cursor:pointer;transition:all .2s}
+.lang-opt:hover,.lang-opt.active{color:var(--accent);background:rgba(99,102,241,.06)}
+/* HERO */
 .hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem 3rem}
 .hero-inner{max-width:720px;animation:fadeUp .8s ease-out both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -54,17 +60,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,16,.88);
 .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.3rem;animation:bounce 2s ease-in-out infinite;color:var(--text-dim);font-size:.68rem}
 .scroll-hint .arrow{width:16px;height:16px;border-right:2px solid var(--text-dim);border-bottom:2px solid var(--text-dim);transform:rotate(45deg);opacity:.5}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-/* ===== COMMON ===== */
+/* COMMON */
 .wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
 section{padding:4rem 0;position:relative}
 section+section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(180px,50%);height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
 .sec-label{font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.5rem}
 .sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:.6rem;letter-spacing:-.01em}
 .sec-desc{color:var(--text-dim);font-size:.9rem;max-width:600px;margin-bottom:2rem}
-/* ===== REVEAL ===== */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .reveal.vis{opacity:1;transform:translateY(0)}
-/* ===== NEWS ===== */
+/* NEWS */
 .news-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.8rem}
 .news-time{font-size:.72rem;color:var(--text-dim);background:var(--surface);padding:.35rem .8rem;border-radius:6px;border:1px solid var(--border)}
 .news-time .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:.3rem;animation:pulse 2s ease-in-out infinite}
@@ -81,7 +86,7 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 .news-title{font-size:.9rem;font-weight:600;margin-bottom:.25rem}
 .news-sum{font-size:.78rem;color:var(--text-dim);margin-bottom:.35rem;line-height:1.55}
 .news-src{font-size:.65rem;color:var(--accent3);display:flex;align-items:center;gap:.3rem;flex-wrap:wrap}
-.news-src .ptag{display:inline-block;font-size:.6rem;padding:.1rem .4rem;border-radius:3px}
+.ptag{display:inline-block;font-size:.6rem;padding:.1rem .4rem;border-radius:3px}
 .ptag.tiktok{background:rgba(255,0,80,.1);color:#ff0050}
 .ptag.temu{background:rgba(245,158,11,.1);color:#f59e0b}
 .ptag.shein{background:rgba(236,72,153,.1);color:#ec4899}
@@ -92,16 +97,16 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 .ptag.cn{background:rgba(245,158,11,.08);color:#f59e0b}
 .ptag.best{background:rgba(34,197,94,.08);color:#22c55e}
 .ptag.jdprop{background:rgba(239,68,68,.1);color:#ef4444}
-.ptag.partnership{background:rgba(139,92,246,.1);color:#a78bfa}
+.ptag.pship{background:rgba(139,92,246,.1);color:#a78bfa}
 .news-ext{font-size:.65rem;color:var(--text-dim);opacity:0;transition:opacity .25s;margin-top:.25rem}
 .news-item:hover .news-ext{opacity:1}
-/* ===== MAP ===== */
+/* MAP */
 .map-section{background:var(--surface)}
 .map-wrap{position:relative;max-width:900px;margin:0 auto}
 .map-svg{width:100%;height:auto}
 .map-svg .land{fill:#1a1a30;stroke:#2a2a45;stroke-width:.5;transition:fill .3s}
 .map-svg .land:hover{fill:#252545}
-.map-svg .land.highlight{fill:rgba(99,102,241,.18);stroke:var(--accent);stroke-width:1}
+.map-svg .land.hl{fill:rgba(99,102,241,.18);stroke:var(--accent);stroke-width:1}
 .map-dot{cursor:pointer;transition:all .3s}
 .map-dot:hover{filter:brightness(1.5)}
 .map-label{font-size:8px;fill:var(--text-dim);pointer-events:none;font-weight:600}
@@ -110,14 +115,14 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 @keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 .map-info h4{font-size:.88rem;font-weight:700;margin-bottom:.5rem;color:var(--accent)}
 .map-info ul{list-style:none;padding:0}
-.map-info li{padding:.25rem 0;color:var(--text-dim);font-size:.75rem;display:flex;align-items:center;gap:.4rem}
-.map-info li::before{content:'•';color:var(--accent);font-weight:bold}
+.map-info li{padding:.25rem 0;color:var(--text-dim);font-size:.75rem}
+.map-info li::before{content:'•';color:var(--accent);font-weight:bold;margin-right:.4rem}
 .map-info .close-btn{position:absolute;top:.5rem;right:.7rem;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.9rem;line-height:1}
 .map-info .close-btn:hover{color:var(--text)}
 .map-legend{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1rem;font-size:.7rem;color:var(--text-dim)}
 .map-legend span{display:flex;align-items:center;gap:.3rem}
 .map-legend .dot{width:8px;height:8px;border-radius:50%}
-/* ===== KEYWORDS ===== */
+/* KEYWORDS */
 .kw-cloud{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1rem 0}
 .kw{padding:.35rem .9rem;border-radius:999px;font-size:.76rem;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);transition:all .25s;cursor:pointer;position:relative}
 .kw:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.04)}
@@ -129,11 +134,11 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 .kw-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--border)}
 .kw-tip .kt{font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:.3rem}
 .kw-tip .km{font-size:.74rem;color:var(--text);margin-bottom:.4rem;line-height:1.5}
-.kw-tip .kw{font-size:.7rem;color:var(--text-dim);line-height:1.5}
-.kw-tip .kw strong{color:var(--orange)}
+.kw-tip .kr{font-size:.7rem;color:var(--text-dim);line-height:1.5}
+.kw-tip .kr strong{color:var(--orange)}
 .kw.active .kw-tip{display:block}
 @media(max-width:768px){.kw-tip{position:fixed;bottom:10px;left:10px;right:10px;width:auto;transform:none}}
-/* ===== PLATFORM CARDS ===== */
+/* CARDS */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.2rem}
 .pcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
 .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .3s}
@@ -153,14 +158,13 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 .tag.new{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.15)}
 .tag.risk{background:rgba(245,158,11,.08);color:var(--orange);border-color:rgba(245,158,11,.15)}
 .pcard-list{list-style:none}
-.pcard-list li{padding:.3rem 0;font-size:.78rem;color:var(--text-dim);border-bottom:1px solid rgba(255,255,55,.02);display:flex;align-items:flex-start;gap:.4rem}
+.pcard-list li{padding:.3rem 0;font-size:.78rem;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,.02);display:flex;align-items:flex-start;gap:.4rem}
 .pcard-list li:last-child{border-bottom:none}
 .pcard-list .b{color:var(--accent);flex-shrink:0;font-size:.7rem}
-/* Challenge card */
 .challenge-box{background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem}
 .challenge-box h5{font-size:.76rem;font-weight:700;color:var(--orange);margin-bottom:.4rem;display:flex;align-items:center;gap:.3rem}
 .challenge-box p{font-size:.72rem;color:var(--text-dim);line-height:1.55}
-/* ===== TRENDS ===== */
+/* TRENDS */
 .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
 .tcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem;position:relative;overflow:hidden;transition:transform .25s}
 .tcard:hover{transform:translateY(-3px)}
@@ -169,7 +173,7 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 .tnum{font-size:2rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:.25;margin-bottom:.3rem}
 .ttitle{font-size:.9rem;font-weight:700;margin-bottom:.3rem}
 .tdesc{font-size:.76rem;color:var(--text-dim);line-height:1.5}
-/* ===== TIMELINE ===== */
+/* TIMELINE */
 .tl{position:relative;padding-left:1.8rem}
 .tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),var(--accent3))}
 .tl-item{position:relative;margin-bottom:1.5rem}
@@ -186,7 +190,7 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 .tl-link{display:block;padding:.6rem .8rem;border-radius:8px;border:1px solid transparent;transition:all .25s}
 .tl-link:hover{border-color:var(--border);background:rgba(99,102,241,.03)}
 .tl-link:hover .tl-title{color:var(--accent)}
-/* ===== TABLE ===== */
+/* TABLE */
 .cmp-wrap{overflow-x:auto;margin-top:1rem;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--border)}
 .cmp{width:100%;border-collapse:collapse;background:var(--surface)}
 .cmp th{background:var(--surface2);padding:.65rem .7rem;font-size:.72rem;font-weight:600;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
@@ -194,14 +198,15 @@ section+section::before{content:'';position:absolute;top:0;left:50%;transform:tr
 .cmp tr:hover td{background:rgba(99,102,241,.03)}
 .cmp a{color:var(--accent3);text-decoration:none;font-weight:600}
 .cmp a:hover{text-decoration:underline;color:var(--accent)}
-/* ===== FOOTER ===== */
+.cmp .risk-cell{color:var(--orange);font-size:.7rem}
+/* FOOTER */
 footer{text-align:center;padding:2.5rem 1.5rem;border-top:1px solid var(--border);position:relative;z-index:1}
 footer p{font-size:.72rem;color:var(--text-dim)}
 footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
 .back-top{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(16px);transition:all .3s;z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.3)}
 .back-top.vis{opacity:1;transform:translateY(0)}
 .back-top:hover{border-color:var(--accent);color:var(--accent)}
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:768px){
   .hero-stats{grid-template-columns:repeat(2,1fr);gap:.6rem}
   .hero{padding:4.5rem 1rem 2.5rem}
@@ -214,7 +219,6 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
   .nav-links a{font-size:.95rem;padding:.65rem 0;border-bottom:1px solid var(--border)}
   .pgrid{grid-template-columns:1fr}
   .tgrid{grid-template-columns:1fr}
-  .news-item{flex-direction:row}
   .map-info{position:fixed!important;bottom:10px!important;left:10px!important;right:10px!important;top:auto!important;width:auto!important;max-width:none;transform:none!important}
 }
 </style>
@@ -225,33 +229,29 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
 <div class="glow g2"></div>
 <div class="glow g3"></div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">🧭 出海罗盘 Atlas</a>
-    <button class="hamburger" onclick="toggleNav()" aria-label="菜单"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <a href="#daily" data-i18n="nav0">📰 动态</a>
-      <a href="#map" data-i18n="nav1">🗺️ 地图</a>
-      <a href="#keywords" data-i18n="nav2">🏷️ 热词</a>
-      <a href="#ecom" data-i18n="nav3">🛒 电商</a>
-      <a href="#logi" data-i18n="nav4">📦 物流</a>
-      <a href="#trends" data-i18n="nav5">🔮 趋势</a>
-      <a href="#timeline" data-i18n="nav6">📅 大事记</a>
-      <a href="#compare" data-i18n="nav7">📊 对比</a>
-      <div class="lang-swt" style="position:relative;margin-left:.6rem">
-        <button class="lang-btn" onclick="toggleLang()" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.3rem .7rem;color:var(--text-dim);font-size:.72rem;cursor:pointer;display:flex;align-items:center;gap:.25rem"><span id="lang-label">简中</span> <span style="font-size:.55rem">▼</span></button>
-        <div id="lang-dd" style="position:absolute;top:calc(100% + 4px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:none;min-width:110px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:10">
-          <span class="lang-opt active" onclick="setLang('zh')" style="display:block;padding:.45rem .9rem;font-size:.75rem;color:var(--text-dim);cursor:pointer">简中</span>
-          <span class="lang-opt" onclick="setLang('zh-TW')" style="display:block;padding:.45rem .9rem;font-size:.75rem;color:var(--text-dim);cursor:pointer">繁中</span>
-          <span class="lang-opt" onclick="setLang('en')" style="display:block;padding:.45rem .9rem;font-size:.75rem;color:var(--text-dim);cursor:pointer">English</span>
-        </div>
+<nav><div class="nav-inner">
+  <a href="#" class="nav-logo">🧭 出海罗盘 Atlas</a>
+  <button class="hamburger" onclick="toggleNav()" aria-label="菜单"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#daily" data-i18n="nav0">📰 动态</a>
+    <a href="#map" data-i18n="nav1">🗺️ 地图</a>
+    <a href="#keywords" data-i18n="nav2">🏷️ 热词</a>
+    <a href="#ecom" data-i18n="nav3">🛒 电商</a>
+    <a href="#logi" data-i18n="nav4">📦 物流</a>
+    <a href="#trends" data-i18n="nav5">🔮 趋势</a>
+    <a href="#timeline" data-i18n="nav6">📅 大事记</a>
+    <a href="#compare" data-i18n="nav7">📊 对比</a>
+    <div class="lang-swt">
+      <button class="lang-btn" onclick="toggleLang()"><span id="lang-label">简中</span> <span style="font-size:.55rem">▼</span></button>
+      <div class="lang-dd" id="lang-dd">
+        <span class="lang-opt active" onclick="setLang('zh')">简中</span>
+        <span class="lang-opt" onclick="setLang('zh-TW')">繁中</span>
+        <span class="lang-opt" onclick="setLang('en')">English</span>
       </div>
     </div>
   </div>
-</nav>
+</div></nav>
 
-<!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-inner">
     <div class="hero-badge" data-i18n="hero_badge">📊 2026 BRIEFING · 数据截至2026年3月</div>
@@ -263,686 +263,751 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
       <div class="stat"><div class="num">+58%</div><div class="label" data-i18n="s3">出海物流订单增速</div></div>
       <div class="stat"><div class="num">千亿美元</div><div class="label" data-i18n="s4">TikTok Shop年GMV</div></div>
     </div>
-    <a href="#daily" class="scroll-hint">探索更多 <div class="arrow"></div></a>
+    <a href="#daily" class="scroll-hint"><span data-i18n="scroll_more">探索更多</span> <div class="arrow"></div></a>
   </div>
 </section>
 
-<!-- DAILY NEWS -->
-<section id="daily">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="news-head">
-        <div><div class="sec-label" data-i18n="n_lab">📰 最新动态</div><h2 class="sec-title" data-i18n="n_tit">行业资讯</h2></div>
-        <div class="news-time"><span class="dot"></span><span data-i18n="n_upd">最后更新：2026-03-25</span></div>
-      </div>
-    </div>
-    <div class="news-list reveal">
+<section id="daily"><div class="wrap">
+  <div class="reveal"><div class="news-head">
+    <div><div class="sec-label" data-i18n="n_lab">📰 最新动态</div><h2 class="sec-title" data-i18n="n_tit">行业资讯</h2></div>
+    <div class="news-time"><span class="dot"></span><span data-i18n="n_upd">最后更新：2026-03-25</span></div>
+  </div></div>
+  <div class="news-list reveal" id="news-list"></div>
+</div></section>
 
-      <a class="news-item" href="https://news.qq.com/rain/a/20260312A03DQG00" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">12</div><div class="month">3月</div></div>
-        <div class="news-body">
-          <div class="news-title">菜鸟将在海外部署大规模机器人仓储网络</div>
-          <div class="news-sum">2026年菜鸟将在中国香港、美国及欧洲等关键市场建成大规模机器人仓库网络，使用自研新一代仓储机器人及AI调度系统，支持跨境电商平台及商家本地发货与配送。</div>
-          <div class="news-src"><span class="ptag cn">菜鸟</span> 来源：36氪 · 界面新闻</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://www.163.com/dy/article/KLLMDR3905568PVM.html" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">13</div><div class="month">2月</div></div>
-        <div class="news-body">
-          <div class="news-title">从"落地"到"扎根"：京东产发如何成为中企出海"后勤部"</div>
-          <div class="news-sum">京东产发正式向港交所递交上市申请，已为希音建成日分拣400万件的肇庆枢纽，在印尼为家电品牌和新茶饮品牌提供仓储支持。</div>
-          <div class="news-src"><span class="ptag jdprop">京东产发</span> 来源：网易</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://news.qq.com/rain/a/20260206A03Y7700" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">06</div><div class="month">2月</div></div>
-        <div class="news-body">
-          <div class="news-title">越南、马来西亚主流媒体聚焦百世东南亚布局：快运成新引擎</div>
-          <div class="news-sum">百世凭借在东南亚市场的扎实耕耘与亮眼业绩，持续获得当地主流媒体关注。越南媒体将百世越南称为快递界的"独角兽"。</div>
-          <div class="news-src"><span class="ptag best">百世</span> 来源：腾讯新闻</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://finance.sina.com.cn/stock/observe/2026-01-29/doc-inhixqkc6831164.shtml" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">27</div><div class="month">1月</div></div>
-        <div class="news-body">
-          <div class="news-title">京东产发递交港交所A1招股书，构建"超级供应链"出海</div>
-          <div class="news-sum">京东智能产发正式向港交所递交A1申请文件，美银、高盛、海通国际联席保荐。海外10国落地超40个物流项目，欧洲布局超15个项目。</div>
-          <div class="news-src"><span class="ptag jdprop">京东产发</span> 来源：新浪财经</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://news.qq.com/rain/a/20260119A04HZ400" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">19</div><div class="month">1月</div></div>
-        <div class="news-body">
-          <div class="news-title">菜鸟全球海外仓2025年订单量同比增长32%</div>
-          <div class="news-sum">菜鸟已在欧洲、北美、亚太等18个国家和地区布局超40个海外仓，跨境物流旺季运营能力持续提升。</div>
-          <div class="news-src"><span class="ptag cn">菜鸟</span> 来源：腾讯新闻</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://news.qq.com/rain/a/20260115A06C6T00" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">15</div><div class="month">1月</div></div>
-        <div class="news-body">
-          <div class="news-title">顺丰控股与极兔速递达成战略合作，交叉持股共建全球智慧物流</div>
-          <div class="news-sum">顺丰持有极兔10%股权，极兔持有顺丰4.2%股权。跨境干线优势与海外末端能力优势互补，被视为"中资快递物流出海"里程碑事件。</div>
-          <div class="news-src"><span class="ptag partnership">顺丰×极兔</span> 来源：财联社</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://sw.wuhan.gov.cn/xwdt/mtbd/202601/t20260114_2710962.shtml" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">14</div><div class="month">1月</div></div>
-        <div class="news-body">
-          <div class="news-title">顺丰国际在鄂州花湖机场举办跨境电商枢纽推介会</div>
-          <div class="news-sum">以"智链全球，一路顺丰"为主题，在亚洲首个专业货运枢纽鄂州花湖国际机场举办推介，共建中国企业出海新支点。</div>
-          <div class="news-src"><span class="ptag sf">顺丰</span> 来源：武汉市商务局</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://news.qq.com/rain/a/20260108A039HE00" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">08</div><div class="month">1月</div></div>
-        <div class="news-body">
-          <div class="news-title">TikTok Shop 2025年成为全球增速第一电商平台</div>
-          <div class="news-sum">排名全球第五大电商平台，GMV约千亿美元级别，活跃消费者超4亿。预测2030年前跻身全球三大零售商。</div>
-          <div class="news-src"><span class="ptag tiktok">TikTok Shop</span> 来源：腾讯新闻</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://news.qq.com/rain/a/20250411A08HYF00" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">11</div><div class="month">4月</div></div>
-        <div class="news-body">
-          <div class="news-title">SHEIN伦敦IPO获英国FCA审批许可</div>
-          <div class="news-sum">SHEIN已获英国金融行为监管局审批许可，待中国监管机构批准后即可赴伦敦IPO，估值约500亿美元。</div>
-          <div class="news-src"><span class="ptag shein">SHEIN</span> 来源：路透社</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-      <a class="news-item" href="https://www.baogaobox.com/insights/250930000021347.html" target="_blank" rel="noopener">
-        <div class="news-date"><div class="day">08</div><div class="month">10月</div></div>
-        <div class="news-body">
-          <div class="news-title">极兔速递：东南亚市占率32.8%，加速全球扩张</div>
-          <div class="news-sum">国金证券报告显示极兔在东南亚快递市场市占率达32.8%，处于绝对领先地位。</div>
-          <div class="news-src"><span class="ptag jt">极兔</span> 来源：国金证券</div>
-          <div class="news-ext">🔗 点击查看原文 →</div>
-        </div>
-      </a>
-
-    </div>
+<section id="map" class="map-section"><div class="wrap">
+  <div class="reveal"><div class="sec-label" data-i18n="m_lab">🗺️ 全球布局</div>
+  <h2 class="sec-title" data-i18n="m_tit">交互式世界地图</h2>
+  <p class="sec-desc" data-i18n="m_desc">点击地图上的标记点，查看各地区的企业布局详情。</p></div>
+  <div class="map-wrap reveal">
+    <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1000" height="500" fill="transparent"/>
+      <path class="land" d="M120,80 L230,60 L280,80 L300,120 L280,180 L250,220 L220,240 L180,230 L140,200 L100,160 L90,120 Z" data-region="north-america"/>
+      <path class="land" d="M220,260 L260,250 L290,280 L300,340 L280,400 L250,440 L220,420 L200,360 L210,300 Z" data-region="south-america"/>
+      <path class="land" d="M440,70 L520,60 L560,80 L550,120 L520,150 L480,160 L440,140 L430,100 Z" data-region="europe"/>
+      <path class="land" d="M440,180 L520,170 L560,200 L570,280 L540,360 L500,400 L460,380 L430,320 L420,250 L430,200 Z" data-region="africa"/>
+      <path class="land" d="M560,130 L620,120 L650,150 L640,190 L600,200 L560,180 Z" data-region="middle-east"/>
+      <path class="land" d="M560,50 L750,30 L820,50 L850,80 L830,120 L780,130 L720,120 L650,100 L580,90 Z" data-region="russia"/>
+      <path class="land" d="M650,160 L720,150 L740,190 L720,240 L680,250 L640,220 L640,180 Z" data-region="south-asia"/>
+      <path class="land" d="M740,80 L830,70 L870,100 L860,150 L820,180 L770,170 L740,140 Z" data-region="east-asia"/>
+      <path class="land" d="M740,200 L820,190 L860,220 L850,280 L800,300 L750,280 L730,240 Z" data-region="southeast-asia"/>
+      <path class="land" d="M800,340 L880,330 L920,360 L910,410 L860,430 L810,410 L790,370 Z" data-region="oceania"/>
+      <path class="land" d="M870,100 L900,90 L920,110 L910,140 L880,145 L865,125 Z" data-region="japan-korea"/>
+      <circle class="map-dot" cx="200" cy="140" r="6" fill="#6366f1" opacity=".8" data-info="north-america"/>
+      <circle class="map-dot" cx="180" cy="120" r="5" fill="#f59e0b" opacity=".8" data-info="north-america"/>
+      <circle class="map-dot" cx="220" cy="155" r="5" fill="#ec4899" opacity=".8" data-info="north-america"/>
+      <text class="map-label" x="195" y="115" data-i18n="map_na">🇺🇸 北美</text>
+      <circle class="map-dot" cx="490" cy="100" r="6" fill="#6366f1" opacity=".8" data-info="europe"/>
+      <circle class="map-dot" cx="510" cy="115" r="5" fill="#ef4444" opacity=".8" data-info="europe"/>
+      <circle class="map-dot" cx="470" cy="110" r="5" fill="#f59e0b" opacity=".8" data-info="europe"/>
+      <circle class="map-dot" cx="520" cy="90" r="4" fill="#ec4899" opacity=".8" data-info="europe"/>
+      <text class="map-label" x="475" y="80" data-i18n="map_eu">🇪🇺 欧洲</text>
+      <circle class="map-dot" cx="780" cy="240" r="7" fill="#ff4444" opacity=".8" data-info="sea"/>
+      <circle class="map-dot" cx="800" cy="255" r="5" fill="#22c55e" opacity=".8" data-info="sea"/>
+      <circle class="map-dot" cx="760" cy="230" r="5" fill="#f59e0b" opacity=".8" data-info="sea"/>
+      <text class="map-label" x="755" y="218" data-i18n="map_sea">🌏 东南亚</text>
+      <circle class="map-dot" cx="790" cy="130" r="6" fill="#06b6d4" opacity=".8" data-info="east-asia"/>
+      <circle class="map-dot" cx="810" cy="120" r="5" fill="#ff0050" opacity=".8" data-info="east-asia"/>
+      <circle class="map-dot" cx="770" cy="140" r="5" fill="#ef4444" opacity=".8" data-info="east-asia"/>
+      <text class="map-label" x="770" y="105" data-i18n="map_ea">🇨🇳 东亚</text>
+      <circle class="map-dot" cx="885" cy="115" r="5" fill="#ff0050" opacity=".8" data-info="jp-kr"/>
+      <text class="map-label" x="875" y="100" data-i18n="map_jk">🇯🇵🇰🇷 日韩</text>
+      <circle class="map-dot" cx="260" cy="320" r="5" fill="#f59e0b" opacity=".8" data-info="south-america"/>
+      <circle class="map-dot" cx="275" cy="300" r="4" fill="#ec4899" opacity=".8" data-info="south-america"/>
+      <text class="map-label" x="240" y="280" data-i18n="map_sa">🇧🇷 拉美</text>
+      <circle class="map-dot" cx="600" cy="165" r="5" fill="#f59e0b" opacity=".8" data-info="middle-east"/>
+      <text class="map-label" x="580" y="155" data-i18n="map_me">🌍 中东</text>
+      <circle class="map-dot" cx="860" cy="380" r="5" fill="#22c55e" opacity=".8" data-info="oceania"/>
+      <circle class="map-dot" cx="840" cy="370" r="4" fill="#f59e0b" opacity=".8" data-info="oceania"/>
+      <text class="map-label" x="830" y="355" data-i18n="map_oc">🇦🇺 大洋洲</text>
+    </svg>
+    <div class="map-info" id="map-info"></div>
+    <div class="map-legend" id="map-legend"></div>
   </div>
-</section>
+</div></section>
 
-<!-- WORLD MAP -->
-<section id="map" class="map-section">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="sec-label" data-i18n="m_lab">🗺️ 全球布局</div>
-      <h2 class="sec-title" data-i18n="m_tit">交互式世界地图</h2>
-      <p class="sec-desc"><span data-i18n="m_desc">点击地图上的标记点，查看各地区的企业布局详情。</span></p>
-    </div>
-    <div class="map-wrap reveal">
-      <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-        <!-- Simplified world map paths -->
-        <rect width="1000" height="500" fill="transparent"/>
-        <!-- North America -->
-        <path class="land" d="M120,80 L230,60 L280,80 L300,120 L280,180 L250,220 L220,240 L180,230 L140,200 L100,160 L90,120 Z" data-region="north-america"/>
-        <!-- South America -->
-        <path class="land" d="M220,260 L260,250 L290,280 L300,340 L280,400 L250,440 L220,420 L200,360 L210,300 Z" data-region="south-america"/>
-        <!-- Europe -->
-        <path class="land" d="M440,70 L520,60 L560,80 L550,120 L520,150 L480,160 L440,140 L430,100 Z" data-region="europe"/>
-        <!-- Africa -->
-        <path class="land" d="M440,180 L520,170 L560,200 L570,280 L540,360 L500,400 L460,380 L430,320 L420,250 L430,200 Z" data-region="africa"/>
-        <!-- Middle East -->
-        <path class="land" d="M560,130 L620,120 L650,150 L640,190 L600,200 L560,180 Z" data-region="middle-east"/>
-        <!-- Russia/Central Asia -->
-        <path class="land" d="M560,50 L750,30 L820,50 L850,80 L830,120 L780,130 L720,120 L650,100 L580,90 Z" data-region="russia"/>
-        <!-- South Asia -->
-        <path class="land" d="M650,160 L720,150 L740,190 L720,240 L680,250 L640,220 L640,180 Z" data-region="south-asia"/>
-        <!-- East Asia -->
-        <path class="land" d="M740,80 L830,70 L870,100 L860,150 L820,180 L770,170 L740,140 Z" data-region="east-asia"/>
-        <!-- Southeast Asia -->
-        <path class="land" d="M740,200 L820,190 L860,220 L850,280 L800,300 L750,280 L730,240 Z" data-region="southeast-asia"/>
-        <!-- Australia -->
-        <path class="land" d="M800,340 L880,330 L920,360 L910,410 L860,430 L810,410 L790,370 Z" data-region="oceania"/>
-        <!-- Japan/Korea -->
-        <path class="land" d="M870,100 L900,90 L920,110 L910,140 L880,145 L865,125 Z" data-region="japan-korea"/>
+<section id="keywords"><div class="wrap">
+  <div class="reveal"><div class="sec-label" data-i18n="k_lab">🏷️ 热词云图</div>
+  <h2 class="sec-title" data-i18n="k_tit">出海关键词</h2>
+  <p class="sec-desc" data-i18n="k_desc">点击每个热词查看其含义与入选原因。</p></div>
+  <div class="kw-cloud reveal" id="kw-cloud"></div>
+</div></section>
 
-        <!-- MARKER DOTS - Companies by region -->
-        <!-- US/Canada -->
-        <circle class="map-dot" cx="200" cy="140" r="6" fill="#6366f1" opacity=".8" data-info="north-america"/>
-        <circle class="map-dot" cx="180" cy="120" r="5" fill="#f59e0b" opacity=".8" data-info="north-america"/>
-        <circle class="map-dot" cx="220" cy="155" r="5" fill="#ec4899" opacity=".8" data-info="north-america"/>
-        <text class="map-label" x="195" y="115">🇺🇸 北美</text>
+<section id="ecom"><div class="wrap">
+  <div class="reveal"><div class="sec-label" data-i18n="e_lab">🛒 板块一</div>
+  <h2 class="sec-title" data-i18n="e_tit">电商平台出海</h2>
+  <p class="sec-desc" data-i18n="e_desc">按体量排序：TikTok Shop、SHEIN、速卖通、Temu、京东国际。机遇与挑战并存。</p></div>
+  <div class="pgrid reveal" id="ecom-grid"></div>
+</div></section>
 
-        <!-- Europe -->
-        <circle class="map-dot" cx="490" cy="100" r="6" fill="#6366f1" opacity=".8" data-info="europe"/>
-        <circle class="map-dot" cx="510" cy="115" r="5" fill="#ef4444" opacity=".8" data-info="europe"/>
-        <circle class="map-dot" cx="470" cy="110" r="5" fill="#f59e0b" opacity=".8" data-info="europe"/>
-        <circle class="map-dot" cx="520" cy="90" r="4" fill="#ec4899" opacity=".8" data-info="europe"/>
-        <text class="map-label" x="475" y="80">🇪🇺 欧洲</text>
+<section id="logi" class="map-section"><div class="wrap">
+  <div class="reveal"><div class="sec-label" data-i18n="l_lab">📦 板块二</div>
+  <h2 class="sec-title" data-i18n="l_tit">物流商出海</h2>
+  <p class="sec-desc" data-i18n="l_desc">按体量排序：菜鸟、顺丰、极兔、京东产发、百世。支撑中国电商全球化的基础设施力量。</p></div>
+  <div class="pgrid reveal" id="logi-grid"></div>
+</div></section>
 
-        <!-- Southeast Asia -->
-        <circle class="map-dot" cx="780" cy="240" r="7" fill="#ff4444" opacity=".8" data-info="sea"/>
-        <circle class="map-dot" cx="800" cy="255" r="5" fill="#22c55e" opacity=".8" data-info="sea"/>
-        <circle class="map-dot" cx="760" cy="230" r="5" fill="#f59e0b" opacity=".8" data-info="sea"/>
-        <text class="map-label" x="755" y="218">🌏 东南亚</text>
+<section id="trends"><div class="wrap">
+  <div class="reveal"><div class="sec-label" data-i18n="t_lab">🔮 关键趋势</div>
+  <h2 class="sec-title" data-i18n="t_tit">2026年六大趋势</h2></div>
+  <div class="tgrid reveal" id="trends-grid"></div>
+</div></section>
 
-        <!-- East Asia (China) -->
-        <circle class="map-dot" cx="790" cy="130" r="6" fill="#06b6d4" opacity=".8" data-info="east-asia"/>
-        <circle class="map-dot" cx="810" cy="120" r="5" fill="#ff0050" opacity=".8" data-info="east-asia"/>
-        <circle class="map-dot" cx="770" cy="140" r="5" fill="#ef4444" opacity=".8" data-info="east-asia"/>
-        <text class="map-label" x="770" y="105">🇨🇳 东亚</text>
+<section id="timeline" class="map-section"><div class="wrap">
+  <div class="reveal"><div class="sec-label" data-i18n="tl_lab">📅 关键事件</div>
+  <h2 class="sec-title" data-i18n="tl_tit">2016—2026 出海十年大事记</h2>
+  <p class="sec-desc"><span class="tl-tag e" data-i18n="tag_ecom">电商</span> <span class="tl-tag l" data-i18n="tag_logi">物流</span> <span data-i18n="tl_desc">点击可查看信息来源</span></p></div>
+  <div class="tl reveal" id="timeline-list"></div>
+</div></section>
 
-        <!-- Japan/Korea -->
-        <circle class="map-dot" cx="885" cy="115" r="5" fill="#ff0050" opacity=".8" data-info="jp-kr"/>
-        <text class="map-label" x="875" y="100">🇯🇵🇰🇷 日韩</text>
-
-        <!-- South America -->
-        <circle class="map-dot" cx="260" cy="320" r="5" fill="#f59e0b" opacity=".8" data-info="south-america"/>
-        <circle class="map-dot" cx="275" cy="300" r="4" fill="#ec4899" opacity=".8" data-info="south-america"/>
-        <text class="map-label" x="240" y="280">🇧🇷 拉美</text>
-
-        <!-- Middle East -->
-        <circle class="map-dot" cx="600" cy="165" r="5" fill="#f59e0b" opacity=".8" data-info="middle-east"/>
-        <text class="map-label" x="580" y="155">🌍 中东</text>
-
-        <!-- Australia -->
-        <circle class="map-dot" cx="860" cy="380" r="5" fill="#22c55e" opacity=".8" data-info="oceania"/>
-        <circle class="map-dot" cx="840" cy="370" r="4" fill="#f59e0b" opacity=".8" data-info="oceania"/>
-        <text class="map-label" x="830" y="355">🇦🇺 大洋洲</text>
-      </svg>
-
-      <!-- Map info popups -->
-      <div class="map-info" id="map-info"></div>
-
-      <div class="map-legend">
-        <span><span class="dot" style="background:#ff0050"></span>TikTok Shop</span>
-        <span><span class="dot" style="background:#f59e0b"></span>Temu</span>
-        <span><span class="dot" style="background:#ec4899"></span>SHEIN</span>
-        <span><span class="dot" style="background:#06b6d4"></span>速卖通/菜鸟</span>
-        <span><span class="dot" style="background:#ef4444"></span>京东/京东产发</span>
-        <span><span class="dot" style="background:#6366f1"></span>顺丰</span>
-        <span><span class="dot" style="background:#ff4444"></span>极兔</span>
-        <span><span class="dot" style="background:#22c55e"></span>百世</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- KEYWORDS -->
-<section id="keywords">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="sec-label" data-i18n="k_lab">🏷️ 热词云图</div>
-      <h2 class="sec-title" data-i18n="k_tit">出海关键词</h2>
-      <p class="sec-desc"><span data-i18n="k_desc">点击每个热词查看其含义与入选原因。</span></p>
-    </div>
-    <div class="kw-cloud reveal">
-      <span class="kw xl" data-kw="crossborder">跨境电商
-        <div class="kw-tip"><div class="kt">跨境电商 Cross-border E-commerce</div><div class="km">分属不同关境的交易主体，通过电子商务平台完成交易、进行支付结算，并利用跨境物流送达商品的商业活动。</div><div class="kw"><strong>入选原因：</strong>整个出海叙事的底层逻辑。2026年全球跨境电商规模预计超8万亿美元，中国占比超35%。</div></div>
-      </span>
-      <span class="kw xl hot" data-kw="tiktok">TikTok Shop
-        <div class="kw-tip"><div class="kt">TikTok Shop</div><div class="km">字节跳动旗下的社交电商平台，将短视频/直播内容与电商购物深度融合，开创"兴趣电商"模式。</div><div class="kw"><strong>入选原因：</strong>2025年GMV达千亿美元级别，增速全球第一。2026年计划进入欧洲四国+韩国。</div></div>
-      </span>
-      <span class="kw lg" data-kw="temu">Temu
-        <div class="kw-tip"><div class="kt">Temu</div><div class="km">拼多多旗下跨境电商平台，以极致性价比策略快速进入全球50+国家市场。</div><div class="kw"><strong>入选原因：</strong>2024年蝉联全球购物App下载量第一。面对关税冲击，正从"中国直邮"转型"本地化运营"。</div></div>
-      </span>
-      <span class="kw xl" data-kw="shein">SHEIN
-        <div class="kw-tip"><div class="kt">SHEIN 希音</div><div class="km">全球领先的快时尚电商平台，以"小单快反"的柔性供应链闻名，覆盖150+国家。</div><div class="kw"><strong>入选原因：</strong>目标GMV 806亿美元，伦敦IPO估值500亿美元。de minimis取消对其冲击最大。</div></div>
-      </span>
-      <span class="kw lg" data-kw="half-custody">半托管
-        <div class="kw-tip"><div class="kt">半托管模式 Semi-custody</div><div class="km">介于全托管和本地托管之间的运营模式。平台负责营销和流量，商家负责本地仓储和物流履约。</div><div class="kw"><strong>入选原因：</strong>Temu等平台正从全托管向半托管转型，是应对关税壁垒和提升时效的关键模式升级。</div></div>
-      </span>
-      <span class="kw lg hot" data-kw="deminimis">de minimis
-        <div class="kw-tip"><div class="kt">de minimis 免税门槛</div><div class="km">美国原800美元以下小额包裹免税入境政策。2025年2月被取消，对中国跨境电商直邮模式造成巨大冲击。</div><div class="kw"><strong>入选原因：</strong>2025-2026年跨境电商最大变量，直接推动整个行业"本地化"转型。</div></div>
-      </span>
-      <span class="kw lg" data-kw="jt">极兔速递
-        <div class="kw-tip"><div class="kt">极兔速递 J&T Express</div><div class="km">2015年创立的全球综合物流服务商，从东南亚崛起，2026年与顺丰交叉持股，东南亚市占率32.8%。</div><div class="kw"><strong>入选原因：</strong>东南亚快递市场绝对龙头。2026年1月与顺丰战略合作，被视为中资快递出海里程碑。</div></div>
-      </span>
-      <span class="kw xl" data-kw="cainiao">菜鸟网络
-        <div class="kw-tip"><div class="kt">菜鸟网络 Cainiao</div><div class="km">阿里巴巴旗下全球智慧物流平台，全球最大跨境电商物流企业。18国布局超40个海外仓。</div><div class="kw"><strong>入选原因：</strong>2025年海外仓订单增32%，2026年将在美欧部署大规模机器人仓储网络。</div></div>
-      </span>
-      <span class="kw lg" data-kw="sf">顺丰国际
-        <div class="kw-tip"><div class="kt">顺丰速运 SF Express</div><div class="km">中国最大独立快递企业，鄂州花湖机场是亚洲最大专业货运枢纽。国际供应链业务快速增长。</div><div class="kw"><strong>入选原因：</strong>2026年1月与极兔交叉持股，在鄂州枢纽举办跨境电商推介。</div></div>
-      </span>
-      <span class="kw lg new" data-kw="overseas-warehouse">海外仓
-        <div class="kw-tip"><div class="kt">海外仓 Overseas Warehouse</div><div class="km">在目标市场国建立的仓储设施，实现本地发货，大幅缩短配送时效，规避跨境物流和关税风险。</div><div class="kw"><strong>入选原因：</strong>菜鸟40+、京东产发40+、顺丰核心枢纽——海外仓是应对de minimis取消的核心基础设施方案。</div></div>
-      </span>
-      <span class="kw" data-kw="flexible-supply">柔性供应链
-        <div class="kw-tip"><div class="kt">柔性供应链 Flexible Supply Chain</div><div class="km">以小批量、多款式、快速反应为特征的供应链模式。SHEIN的"小单快反"是典型代表。</div><div class="kw"><strong>入选原因：</strong>中国跨境电商核心竞争优势之一，将中国制造的灵活性与数字化结合。</div></div>
-      </span>
-      <span class="kw lg" data-kw="sea">东南亚
-        <div class="kw-tip"><div class="kt">东南亚市场 Southeast Asia</div><div class="km">包括印尼、越南、泰国、马来西亚、菲律宾等国，是中国电商和物流出海的第一站和核心市场。</div><div class="kw"><strong>入选原因：</strong>极兔32.8%市占率、百世"独角兽"、Lazada/Shopee主战场——东南亚是中国出海基本盘。</div></div>
-      </span>
-      <span class="kw new" data-kw="europe">欧洲市场
-        <div class="kw-tip"><div class="kt">欧洲市场 Europe</div><div class="km">美国收紧政策后欧洲成为新的出海热土。TikTok Shop拟进欧洲十国，SHEIN赴伦敦IPO。</div><div class="kw"><strong>入选原因：</strong>2026年各平台欧洲布局密集：TikTok Shop四国扩张、菜鸟五国机器人仓、京东产发15+项目。</div></div>
-      </span>
-      <span class="kw hot" data-kw="ipo">港交所/伦敦IPO
-        <div class="kw-tip"><div class="kt">出海企业IPO</div><div class="km">多家中国出海企业选择在港股或伦敦上市融资，以支持海外扩张。京东产发→港交所，SHEIN→伦敦。</div><div class="kw"><strong>入选原因：</strong>京东产发2026年1月递交A1招股书，SHEIN获FCA批准。资本市场为出海提供弹药。</div></div>
-      </span>
-      <span class="kw" data-kw="ai-logistics">AI+机器人物流
-        <div class="kw-tip"><div class="kt">AI+机器人物流</div><div class="km">利用人工智能调度系统和自动化仓储机器人提升物流效率。菜鸟2026年将在海外大规模部署。</div><div class="kw"><strong>入选原因：</strong>菜鸟宣布在美欧部署自研仓储机器人+AI调度系统，中国物流科技开始向海外输出。</div></div>
-      </span>
-      <span class="kw hot" data-kw="tariff-risk">关税风险
-        <div class="kw-tip"><div class="kt">关税与合规风险</div><div class="km">美国加征关税、欧盟碳边境税、各国数据隐私法规等政策风险，是中国电商出海面临的最大外部挑战。</div><div class="kw"><strong>入选原因：</strong>de minimis取消、欧盟DSA法案、各国本地化要求——合规成本正在快速上升。</div></div>
-      </span>
-    </div>
-  </div>
-</section>
-
-<!-- E-COMMERCE PLATFORMS -->
-<section id="ecom">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="sec-label" data-i18n="e_lab">🛒 板块一</div>
-      <h2 class="sec-title" data-i18n="e_tit">电商平台出海</h2>
-      <p class="sec-desc"><span data-i18n="e_desc">按体量排序：TikTok Shop、SHEIN、速卖通、Temu、京东国际。机遇与挑战并存。</span></p>
-    </div>
-    <div class="pgrid">
-
-      <!-- TikTok Shop - #1 by GMV -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(255,0,80,.1)">🎵</div>
-          <div><div class="pcard-name">TikTok Shop</div><div class="pcard-sub">字节跳动 · 兴趣电商 · 体量#1</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">~千亿美元</div><div class="ml">2025年GMV</div></div>
-          <div class="m"><div class="mv">4亿+</div><div class="ml">活跃消费者</div></div>
-          <div class="m"><div class="mv">17国</div><div class="ml">已进入市场</div></div>
-          <div class="m"><div class="mv">增速#1</div><div class="ml">全球电商平台</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag hot">🔥 增速全球第一</span><span class="tag new">2026 欧洲四国+韩国</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>排名全球第五（仅次于亚马逊、沃尔玛、Shopee、eBay）</li>
-          <li><span class="b">▸</span>2026年计划进军荷兰、比利时、瑞典、波兰</li>
-          <li><span class="b">▸</span>预测2030年前跻身全球三大零售商</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>美国市场面临强制出售或封禁的政策风险（"不卖就禁"法案仍未完全解除）；直播电商模式在欧美消费者中的接受度仍低于东南亚；本地化运营团队建设和合规成本高企；与Instagram、YouTube等平台的社交电商竞争日趋激烈。</p>
-        </div>
-      </div>
-
-      <!-- SHEIN - #2 by GMV -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(236,72,153,.1)">👗</div>
-          <div><div class="pcard-name">SHEIN 希音</div><div class="pcard-sub">快时尚 · 柔性供应链 · 体量#2</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">150+国</div><div class="ml">覆盖市场</div></div>
-          <div class="m"><div class="mv">806亿美元</div><div class="ml">目标GMV</div></div>
-          <div class="m"><div class="mv">500亿美元</div><div class="ml">IPO估值</div></div>
-          <div class="m"><div class="mv">伦敦</div><div class="ml">IPO目的地</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag hot">🔥 FCA已批准</span><span class="tag">小单快反</span><span class="tag risk">⚠️ 环保争议</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>de minimis取消对其冲击最大（高度依赖中国直邮小包）</li>
-          <li><span class="b">▸</span>从服装向家居、美妆等多元品类扩展</li>
-          <li><span class="b">▸</span>"小单快反"柔性供应链是其核心壁垒</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>IPO之路坎坷——中国监管审批尚未完成，且面临ESG（环保、劳工）审查压力；"快时尚"标签引发环保组织持续抗议；美国关税政策直接冲击其直邮模式，转型本地化需要巨额投入；知识产权诉讼频发。</p>
-        </div>
-      </div>
-
-      <!-- AliExpress - #3 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(6,182,212,.1)">🚀</div>
-          <div><div class="pcard-name">速卖通 AliExpress</div><div class="pcard-sub">阿里巴巴 · 品牌出海 · 体量#3</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">200+国</div><div class="ml">覆盖市场</div></div>
-          <div class="m"><div class="mv">392亿元</div><div class="ml">国际季度营收</div></div>
-          <div class="m"><div class="mv">+18.7%</div><div class="ml">美国访问量增长</div></div>
-          <div class="m"><div class="mv">TOP10</div><div class="ml">美国增速最快</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag new">Similarweb TOP10</span><span class="tag">Brand+ 计划</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>首个在韩国与YouTube合作的中国电商平台</li>
-          <li><span class="b">▸</span>筹备"最高规格"品牌出海项目，向500强发出邀约</li>
-          <li><span class="b">▸</span>依托菜鸟物流网络，本地化仓储能力持续提升</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>品牌形象仍偏"低价平台"，品牌化升级需要时间；在部分市场面临来自Shopee、Lazada的激烈竞争；阿里巴巴集团战略重心调整可能影响资源投入；物流时效与亚马逊FBA仍有差距。</p>
-        </div>
-      </div>
-
-      <!-- Temu - #4 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(245,158,11,.1)">🟠</div>
-          <div><div class="pcard-name">Temu</div><div class="pcard-sub">拼多多 · 极致性价比 · 体量#4</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">50+国</div><div class="ml">覆盖市场</div></div>
-          <div class="m"><div class="mv">数百亿美元</div><div class="ml">年交易规模</div></div>
-          <div class="m"><div class="mv">半托管</div><div class="ml">核心转型</div></div>
-          <div class="m"><div class="mv">欧洲暴涨</div><div class="ml">新增长极</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag hot">美国关税冲击</span><span class="tag new">本地商家入驻</span><span class="tag risk">⚠️ 数据安全审查</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>弃用纯"中国直邮"模式，转向美国本地商家</li>
-          <li><span class="b">▸</span>欧洲市场成为美国之外最重要的替代增长市场</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>面临美国、欧盟数据安全审查；极低利润率模式能否持续存疑；"烧钱获客"模式在海外市场面临文化差异挑战；美国关税政策下供应链被迫重构，成本大幅上升；消费者对"超低价"产品质量的信任度有待建立。</p>
-        </div>
-      </div>
-
-      <!-- JD International - #5 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(239,68,68,.1)">📦</div>
-          <div><div class="pcard-name">京东国际 Joybuy</div><div class="pcard-sub">京东 · 品质路线 · 体量#5</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">欧洲</div><div class="ml">首站市场</div></div>
-          <div class="m"><div class="mv">母婴玩具</div><div class="ml">首推品类</div></div>
-          <div class="m"><div class="mv">自建物流</div><div class="ml">核心优势</div></div>
-          <div class="m"><div class="mv">品质路线</div><div class="ml">差异化策略</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag">重资产模式</span><span class="tag">品质路线</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>2025年4月推出欧洲品牌Joybuy，首站英国</li>
-          <li><span class="b">▸</span>依托自建物流和数智化供应链能力</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>出海起步晚，市场份额远落后于竞品；重资产模式在海外市场投入大、回报周期长；品牌知名度低，获客成本高；欧洲市场已有亚马逊等强势玩家，突围难度大。</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- LOGISTICS -->
-<section id="logi" class="map-section">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="sec-label" data-i18n="l_lab">📦 板块二</div>
-      <h2 class="sec-title" data-i18n="l_tit">物流商出海</h2>
-      <p class="sec-desc"><span data-i18n="l_desc">按体量排序：菜鸟、顺丰、极兔、京东产发、百世。支撑中国电商全球化的基础设施力量。</span></p>
-    </div>
-    <div class="pgrid">
-
-      <!-- Cainiao - #1 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(245,158,11,.1)">🟧</div>
-          <div><div class="pcard-name">菜鸟网络 Cainiao</div><div class="pcard-sub">阿里巴巴 · 全球智慧物流 · 体量#1</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">18国</div><div class="ml">海外仓覆盖</div></div>
-          <div class="m"><div class="mv">40+个</div><div class="ml">海外仓数量</div></div>
-          <div class="m"><div class="mv">+32%</div><div class="ml">2025海外仓订单增长</div></div>
-          <div class="m"><div class="mv">全球最大</div><div class="ml">跨境电商物流企业</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag hot">🔥 订单量增32%</span><span class="tag new">2026美欧机器人仓</span><span class="tag">AI调度系统</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>全球最大的跨境电商物流企业</li>
-          <li><span class="b">▸</span>2026年将在荷兰、西班牙、法国、德国、美国部署机器人仓库</li>
-          <li><span class="b">▸</span>自研新一代仓储机器人+AI调度系统，向海外输出物流科技</li>
-          <li><span class="b">▸</span>助力速卖通、Lazada等阿里系出海</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>与阿里体系绑定较深，独立拓展非阿里系客户难度大；海外自建物流网络投入巨大；各国物流法规和劳动法差异增加合规成本；与DHL、UPS等国际巨头在服务品质上仍有差距。</p>
-        </div>
-      </div>
-
-      <!-- SF Express - #2 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(100,100,100,.2)">✈️</div>
-          <div><div class="pcard-name">顺丰速运 SF Express</div><div class="pcard-sub">独立快递 · 航空网络 · 体量#2</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">鄂州枢纽</div><div class="ml">亚洲最大货运机场</div></div>
-          <div class="m"><div class="mv">10%</div><div class="ml">持有极兔股权</div></div>
-          <div class="m"><div class="mv">跨境干线</div><div class="ml">核心竞争力</div></div>
-          <div class="m"><div class="mv">全球</div><div class="ml">覆盖范围</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag hot">🔥 与极兔交叉持股</span><span class="tag new">鄂州枢纽推介</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>鄂州花湖机场：亚洲最大专业货运枢纽</li>
-          <li><span class="b">▸</span>2026年1月与极兔交叉持股：顺丰持极兔10%，极兔持顺丰4.2%</li>
-          <li><span class="b">▸</span>"顺丰跨境干线+极兔海外末端"形成出海组合拳</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>海外末端网络薄弱，高度依赖合作伙伴；国际业务长期亏损，盈利模式尚不清晰；鄂州枢纽投入巨大，短期回报有限；面临FedEx、UPS等巨头的直接竞争，品牌国际认知度低。</p>
-        </div>
-      </div>
-
-      <!-- J&T Express - #3 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(255,0,0,.08)">🐇</div>
-          <div><div class="pcard-name">极兔速递 J&T Express</div><div class="pcard-sub">全球综合物流 · 东南亚龙头 · 体量#3</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">32.8%</div><div class="ml">东南亚市占率</div></div>
-          <div class="m"><div class="mv">4.2%</div><div class="ml">持有顺丰股权</div></div>
-          <div class="m"><div class="mv">东南亚+中国</div><div class="ml">核心市场</div></div>
-          <div class="m"><div class="mv">全球</div><div class="ml">快递网络覆盖</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag hot">🔥 东南亚市占率第一</span><span class="tag new">与顺丰战略合作</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>东南亚快递市场绝对龙头，市占率32.8%</li>
-          <li><span class="b">▸</span>2026年1月与顺丰交叉持股，优势互补共拓全球</li>
-          <li><span class="b">▸</span>覆盖印尼、越南、马来西亚等东南亚核心国家</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>中国市场竞争白热化，利润率承压；东南亚市场面临本地玩家和Shopee自建物流的挑战；此前烧钱扩张导致的盈利修复仍需时间；各国运营标准不统一，管理复杂度高。</p>
-        </div>
-      </div>
-
-      <!-- JD Property - #4 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(239,68,68,.1)">🏭</div>
-          <div><div class="pcard-name">京东产发 JINGDONG Property</div><div class="pcard-sub">京东集团 · 全球供应链基础设施 · 体量#4</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">10国</div><div class="ml">海外落地国家</div></div>
-          <div class="m"><div class="mv">40+个</div><div class="ml">海外物流项目</div></div>
-          <div class="m"><div class="mv">15+个</div><div class="ml">欧洲项目</div></div>
-          <div class="m"><div class="mv">港交所</div><div class="ml">拟上市地点</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag hot">🔥 递交A1招股书</span><span class="tag new">中企出海"后勤部"</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>2026年1月递交A1招股书，美银、高盛、海通联席保荐</li>
-          <li><span class="b">▸</span>建面规模国内第二，为希音建成日分拣400万件的肇庆枢纽</li>
-          <li><span class="b">▸</span>在印尼为家电品牌和新茶饮品牌提供仓储支持</li>
-          <li><span class="b">▸</span>IPO融资重点用于拓展海外关键物流节点基础设施</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>重资产模式资金需求大，海外地产投资面临汇率和政策风险；客户集中度高，对京东系和少数大客户依赖较大；海外物流地产市场竞争激烈，Prologis等巨头占据主导地位。</p>
-        </div>
-      </div>
-
-      <!-- BEST Inc - #5 -->
-      <div class="pcard reveal">
-        <div class="pcard-head">
-          <div class="pcard-icon" style="background:rgba(34,197,94,.1)">🟢</div>
-          <div><div class="pcard-name">百世集团 BEST Inc</div><div class="pcard-sub">智慧供应链 · 快运+国际 · 体量#5</div></div>
-        </div>
-        <div class="pcard-metrics">
-          <div class="m"><div class="mv">7国</div><div class="ml">海外业务覆盖</div></div>
-          <div class="m"><div class="mv">独角兽</div><div class="ml">越南媒体评价</div></div>
-          <div class="m"><div class="mv">395个</div><div class="ml">云仓数量</div></div>
-          <div class="m"><div class="mv">280万㎡</div><div class="ml">仓储面积</div></div>
-        </div>
-        <div class="pcard-tags"><span class="tag new">🔥 越马媒体聚焦</span><span class="tag">全链路升级</span></div>
-        <ul class="pcard-list">
-          <li><span class="b">▸</span>越南主流媒体称百世越南为快递界"独角兽"</li>
-          <li><span class="b">▸</span>越南和马来西亚全链路物流升级获深度报道</li>
-          <li><span class="b">▸</span>集快运、供应链管理、国际物流于一体的一站式服务</li>
-        </ul>
-        <div class="challenge-box">
-          <h5>⚠️ 面临的困境</h5>
-          <p>国内市场已边缘化，份额持续萎缩；海外市场营收占比仍小，尚未形成规模效应；资金链紧张，持续亏损；面临极兔、菜鸟等更强竞争对手的挤压。</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TRENDS -->
-<section id="trends">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="sec-label" data-i18n="t_lab">🔮 关键趋势</div>
-      <h2 class="sec-title" data-i18n="t_tit">2026年六大趋势</h2>
-    </div>
-    <div class="tgrid reveal">
-      <div class="tcard"><div class="tnum">01</div><div class="ttitle">全托管→半托管→本地托管</div><div class="tdesc">平台从包揽一切向商家本地化运营演进，提升时效、降低关税风险。Temu、速卖通率先推进。</div></div>
-      <div class="tcard"><div class="tnum">02</div><div class="ttitle">美国关税政策冲击</div><div class="tdesc">de minimis取消倒逼从"中国直邮"向"海外本地化"转型，供应链重构成本巨大。</div></div>
-      <div class="tcard"><div class="tnum">03</div><div class="ttitle">欧洲成为新战场</div><div class="tdesc">美国收紧下欧洲吸引力大增，但GDPR、DSA和可持续法规构成新门槛。</div></div>
-      <div class="tcard"><div class="tnum">04</div><div class="ttitle">物流基础设施先行</div><div class="tdesc">菜鸟40+海外仓、京东产发10国落地、顺丰鄂州枢纽——基建驱动出海。</div></div>
-      <div class="tcard"><div class="tnum">05</div><div class="ttitle">AI+机器人重塑物流</div><div class="tdesc">菜鸟自研仓储机器人和AI调度系统出海，中国物流科技开始向海外输出。</div></div>
-      <div class="tcard"><div class="tnum">06</div><div class="ttitle">合规成本急剧上升</div><div class="tdesc">欧盟DSA法案、碳边境税、数据本地化要求——合规正在成为出海的最大隐性成本。</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TIMELINE -->
-<section id="timeline" class="map-section">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="sec-label" data-i18n="tl_lab">📅 关键事件</div>
-      <h2 class="sec-title" data-i18n="tl_tit">2016—2026 出海十年大事记</h2>
-      <p class="sec-desc"><span class="tl-tag e">电商</span> <span class="tl-tag l">物流</span> <span data-i18n="tl_desc">点击可查看信息来源</span></p>
-    </div>
-    <div class="tl reveal">
-
-      <a class="tl-link" href="https://news.qq.com/rain/a/20260312A03DQG00" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年3月 <span class="tl-tag l">物流</span></div><div class="tl-title">菜鸟海外部署大规模机器人仓储网络</div><div class="tl-desc">在荷兰、西班牙、法国、德国、美国建成大规模机器人仓库，使用自研仓储机器人+AI调度系统。</div></div>
-      </a>
-      <a class="tl-link" href="https://www.163.com/dy/article/KLLMDR3905568PVM.html" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年2月 <span class="tl-tag l">物流</span></div><div class="tl-title">京东产发被称为中企出海"后勤部"</div><div class="tl-desc">向港交所递交上市申请，为希音建成日分拣400万件的肇庆枢纽。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20260206A03Y7700" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年2月 <span class="tl-tag l">物流</span></div><div class="tl-title">百世东南亚获越南、马来西亚主流媒体聚焦</div><div class="tl-desc">百世越南被当地媒体称为快递界"独角兽"。</div></div>
-      </a>
-      <a class="tl-link" href="https://finance.sina.com.cn/stock/observe/2026-01-29/doc-inhixqkc6831164.shtml" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年1月 <span class="tl-tag l">物流</span></div><div class="tl-title">京东产发递交港交所A1招股书</div><div class="tl-desc">美银、高盛、海通联席保荐。海外10国落地超40个物流项目。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20260119A04HZ400" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年1月 <span class="tl-tag l">物流</span></div><div class="tl-title">菜鸟海外仓订单量同比增32%</div><div class="tl-desc">18国40+海外仓，覆盖欧洲、北美、亚太。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20260115A06C6T00" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年1月 <span class="tl-tag l">物流</span></div><div class="tl-title">顺丰×极兔交叉持股，共建全球智慧物流</div><div class="tl-desc">顺丰持极兔10%、极兔持顺丰4.2%。中资快递出海里程碑。</div></div>
-      </a>
-      <a class="tl-link" href="https://sw.wuhan.gov.cn/xwdt/mtbd/202601/t20260114_2710962.shtml" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年1月 <span class="tl-tag l">物流</span></div><div class="tl-title">顺丰国际鄂州枢纽跨境电商推介</div><div class="tl-desc">"智链全球"主题，在亚洲最大货运枢纽举办推介。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20260108A039HE00" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2026年1月 <span class="tl-tag e">电商</span></div><div class="tl-title">TikTok Shop成为全球增速第一电商平台</div><div class="tl-desc">GMV约千亿美元，排名第五。预测2030年前跻身全球三大零售商。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20250411A08HYF00" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2025年4月 <span class="tl-tag e">电商</span></div><div class="tl-title">SHEIN获FCA审批 · 京东推出Joybuy</div><div class="tl-desc">SHEIN伦敦IPO获英国FCA批准，估值500亿。京东在欧洲推出Joybuy品牌。</div></div>
-      </a>
-      <a class="tl-link" href="https://database.caixin.com/2025-05-02/102316050.html" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2025年5月 <span class="tl-tag e">电商</span></div><div class="tl-title">Temu弃用中国直邮模式</div><div class="tl-desc">应对关税冲击，Temu大规模引入美国本地商家。</div></div>
-      </a>
-      <a class="tl-link" href="https://www.baogaobox.com/insights/250930000021347.html" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2025年 <span class="tl-tag l">物流</span></div><div class="tl-title">极兔东南亚市占率32.8%</div><div class="tl-desc">国金证券确认极兔在东南亚快递市场稳居龙头。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20250411A08HYF00" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2025年2月 <span class="tl-tag e">电商</span></div><div class="tl-title">美国取消800美元小额免税政策</div><div class="tl-desc">特朗普取消de minimis免税政策，对中国跨境电商冲击巨大。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20260129A0372V00" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2024年 <span class="tl-tag e">电商</span></div><div class="tl-title">Temu登顶全球下载榜 · SHEIN提交伦敦IPO</div><div class="tl-desc">Temu蝉联购物App下载量第一。TikTok Shop覆盖17个市场。</div></div>
-      </a>
-      <a class="tl-link" href="https://www.chinairn.com/news/20250516/144602304.shtml" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2023年 <span class="tl-tag e">电商</span></div><div class="tl-title">Temu爆发增长 · 三强格局确立</div><div class="tl-desc">Temu进入40+国家。TikTok Shop美国全面开放。</div></div>
-      </a>
-      <a class="tl-link" href="https://finance.sina.cn/tech/2026-01-09/detail-inhfssrv0583065.d.html" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2022年 <span class="tl-tag e">电商</span> <span class="tl-tag l">物流</span></div><div class="tl-title">Temu上线美国 · SHEIN估值千亿 · 菜鸟加速出海</div><div class="tl-desc">拼多多推出Temu。SHEIN估值达1000亿美元。</div></div>
-      </a>
-      <a class="tl-link" href="https://news.qq.com/rain/a/20260108A039HE00" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2021年 <span class="tl-tag e">电商</span></div><div class="tl-title">TikTok Shop上线 · SHEIN超亚马逊下载量</div><div class="tl-desc">字节推出TikTok Shop，"兴趣电商"诞生。SHEIN在美国下载量超越亚马逊。</div></div>
-      </a>
-      <a class="tl-link" href="https://m.sohu.com/a/873385035_122066678" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2020年 <span class="tl-tag e">电商</span> <span class="tl-tag l">物流</span></div><div class="tl-title">疫情催化跨境电商爆发</div><div class="tl-desc">中国跨境电商出口增长40%+。SHEIN营收接近100亿美元。</div></div>
-      </a>
-      <a class="tl-link" href="https://www.sohu.com/a/881914422_121885028" target="_blank" rel="noopener">
-        <div class="tl-item"><div class="tl-date">2016年 <span class="tl-tag e">电商</span></div><div class="tl-title">阿里收购Lazada · 中国电商出海元年</div><div class="tl-desc">阿里10亿美元收购东南亚最大电商平台Lazada控股权。</div></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- COMPARISON TABLES -->
-<section id="compare">
-  <div class="wrap">
-    <div class="reveal" style="margin-bottom:2.5rem">
-      <div class="sec-label" data-i18n="c1_lab">📊 电商平台对比</div>
-      <h2 class="sec-title" data-i18n="c1_tit">五大电商平台一览</h2>
-      <p class="sec-desc"><span data-i18n="c1_desc">点击公司名称可访问官网</span></p>
-      <div class="cmp-wrap">
-        <table class="cmp">
-          <thead><tr><th>平台</th><th>覆盖市场</th><th>规模</th><th>核心模式</th><th>2026重点</th><th>主要风险</th></tr></thead>
-          <tbody>
-            <tr><td><a href="https://seller.tiktok.com/" target="_blank">TikTok Shop</a></td><td>17国</td><td>GMV~千亿美元，增速#1</td><td>兴趣电商·直播带货</td><td>欧洲10国+韩国·本地托管</td><td style="color:var(--orange);font-size:.7rem">美国封禁风险</td></tr>
-            <tr><td><a href="https://www.shein.com/" target="_blank">SHEIN</a></td><td>150+国</td><td>目标GMV 806亿美元</td><td>小单快反·柔性供应链</td><td>伦敦IPO·品类扩展</td><td style="color:var(--orange);font-size:.7rem">ESG审查·IPO不确定</td></tr>
-            <tr><td><a href="https://www.aliexpress.com/" target="_blank">速卖通</a></td><td>200+国</td><td>季度营收392亿元</td><td>品牌出海·本地化</td><td>YouTube合作·Brand+</td><td style="color:var(--orange);font-size:.7rem">品牌升级难度</td></tr>
-            <tr><td><a href="https://www.temu.com/" target="_blank">Temu</a></td><td>50+国</td><td>数百亿美元级</td><td>极致性价比·半托管</td><td>欧洲替代增长·美国本地化</td><td style="color:var(--orange);font-size:.7rem">数据安全·利润率</td></tr>
-            <tr><td><a href="https://www.joybuy.com/" target="_blank">京东国际</a></td><td>精选市场</td><td>以进口为主</td><td>自建物流·品质路线</td><td>欧洲Joybuy·供应链</td><td style="color:var(--orange);font-size:.7rem">起步晚·份额小</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="sec-label" data-i18n="c2_lab">📊 物流商对比</div>
-      <h2 class="sec-title" data-i18n="c2_tit">五大物流商一览</h2>
-      <p class="sec-desc"><span data-i18n="c2_desc">点击公司名称可访问官网</span></p>
-      <div class="cmp-wrap">
-        <table class="cmp">
-          <thead><tr><th>企业</th><th>海外覆盖</th><th>核心优势</th><th>出海模式</th><th>2026重点</th><th>主要风险</th></tr></thead>
-          <tbody>
-            <tr><td><a href="https://www.cainiao.com/" target="_blank">菜鸟网络</a></td><td>18国40+海外仓</td><td>全球最大跨境电商物流</td><td>科技驱动·智慧物流</td><td>美欧机器人仓·AI调度</td><td style="color:var(--orange);font-size:.7rem">阿里依赖·国际竞争</td></tr>
-            <tr><td><a href="https://www.sf-express.com/" target="_blank">顺丰速运</a></td><td>全球</td><td>航空网络·鄂州枢纽</td><td>跨境干线·与极兔互补</td><td>交叉持股·鄂州枢纽推介</td><td style="color:var(--orange);font-size:.7rem">末端薄弱·长期亏损</td></tr>
-            <tr><td><a href="https://www.jet.co.id/" target="_blank">极兔速递</a></td><td>东南亚+中国+全球</td><td>东南亚市占率32.8%</td><td>海外末端·与顺丰互补</td><td>交叉持股·全球化扩张</td><td style="color:var(--orange);font-size:.7rem">价格战·盈利修复</td></tr>
-            <tr><td><a href="https://jdcproperty.com/" target="_blank">京东产发</a></td><td>10国40+项目</td><td>高标准仓储基础设施</td><td>基建先行·客户协同</td><td>港交所上市·全球扩张</td><td style="color:var(--orange);font-size:.7rem">重资产·客户集中</td></tr>
-            <tr><td><a href="https://www.800best.cn/" target="_blank">百世集团</a></td><td>海外7国</td><td>快运+云仓+国际</td><td>全链路供应链</td><td>东南亚深耕·越南独角兽</td><td style="color:var(--orange);font-size:.7rem">国内边缘化·资金紧张</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="compare"><div class="wrap">
+  <div class="reveal" style="margin-bottom:2.5rem"><div class="sec-label" data-i18n="c1_lab">📊 电商平台对比</div>
+  <h2 class="sec-title" data-i18n="c1_tit">五大电商平台一览</h2>
+  <p class="sec-desc" data-i18n="c1_desc">点击公司名称可访问官网</p>
+  <div class="cmp-wrap" id="cmp-ecom"></div></div>
+  <div class="reveal"><div class="sec-label" data-i18n="c2_lab">📊 物流商对比</div>
+  <h2 class="sec-title" data-i18n="c2_tit">五大物流商一览</h2>
+  <p class="sec-desc" data-i18n="c2_desc">点击公司名称可访问官网</p>
+  <div class="cmp-wrap" id="cmp-logi"></div></div>
+</div></section>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0})" aria-label="回到顶部">↑</button>
 <footer>
-  <p><span data-i18n="ft">出海罗盘 · ChinaEcom Atlas · 编制日期：2026年3月25日</span></p>
-  <p class="disclaimer"><span data-i18n="fd">本简报基于公开信息整理，数据和观点仅供参考，不构成投资建议。</span></p>
+  <p data-i18n="ft">出海罗盘 · ChinaEcom Atlas · 编制日期：2026年3月25日</p>
+  <p class="disclaimer" data-i18n="fd">本简报基于公开信息整理，数据和观点仅供参考，不构成投资建议。</p>
 </footer>
 
 <script>
-// Mobile nav
+/* ===== I18N DICTIONARIES ===== */
+const I={
+'zh-TW':{
+nav0:'📰 動態',nav1:'🗺️ 地圖',nav2:'🏷️ 熱詞',nav3:'🛒 電商',nav4:'📦 物流',nav5:'🔮 趨勢',nav6:'📅 大事記',nav7:'📊 對比',
+hero_badge:'📊 2026 BRIEFING · 數據截至2026年3月',hero_t1:'中國電商與物流',hero_t2:'出海全景',
+hero_sub:'從TikTok Shop千億美元GMV到菜鳥全球40+海外倉，深度解析電商與物流兩大板塊的全球化戰略、困境與趨勢',
+s1:'全球跨境電商(美元)',s2:'中國佔比',s3:'出海物流訂單增速',s4:'TikTok Shop年GMV',scroll_more:'探索更多',
+n_lab:'📰 最新動態',n_tit:'行業資訊',n_upd:'最後更新：2026-03-25',
+m_lab:'🗺️ 全球佈局',m_tit:'交互式世界地圖',m_desc:'點擊地圖上的標記點，查看各地區的企業佈局詳情。',
+map_na:'🇺🇸 北美',map_eu:'🇪🇺 歐洲',map_sea:'🌏 東南亞',map_ea:'🇨🇳 東亞',map_jk:'🇯🇵🇰🇷 日韓',map_sa:'🇧🇷 拉美',map_me:'🌍 中東',map_oc:'🇦🇺 大洋洲',
+k_lab:'🏷️ 熱詞雲圖',k_tit:'出海關鍵詞',k_desc:'點擊每個熱詞查看其含義與入選原因。',
+e_lab:'🛒 板塊一',e_tit:'電商平台出海',e_desc:'按體量排序：TikTok Shop、SHEIN、速賣通、Temu、京東國際。機遇與挑戰並存。',
+l_lab:'📦 板塊二',l_tit:'物流商出海',l_desc:'按體量排序：菜鳥、順豐、極兔、京東產發、百世。支撐中國電商全球化的基礎設施力量。',
+t_lab:'🔮 關鍵趨勢',t_tit:'2026年六大趨勢',
+tl_lab:'📅 關鍵事件',tl_tit:'2016—2026 出海十年大事記',tl_desc:'點擊可查看資訊來源',tag_ecom:'電商',tag_logi:'物流',
+c1_lab:'📊 電商平台對比',c1_tit:'五大電商平台一覽',c1_desc:'點擊公司名稱可訪問官網',
+c2_lab:'📊 物流商對比',c2_tit:'五大物流商一覽',c2_desc:'點擊公司名稱可訪問官網',
+ft:'出海羅盤 · ChinaEcom Atlas · 編制日期：2026年3月25日',
+fd:'本簡報基於公開資訊整理，數據和觀點僅供參考，不構成投資建議。',
+tbl_platform:'平台',tbl_cover:'覆蓋市場',tbl_scale:'規模',tbl_mode:'核心模式',tbl_focus:'2026重點',tbl_risk:'主要風險',
+tbl_company:'企業',tbl_advantage:'核心優勢',tbl_overseas:'出海模式',
+ch_title:'⚠️ 面臨的困境'
+},
+'en':{
+nav0:'📰 News',nav1:'🗺️ Map',nav2:'🏷️ Keywords',nav3:'🛒 E-com',nav4:'📦 Logistics',nav5:'🔮 Trends',nav6:'📅 Timeline',nav7:'📊 Compare',
+hero_badge:'📊 2026 BRIEFING · Data as of March 2026',hero_t1:'China E-commerce & Logistics',hero_t2:'Global Expansion',
+hero_sub:'From TikTok Shop\'s hundred-billion GMV to Cainiao\'s 40+ overseas warehouses — deep analysis of e-commerce and logistics globalization',
+s1:'Global Cross-border E-com (USD)',s2:'China Share',s3:'Logistics Order Growth',s4:'TikTok Shop Annual GMV',scroll_more:'Explore',
+n_lab:'📰 Latest Updates',n_tit:'Industry News',n_upd:'Last updated: 2026-03-25',
+m_lab:'🗺️ Global Map',m_tit:'Interactive World Map',m_desc:'Click markers on the map to see company layouts by region.',
+map_na:'🇺🇸 N. America',map_eu:'🇪🇺 Europe',map_sea:'🌏 SE Asia',map_ea:'🇨🇳 E. Asia',map_jk:'🇯🇵🇰🇷 Japan/Korea',map_sa:'🇧🇷 LatAm',map_me:'🌍 Mid East',map_oc:'🇦🇺 Oceania',
+k_lab:'🏷️ Keywords',k_tit:'Going Global Keywords',k_desc:'Click each keyword to see its meaning and why it was selected.',
+e_lab:'🛒 Sector 1',e_tit:'E-commerce Platforms',e_desc:'Sorted by scale: TikTok Shop, SHEIN, AliExpress, Temu, JD International.',
+l_lab:'📦 Sector 2',l_tit:'Logistics Providers',l_desc:'Sorted by scale: Cainiao, SF, J&T, JD Property, BEST.',
+t_lab:'🔮 Key Trends',t_tit:'6 Trends for 2026',
+tl_lab:'📅 Key Events',tl_tit:'2016–2026: A Decade of Going Global',tl_desc:'Click to view source',tag_ecom:'E-com',tag_logi:'Logistics',
+c1_lab:'📊 E-com Comparison',c1_tit:'5 E-commerce Platforms at a Glance',c1_desc:'Click company name to visit official website',
+c2_lab:'📊 Logistics Comparison',c2_tit:'5 Logistics Providers at a Glance',c2_desc:'Click company name to visit official website',
+ft:'ChinaEcom Atlas · Compiled: March 25, 2026',fd:'Based on public information. For reference only, not investment advice.',
+tbl_platform:'Platform',tbl_cover:'Coverage',tbl_scale:'Scale',tbl_mode:'Core Model',tbl_focus:'2026 Focus',tbl_risk:'Key Risks',
+tbl_company:'Company',tbl_advantage:'Edge',tbl_overseas:'Model',
+ch_title:'⚠️ Challenges'
+}
+};
+
+/* ===== NEWS DATA ===== */
+const NEWS=[
+{day:'12',month:{zh:'3月',en:'Mar'},title:{zh:'菜鸟将在海外部署大规模机器人仓储网络',en:'Cainiao to Deploy Large-scale Robot Warehouses Overseas'},
+sum:{zh:'2026年菜鸟将在中国香港、美国及欧洲等关键市场建成大规模机器人仓库网络，使用自研新一代仓储机器人及AI调度系统。',en:'Cainiao will build large-scale robot warehouse networks in HK, US and Europe using self-developed robots and AI dispatch.'},
+src:{zh:'菜鸟',en:'Cainiao'},tag:'cn',href:'https://news.qq.com/rain/a/20260312A03DQG00'},
+{day:'13',month:{zh:'2月',en:'Feb'},title:{zh:'从"落地"到"扎根"：京东产发如何成为中企出海"后勤部"',en:'JD Property: The "Logistics HQ" for Chinese Companies Going Global'},
+sum:{zh:'京东产发正式向港交所递交上市申请，已为希音建成日分拣400万件的肇庆枢纽，在印尼为家电品牌和新茶饮品牌提供仓储支持。',en:'JD Property filed for HK IPO, built a 4M/day sorting hub for SHEIN in Zhaoqing, and supports brands in Indonesia.'},
+src:{zh:'京东产发',en:'JD Property'},tag:'jdprop',href:'https://www.163.com/dy/article/KLLMDR3905568PVM.html'},
+{day:'06',month:{zh:'2月',en:'Feb'},title:{zh:'越南、马来西亚主流媒体聚焦百世东南亚布局',en:'Vietnam & Malaysia Media Spotlight BEST Inc\'s SE Asia Expansion'},
+sum:{zh:'百世凭借在东南亚市场的扎实耕耘与亮眼业绩，持续获得当地主流媒体关注。越南媒体将百世越南称为快递界的"独角兽"。',en:'BEST Inc continues to gain attention from local media in Southeast Asia, with Vietnamese media calling it the "unicorn" of express delivery.'},
+src:{zh:'百世',en:'BEST Inc'},tag:'best',href:'https://news.qq.com/rain/a/20260206A03Y7700'},
+{day:'27',month:{zh:'1月',en:'Jan'},title:{zh:'京东产发递交港交所A1招股书，构建"超级供应链"出海',en:'JD Property Files A1 Prospectus for HK IPO'},
+sum:{zh:'京东智能产发正式向港交所递交A1申请文件，美银、高盛、海通国际联席保荐。海外10国落地超40个物流项目，欧洲布局超15个项目。',en:'JD Property filed A1 with BofA, Goldman, Haitai as joint sponsors. 40+ projects across 10 countries, 15+ in Europe.'},
+src:{zh:'京东产发',en:'JD Property'},tag:'jdprop',href:'https://finance.sina.com.cn/stock/observe/2026-01-29/doc-inhixqkc6831164.shtml'},
+{day:'19',month:{zh:'1月',en:'Jan'},title:{zh:'菜鸟全球海外仓2025年订单量同比增长32%',en:'Cainiao Global Warehouse Orders Up 32% YoY in 2025'},
+sum:{zh:'菜鸟已在欧洲、北美、亚太等18个国家和地区布局超40个海外仓，跨境物流旺季运营能力持续提升。',en:'Cainiao has 40+ overseas warehouses in 18 countries across Europe, North America and Asia-Pacific.'},
+src:{zh:'菜鸟',en:'Cainiao'},tag:'cn',href:'https://news.qq.com/rain/a/20260119A04HZ400'},
+{day:'15',month:{zh:'1月',en:'Jan'},title:{zh:'顺丰控股与极兔速递达成战略合作，交叉持股共建全球智慧物流',en:'SF Express and J&T Express Form Strategic Partnership with Cross-shareholding'},
+sum:{zh:'顺丰持有极兔10%股权，极兔持有顺丰4.2%股权。跨境干线优势与海外末端能力优势互补，被视为"中资快递物流出海"里程碑事件。',en:'SF holds 10% of J&T, J&T holds 4.2% of SF. A milestone for Chinese logistics going global.'},
+src:{zh:'顺丰×极兔',en:'SF × J&T'},tag:'pship',href:'https://news.qq.com/rain/a/20260115A06C6T00'},
+{day:'14',month:{zh:'1月',en:'Jan'},title:{zh:'顺丰国际在鄂州花湖机场举办跨境电商枢纽推介会',en:'SF International Hosts Cross-border Hub Promotion at Ezhou Huahu Airport'},
+sum:{zh:'以"智链全球，一路顺丰"为主题，在亚洲首个专业货运枢纽鄂州花湖国际机场举办推介，共建中国企业出海新支点。',en:'Promoting Ezhou Huahu Airport — Asia\'s first dedicated cargo hub — as a new pivot for Chinese enterprises going global.'},
+src:{zh:'顺丰',en:'SF Express'},tag:'sf',href:'https://sw.wuhan.gov.cn/xwdt/mtbd/202601/t20260114_2710962.shtml'},
+{day:'08',month:{zh:'1月',en:'Jan'},title:{zh:'TikTok Shop 2025年成为全球增速第一电商平台',en:'TikTok Shop Becomes World\'s Fastest-growing E-commerce Platform in 2025'},
+sum:{zh:'排名全球第五大电商平台，GMV约千亿美元级别，活跃消费者超4亿。预测2030年前跻身全球三大零售商。',en:'Ranked #5 globally, GMV ~$100B, 400M+ active consumers. Predicted to enter top 3 global retailers by 2030.'},
+src:{zh:'TikTok Shop',en:'TikTok Shop'},tag:'tiktok',href:'https://news.qq.com/rain/a/20260108A039HE00'},
+{day:'11',month:{zh:'4月',en:'Apr'},title:{zh:'SHEIN伦敦IPO获英国FCA审批许可',en:'SHEIN London IPO Approved by UK FCA'},
+sum:{zh:'SHEIN已获英国金融行为监管局审批许可，待中国监管机构批准后即可赴伦敦IPO，估值约500亿美元。',en:'SHEIN received UK FCA approval for London IPO, pending Chinese regulatory approval. Valued at ~$50B.'},
+src:{zh:'SHEIN',en:'SHEIN'},tag:'shein',href:'https://news.qq.com/rain/a/20250411A08HYF00'},
+{day:'08',month:{zh:'10月',en:'Oct'},title:{zh:'极兔速递：东南亚市占率32.8%，加速全球扩张',en:'J&T Express: 32.8% Market Share in SE Asia, Accelerating Global Expansion'},
+sum:{zh:'国金证券报告显示极兔在东南亚快递市场市占率达32.8%，处于绝对领先地位。',en:'Guojin Securities reports J&T holds 32.8% share in SE Asia express delivery market, a dominant position.'},
+src:{zh:'极兔',en:'J&T Express'},tag:'jt',href:'https://www.baogaobox.com/insights/250930000021347.html'}
+];
+
+/* ===== KEYWORD DATA ===== */
+const KWS=[
+{key:'crossborder',cls:'xl',label:{zh:'跨境电商',en:'Cross-border E-com'},
+tip:{zh:{t:'跨境电商 Cross-border E-commerce',m:'分属不同关境的交易主体，通过电子商务平台完成交易、进行支付结算，并利用跨境物流送达商品的商业活动。',r:'整个出海叙事的底层逻辑。2026年全球跨境电商规模预计超8万亿美元，中国占比超35%。'},
+en:{t:'Cross-border E-commerce',m:'Transactions between parties in different customs territories, completed via e-commerce platforms with cross-border logistics.',r:'The foundational narrative. Global cross-border e-com expected to exceed $8T in 2026, with China holding 35%+ share.'}}},
+{key:'tiktok',cls:'xl hot',label:{zh:'TikTok Shop',en:'TikTok Shop'},
+tip:{zh:{t:'TikTok Shop',m:'字节跳动旗下的社交电商平台，将短视频/直播内容与电商购物深度融合，开创"兴趣电商"模式。',r:'2025年GMV达千亿美元级别，增速全球第一。2026年计划进入欧洲四国+韩国。'},
+en:{t:'TikTok Shop',m:'ByteDance\'s social commerce platform, merging short video/live streaming with e-commerce — the "Interest Commerce" model.',r:'2025 GMV ~$100B, #1 growth globally. 2026: expanding to 4 European countries + Korea.'}}},
+{key:'temu',cls:'lg',label:{zh:'Temu',en:'Temu'},
+tip:{zh:{t:'Temu',m:'拼多多旗下跨境电商平台，以极致性价比策略快速进入全球50+国家市场。',r:'2024年蝉联全球购物App下载量第一。面对关税冲击，正从"中国直邮"转型"本地化运营"。'},
+en:{t:'Temu',m:'Pinduoduo\'s cross-border platform, rapidly entering 50+ countries with extreme value-for-money strategy.',r:'#1 shopping app globally in 2024. Transitioning from China-direct to localized operations amid tariff pressure.'}}},
+{key:'shein',cls:'xl',label:{zh:'SHEIN',en:'SHEIN'},
+tip:{zh:{t:'SHEIN 希音',m:'全球领先的快时尚电商平台，以"小单快反"的柔性供应链闻名，覆盖150+国家。',r:'目标GMV 806亿美元，伦敦IPO估值500亿美元。de minimis取消对其冲击最大。'},
+en:{t:'SHEIN',m:'Leading fast-fashion e-commerce, known for its "small-batch, quick-response" flexible supply chain, covering 150+ countries.',r:'Target GMV $80.6B, London IPO valued at $50B. Most impacted by de minimis removal.'}}},
+{key:'half-custody',cls:'lg',label:{zh:'半托管',en:'Semi-custody'},
+tip:{zh:{t:'半托管模式 Semi-custody',m:'介于全托管和本地托管之间的运营模式。平台负责营销和流量，商家负责本地仓储和物流履约。',r:'Temu等平台正从全托管向半托管转型，是应对关税壁垒和提升时效的关键模式升级。'},
+en:{t:'Semi-custody Model',m:'Between full-custody and local-custody. Platform handles marketing/traffic; merchants handle local warehousing and fulfillment.',r:'Key model upgrade for platforms like Temu to address tariff barriers and improve delivery times.'}}},
+{key:'deminimis',cls:'lg hot',label:{zh:'de minimis',en:'de minimis'},
+tip:{zh:{t:'de minimis 免税门槛',m:'美国原800美元以下小额包裹免税入境政策。2025年2月被取消，对中国跨境电商直邮模式造成巨大冲击。',r:'2025-2026年跨境电商最大变量，直接推动整个行业"本地化"转型。'},
+en:{t:'De Minimis Threshold',m:'US policy allowing duty-free entry for packages under $800. Removed Feb 2025, devastating Chinese direct-mail e-commerce.',r:'The single biggest variable in cross-border e-com 2025-2026, driving industry-wide localization.'}}},
+{key:'jt',cls:'lg',label:{zh:'极兔速递',en:'J&T Express'},
+tip:{zh:{t:'极兔速递 J&T Express',m:'2015年创立的全球综合物流服务商，从东南亚崛起，2026年与顺丰交叉持股，东南亚市占率32.8%。',r:'东南亚快递市场绝对龙头。2026年1月与顺丰战略合作，被视为中资快递出海里程碑。'},
+en:{t:'J&T Express',m:'Global logistics provider founded 2015, risen from SE Asia. Cross-shareholding with SF in 2026, 32.8% SE Asia market share.',r:'Absolute leader in SE Asia express. Jan 2026 SF partnership is a milestone for Chinese logistics going global.'}}},
+{key:'cainiao',cls:'xl',label:{zh:'菜鸟网络',en:'Cainiao'},
+tip:{zh:{t:'菜鸟网络 Cainiao',m:'阿里巴巴旗下全球智慧物流平台，全球最大跨境电商物流企业。18国布局超40个海外仓。',r:'2025年海外仓订单增32%，2026年将在美欧部署大规模机器人仓储网络。'},
+en:{t:'Cainiao',m:'Alibaba\'s global smart logistics platform, world\'s largest cross-border e-commerce logistics provider. 40+ warehouses in 18 countries.',r:'Warehouse orders up 32% in 2025. Deploying robot warehouses in US and Europe in 2026.'}}},
+{key:'sf',cls:'lg',label:{zh:'顺丰国际',en:'SF Express'},
+tip:{zh:{t:'顺丰速运 SF Express',m:'中国最大独立快递企业，鄂州花湖机场是亚洲最大专业货运枢纽。国际供应链业务快速增长。',r:'2026年1月与极兔交叉持股，在鄂州枢纽举办跨境电商推介。'},
+en:{t:'SF Express',m:'China\'s largest independent courier. Ezhou Huahu Airport is Asia\'s largest dedicated cargo hub. International supply chain growing fast.',r:'Cross-shareholding with J&T in Jan 2026. Cross-border e-com promotion at Ezhou hub.'}}},
+{key:'overseas-warehouse',cls:'lg new',label:{zh:'海外仓',en:'Overseas Warehouse'},
+tip:{zh:{t:'海外仓 Overseas Warehouse',m:'在目标市场国建立的仓储设施，实现本地发货，大幅缩短配送时效，规避跨境物流和关税风险。',r:'菜鸟40+、京东产发40+、顺丰核心枢纽——海外仓是应对de minimis取消的核心基础设施方案。'},
+en:{t:'Overseas Warehouse',m:'Warehouses in target markets enabling local shipping, dramatically reducing delivery time and mitigating tariff risks.',r:'Cainiao 40+, JD Property 40+, SF hub — overseas warehouses are the core infrastructure solution post de minimis.'}}},
+{key:'flexible-supply',cls:'',label:{zh:'柔性供应链',en:'Flexible Supply Chain'},
+tip:{zh:{t:'柔性供应链 Flexible Supply Chain',m:'以小批量、多款式、快速反应为特征的供应链模式。SHEIN的"小单快反"是典型代表。',r:'中国跨境电商核心竞争优势之一，将中国制造的灵活性与数字化结合。'},
+en:{t:'Flexible Supply Chain',m:'Supply chain characterized by small batches, diverse styles, and rapid response. SHEIN\'s model is the classic example.',r:'Core competitive advantage of Chinese cross-border e-commerce, combining manufacturing flexibility with digitalization.'}}},
+{key:'sea',cls:'lg',label:{zh:'东南亚',en:'Southeast Asia'},
+tip:{zh:{t:'东南亚市场 Southeast Asia',m:'包括印尼、越南、泰国、马来西亚、菲律宾等国，是中国电商和物流出海的第一站和核心市场。',r:'极兔32.8%市占率、百世"独角兽"、Lazada/Shopee主战场——东南亚是中国出海基本盘。'},
+en:{t:'Southeast Asia Market',m:'Indonesia, Vietnam, Thailand, Malaysia, Philippines etc. The first stop and core market for Chinese e-commerce and logistics.',r:'J&T 32.8% share, BEST "unicorn", Lazada/Shopee battleground — SE Asia is the foundation of China\'s global expansion.'}}},
+{key:'europe',cls:'new',label:{zh:'欧洲市场',en:'Europe'},
+tip:{zh:{t:'欧洲市场 Europe',m:'美国收紧政策后欧洲成为新的出海热土。TikTok Shop拟进欧洲十国，SHEIN赴伦敦IPO。',r:'2026年各平台欧洲布局密集：TikTok Shop四国扩张、菜鸟五国机器人仓、京东产发15+项目。'},
+en:{t:'European Market',m:'Europe is the new frontier as the US tightens policies. TikTok Shop targeting 10 European countries, SHEIN pursuing London IPO.',r:'2026 sees dense European expansion: TikTok Shop 4 countries, Cainiao 5-country robot warehouses, JD Property 15+ projects.'}}},
+{key:'ipo',cls:'hot',label:{zh:'港交所/伦敦IPO',en:'HK/London IPO'},
+tip:{zh:{t:'出海企业IPO',m:'多家中国出海企业选择在港股或伦敦上市融资，以支持海外扩张。京东产发→港交所，SHEIN→伦敦。',r:'京东产发2026年1月递交A1招股书，SHEIN获FCA批准。资本市场为出海提供弹药。'},
+en:{t:'Going-Global IPOs',m:'Multiple Chinese companies choosing HK or London IPOs to fund overseas expansion. JD Property → HK, SHEIN → London.',r:'JD Property filed A1 in Jan 2026, SHEIN got FCA approval. Capital markets fuel global expansion.'}}},
+{key:'ai-logistics',cls:'',label:{zh:'AI+机器人物流',en:'AI + Robotic Logistics'},
+tip:{zh:{t:'AI+机器人物流',m:'利用人工智能调度系统和自动化仓储机器人提升物流效率。菜鸟2026年将在海外大规模部署。',r:'菜鸟宣布在美欧部署自研仓储机器人+AI调度系统，中国物流科技开始向海外输出。'},
+en:{t:'AI + Robotic Logistics',m:'Using AI dispatch systems and automated warehouse robots to boost logistics efficiency. Cainiao deploying overseas at scale in 2026.',r:'Cainiao deploying self-developed robots + AI dispatch in US/Europe. Chinese logistics tech going global.'}}},
+{key:'tariff-risk',cls:'hot',label:{zh:'关税风险',en:'Tariff Risk'},
+tip:{zh:{t:'关税与合规风险',m:'美国加征关税、欧盟碳边境税、各国数据隐私法规等政策风险，是中国电商出海面临的最大外部挑战。',r:'de minimis取消、欧盟DSA法案、各国本地化要求——合规成本正在快速上升。'},
+en:{t:'Tariff & Compliance Risk',m:'US tariffs, EU carbon border tax, data privacy regulations — the biggest external challenges for Chinese e-commerce going global.',r:'De minimis removal, EU DSA, localization requirements — compliance costs are rising fast.'}}}
+];
+
+/* ===== MAP DATA ===== */
+const MAP_DATA={
+'north-america':{title:{zh:'🇺🇸 北美市场',en:'🇺🇸 North America'},items:[
+{zh:'TikTok Shop — 美国核心市场，但面临封禁风险',en:'TikTok Shop — Core US market, but facing ban risk'},
+{zh:'Temu — 美国本地商家入驻，弃用中国直邮',en:'Temu — US local merchants, abandoned China direct-mail'},
+{zh:'SHEIN — 美国最大快时尚平台，关税冲击严重',en:'SHEIN — Largest fast-fashion platform in US, tariff impact severe'},
+{zh:'菜鸟 — 2026年将在美国部署机器人仓库',en:'Cainiao — Deploying robot warehouses in US in 2026'},
+{zh:'顺丰 — 鄂州枢纽对接北美航线',en:'SF Express — Ezhou hub connects to N. America routes'},
+{zh:'速卖通 — 美国增速TOP10',en:'AliExpress — Top 10 fastest growing in US'}]},
+'europe':{title:{zh:'🇪🇺 欧洲市场',en:'🇪🇺 Europe'},items:[
+{zh:'TikTok Shop — 2026年进军荷兰、比利时、瑞典、波兰',en:'TikTok Shop — Entering Netherlands, Belgium, Sweden, Poland in 2026'},
+{zh:'SHEIN — 伦敦IPO进行中，FCA已批准',en:'SHEIN — London IPO underway, FCA approved'},
+{zh:'Temu — 欧洲成为替代增长市场',en:'Temu — Europe as alternative growth market'},
+{zh:'菜鸟 — 荷兰、西班牙、法国、德国部署机器人仓',en:'Cainiao — Robot warehouses in Netherlands, Spain, France, Germany'},
+{zh:'京东产发 — 欧洲布局超15个物流项目',en:'JD Property — 15+ logistics projects in Europe'},
+{zh:'顺丰 — 跨境干线覆盖欧洲',en:'SF Express — Cross-border routes cover Europe'}]},
+'southeast-asia':{title:{zh:'🌏 东南亚市场（中国出海基本盘）',en:'🌏 Southeast Asia (Core Market)'},items:[
+{zh:'极兔速递 — 市占率32.8%，绝对龙头',en:'J&T Express — 32.8% market share, absolute leader'},
+{zh:'百世 — 越南"独角兽"，全链路升级',en:'BEST Inc — Vietnam "unicorn", full-chain upgrade'},
+{zh:'Lazada（阿里系）— 东南亚最大电商平台',en:'Lazada (Alibaba) — Largest e-commerce in SE Asia'},
+{zh:'Shopee — 区域霸主（非中资但竞争激烈）',en:'Shopee — Regional powerhouse (non-Chinese but competitive)'},
+{zh:'菜鸟 — 东南亚物流网络核心节点',en:'Cainiao — Core logistics network node'},
+{zh:'TikTok Shop — 东南亚是其增长最快区域',en:'TikTok Shop — SE Asia is its fastest-growing region'}]},
+'east-asia':{title:{zh:'🇨🇳 中国（出海大本营）',en:'🇨🇳 China (Home Base)'},items:[
+{zh:'所有平台和物流商的总部和供应链核心',en:'HQ and supply chain core for all platforms and logistics'},
+{zh:'全球最大的跨境电商商品生产基地',en:'World\'s largest cross-border e-com production base'},
+{zh:'菜鸟、顺丰、极兔的国内网络基础',en:'Domestic network base for Cainiao, SF, J&T'},
+{zh:'京东产发国内建面规模第二',en:'JD Property: #2 in domestic warehouse area'}]},
+'jp-kr':{title:{zh:'🇯🇵🇰🇷 日韩市场',en:'🇯🇵🇰🇷 Japan & Korea'},items:[
+{zh:'TikTok Shop — 2026年计划进入韩国',en:'TikTok Shop — Planning Korea entry in 2026'},
+{zh:'速卖通 — 韩国与YouTube合作',en:'AliExpress — Korea YouTube partnership'},
+{zh:'菜鸟 — 日韩海外仓布局',en:'Cainiao — Japan/Korea warehouse network'},
+{zh:'极兔 — 日本市场有布局',en:'J&T Express — Japan market presence'}]},
+'south-america':{title:{zh:'🇧🇷 拉美市场',en:'🇧🇷 Latin America'},items:[
+{zh:'SHEIN — 巴西市场表现强劲',en:'SHEIN — Strong in Brazil'},
+{zh:'Temu — 进入拉美多个国家',en:'Temu — Entered multiple LatAm countries'},
+{zh:'速卖通 — 拉美传统优势市场',en:'AliExpress — Traditional strength in LatAm'},
+{zh:'极兔 — 巴西快递网络',en:'J&T Express — Brazil delivery network'}]},
+'middle-east':{title:{zh:'🌍 中东市场',en:'🌍 Middle East'},items:[
+{zh:'TikTok Shop — 中东市场活跃',en:'TikTok Shop — Active in Middle East'},
+{zh:'SHEIN — 中东地区快速增长',en:'SHEIN — Rapid growth in Middle East'},
+{zh:'速卖通 — 中东传统优势市场',en:'AliExpress — Traditional strength in Middle East'},
+{zh:'极兔 — 沙特等国快递网络',en:'J&T Express — Delivery network in Saudi Arabia etc.'}]},
+'oceania':{title:{zh:'🇦🇺 大洋洲市场',en:'🇦🇺 Oceania'},items:[
+{zh:'Temu — 澳大利亚市场增长',en:'Temu — Growing in Australia'},
+{zh:'菜鸟 — 澳洲海外仓布局',en:'Cainiao — Australia warehouse network'},
+{zh:'SHEIN — 澳洲快时尚市场',en:'SHEIN — Australia fast-fashion market'},
+{zh:'百世 — 东南亚-澳洲航线',en:'BEST Inc — SE Asia-Australia routes'}]}
+};
+
+/* ===== LEGEND ===== */
+const LEGEND=[
+{color:'#ff0050',zh:'TikTok Shop',en:'TikTok Shop'},
+{color:'#f59e0b',zh:'Temu',en:'Temu'},
+{color:'#ec4899',zh:'SHEIN',en:'SHEIN'},
+{color:'#06b6d4',zh:'速卖通/菜鸟',en:'AliExpress/Cainiao'},
+{color:'#ef4444',zh:'京东/京东产发',en:'JD/JD Property'},
+{color:'#6366f1',zh:'顺丰',en:'SF Express'},
+{color:'#ff4444',zh:'极兔',en:'J&T Express'},
+{color:'#22c55e',zh:'百世',en:'BEST Inc'}
+];
+
+/* ===== ECOM CARDS ===== */
+const ECOM=[
+{icon:'🎵',iconBg:'rgba(255,0,80,.1)',name:{zh:'TikTok Shop',en:'TikTok Shop'},
+sub:{zh:'字节跳动 · 兴趣电商 · 体量#1',en:'ByteDance · Interest Commerce · #1 by scale'},
+metrics:[{v:'~千亿美元',l:{zh:'2025年GMV',en:'2025 GMV'}},{v:'4亿+',l:{zh:'活跃消费者',en:'Active Consumers'}},{v:'17国',l:{zh:'已进入市场',en:'Markets'}},{v:'增速#1',l:{zh:'全球电商平台',en:'Global E-com Growth'}}],
+tags:[{t:{zh:'🔥 增速全球第一',en:'🔥 #1 Global Growth'},cls:'hot'},{t:{zh:'2026 欧洲四国+韩国',en:'2026: 4 EU Countries + Korea'},cls:'new'}],
+list:[{zh:'排名全球第五（仅次于亚马逊、沃尔玛、Shopee、eBay）',en:'#5 globally (after Amazon, Walmart, Shopee, eBay)'},
+{zh:'2026年计划进军荷兰、比利时、瑞典、波兰',en:'2026: entering Netherlands, Belgium, Sweden, Poland'},
+{zh:'预测2030年前跻身全球三大零售商',en:'Predicted to enter top 3 global retailers by 2030'}],
+challenge:{zh:'美国市场面临强制出售或封禁的政策风险（"不卖就禁"法案仍未完全解除）；直播电商模式在欧美消费者中的接受度仍低于东南亚；本地化运营团队建设和合规成本高企；与Instagram、YouTube等平台的社交电商竞争日趋激烈。',
+en:'US market faces forced sale or ban risk; livestream commerce acceptance in West still lags SE Asia; high localization and compliance costs; intensifying competition from Instagram and YouTube social commerce.'}},
+{icon:'👗',iconBg:'rgba(236,72,153,.1)',name:{zh:'SHEIN 希音',en:'SHEIN'},
+sub:{zh:'快时尚 · 柔性供应链 · 体量#2',en:'Fast Fashion · Flexible Supply Chain · #2'},
+metrics:[{v:'150+国',l:{zh:'覆盖市场',en:'Markets'}},{v:'806亿美元',l:{zh:'目标GMV',en:'Target GMV'}},{v:'500亿美元',l:{zh:'IPO估值',en:'IPO Valuation'}},{v:'伦敦',l:{zh:'IPO目的地',en:'IPO Location'}}],
+tags:[{t:{zh:'🔥 FCA已批准',en:'🔥 FCA Approved'},cls:'hot'},{t:{zh:'小单快反',en:'Quick Response'},cls:''},{t:{zh:'⚠️ 环保争议',en:'⚠️ ESG Controversy'},cls:'risk'}],
+list:[{zh:'de minimis取消对其冲击最大（高度依赖中国直邮小包）',en:'Most impacted by de minimis removal (heavily reliant on China direct mail)'},
+{zh:'从服装向家居、美妆等多元品类扩展',en:'Expanding from fashion to home, beauty and more'},
+{zh:'"小单快反"柔性供应链是其核心壁垒',en:'"Small-batch quick-response" supply chain is its core moat'}],
+challenge:{zh:'IPO之路坎坷——中国监管审批尚未完成，且面临ESG（环保、劳工）审查压力；"快时尚"标签引发环保组织持续抗议；美国关税政策直接冲击其直邮模式，转型本地化需要巨额投入；知识产权诉讼频发。',
+en:'IPO path rocky — Chinese regulatory approval pending, ESG scrutiny pressure; "fast-fashion" label draws environmental protests; US tariffs directly impact direct-mail model; frequent IP lawsuits.'}},
+{icon:'🚀',iconBg:'rgba(6,182,212,.1)',name:{zh:'速卖通 AliExpress',en:'AliExpress'},
+sub:{zh:'阿里巴巴 · 品牌出海 · 体量#3',en:'Alibaba · Brand Export · #3'},
+metrics:[{v:'200+国',l:{zh:'覆盖市场',en:'Markets'}},{v:'392亿元',l:{zh:'国际季度营收',en:'Intl Quarterly Revenue'}},{v:'+18.7%',l:{zh:'美国访问量增长',en:'US Visit Growth'}},{v:'TOP10',l:{zh:'美国增速最快',en:'Fastest Growing US'}}],
+tags:[{t:{zh:'Similarweb TOP10',en:'Similarweb Top 10'},cls:'new'},{t:{zh:'Brand+ 计划',en:'Brand+ Program'},cls:''}],
+list:[{zh:'首个在韩国与YouTube合作的中国电商平台',en:'First Chinese e-com to partner with YouTube in Korea'},
+{zh:'筹备"最高规格"品牌出海项目，向500强发出邀约',en:'Preparing premium brand export project, inviting Fortune 500'},
+{zh:'依托菜鸟物流网络，本地化仓储能力持续提升',en:'Leveraging Cainiao logistics network, improving local warehousing'}],
+challenge:{zh:'品牌形象仍偏"低价平台"，品牌化升级需要时间；在部分市场面临来自Shopee、Lazada的激烈竞争；阿里巴巴集团战略重心调整可能影响资源投入；物流时效与亚马逊FBA仍有差距。',
+en:'Brand still perceived as "low-price platform"; competition from Shopee/Lazada in key markets; Alibaba strategic shifts may affect investment; logistics speed still trails Amazon FBA.'}},
+{icon:'🟠',iconBg:'rgba(245,158,11,.1)',name:{zh:'Temu',en:'Temu'},
+sub:{zh:'拼多多 · 极致性价比 · 体量#4',en:'Pinduoduo · Extreme Value · #4'},
+metrics:[{v:'50+国',l:{zh:'覆盖市场',en:'Markets'}},{v:'数百亿美元',l:{zh:'年交易规模',en:'Annual GMV'}},{v:'半托管',l:{zh:'核心转型',en:'Core Pivot'}},{v:'欧洲暴涨',l:{zh:'新增长极',en:'New Growth Pole'}}],
+tags:[{t:{zh:'美国关税冲击',en:'US Tariff Impact'},cls:'hot'},{t:{zh:'本地商家入驻',en:'Local Merchants'},cls:'new'},{t:{zh:'⚠️ 数据安全审查',en:'⚠️ Data Security Review'},cls:'risk'}],
+list:[{zh:'弃用纯"中国直邮"模式，转向美国本地商家',en:'Abandoning pure China-direct, shifting to US local merchants'},
+{zh:'欧洲市场成为美国之外最重要的替代增长市场',en:'Europe becoming the most important alternative growth market outside US'}],
+challenge:{zh:'面临美国、欧盟数据安全审查；极低利润率模式能否持续存疑；"烧钱获客"模式在海外市场面临文化差异挑战；美国关税政策下供应链被迫重构，成本大幅上升；消费者对"超低价"产品质量的信任度有待建立。',
+en:'Faces US/EU data security reviews; sustainability of ultra-low-margin model in question; "burn cash for users" faces cultural challenges abroad; tariff-forced supply chain restructuring increases costs; consumer trust in ultra-low prices needs building.'}},
+{icon:'📦',iconBg:'rgba(239,68,68,.1)',name:{zh:'京东国际 Joybuy',en:'JD International / Joybuy'},
+sub:{zh:'京东 · 品质路线 · 体量#5',en:'JD.com · Quality Focus · #5'},
+metrics:[{v:'欧洲',l:{zh:'首站市场',en:'First Market'}},{v:'母婴玩具',l:{zh:'首推品类',en:'Launch Category'}},{v:'自建物流',l:{zh:'核心优势',en:'Core Edge'}},{v:'品质路线',l:{zh:'差异化策略',en:'Differentiation'}}],
+tags:[{t:{zh:'重资产模式',en:'Asset-heavy Model'},cls:''},{t:{zh:'品质路线',en:'Quality Focus'},cls:''}],
+list:[{zh:'2025年4月推出欧洲品牌Joybuy，首站英国',en:'Launched Joybuy in Europe Apr 2025, starting with UK'},
+{zh:'依托自建物流和数智化供应链能力',en:'Leveraging self-built logistics and smart supply chain'}],
+challenge:{zh:'出海起步晚，市场份额远落后于竞品；重资产模式在海外市场投入大、回报周期长；品牌知名度低，获客成本高；欧洲市场已有亚马逊等强势玩家，突围难度大。',
+en:'Late start, market share far behind competitors; asset-heavy model requires heavy investment with long ROI; low brand awareness; Amazon dominance in Europe makes breakthrough difficult.'}}
+];
+
+/* ===== LOGISTICS CARDS ===== */
+const LOGI=[
+{icon:'🟧',iconBg:'rgba(245,158,11,.1)',name:{zh:'菜鸟网络 Cainiao',en:'Cainiao'},
+sub:{zh:'阿里巴巴 · 全球智慧物流 · 体量#1',en:'Alibaba · Global Smart Logistics · #1'},
+metrics:[{v:'18国',l:{zh:'海外仓覆盖',en:'Warehouse Countries'}},{v:'40+个',l:{zh:'海外仓数量',en:'Warehouses'}},{v:'+32%',l:{zh:'2025海外仓订单增长',en:'2025 Order Growth'}},{v:'全球最大',l:{zh:'跨境电商物流企业',en:'Cross-border Logistics'}}],
+tags:[{t:{zh:'🔥 订单量增32%',en:'🔥 Orders +32%'},cls:'hot'},{t:{zh:'2026美欧机器人仓',en:'2026 US/EU Robot Warehouses'},cls:'new'},{t:{zh:'AI调度系统',en:'AI Dispatch'},cls:''}],
+list:[{zh:'全球最大的跨境电商物流企业',en:'World\'s largest cross-border e-commerce logistics provider'},
+{zh:'2026年将在荷兰、西班牙、法国、德国、美国部署机器人仓库',en:'Deploying robot warehouses in Netherlands, Spain, France, Germany, US in 2026'},
+{zh:'自研新一代仓储机器人+AI调度系统，向海外输出物流科技',en:'Self-developed next-gen warehouse robots + AI dispatch, exporting logistics tech'},
+{zh:'助力速卖通、Lazada等阿里系出海',en:'Powering AliExpress, Lazada and other Alibaba ecosystem'}],
+challenge:{zh:'与阿里体系绑定较深，独立拓展非阿里系客户难度大；海外自建物流网络投入巨大；各国物流法规和劳动法差异增加合规成本；与DHL、UPS等国际巨头在服务品质上仍有差距。',
+en:'Deep Alibaba ties limit independent client acquisition; massive overseas network investment; varying logistics regulations increase compliance costs; service quality still trails DHL, UPS.'}},
+{icon:'✈️',iconBg:'rgba(100,100,100,.2)',name:{zh:'顺丰速运 SF Express',en:'SF Express'},
+sub:{zh:'独立快递 · 航空网络 · 体量#2',en:'Independent Courier · Aviation Network · #2'},
+metrics:[{v:'鄂州枢纽',l:{zh:'亚洲最大货运机场',en:'Asia\'s Largest Cargo Hub'}},{v:'10%',l:{zh:'持有极兔股权',en:'J&T Stake'}},{v:'跨境干线',l:{zh:'核心竞争力',en:'Core Edge'}},{v:'全球',l:{zh:'覆盖范围',en:'Coverage'}}],
+tags:[{t:{zh:'🔥 与极兔交叉持股',en:'🔥 Cross-shareholding with J&T'},cls:'hot'},{t:{zh:'鄂州枢纽推介',en:'Ezhou Hub Promotion'},cls:'new'}],
+list:[{zh:'鄂州花湖机场：亚洲最大专业货运枢纽',en:'Ezhou Huahu Airport: Asia\'s largest dedicated cargo hub'},
+{zh:'2026年1月与极兔交叉持股：顺丰持极兔10%，极兔持顺丰4.2%',en:'Jan 2026 cross-shareholding: SF holds 10% J&T, J&T holds 4.2% SF'},
+{zh:'"顺丰跨境干线+极兔海外末端"形成出海组合拳',en:'"SF cross-border routes + J&T overseas last-mile" combo punch'}],
+challenge:{zh:'海外末端网络薄弱，高度依赖合作伙伴；国际业务长期亏损，盈利模式尚不清晰；鄂州枢纽投入巨大，短期回报有限；面临FedEx、UPS等巨头的直接竞争，品牌国际认知度低。',
+en:'Weak overseas last-mile network, heavily dependent on partners; international business chronically loss-making; massive Ezhou investment with limited short-term returns; faces FedEx, UPS competition with low global brand awareness.'}},
+{icon:'🐇',iconBg:'rgba(255,0,0,.08)',name:{zh:'极兔速递 J&T Express',en:'J&T Express'},
+sub:{zh:'全球综合物流 · 东南亚龙头 · 体量#3',en:'Global Logistics · SE Asia Leader · #3'},
+metrics:[{v:'32.8%',l:{zh:'东南亚市占率',en:'SE Asia Share'}},{v:'4.2%',l:{zh:'持有顺丰股权',en:'SF Stake'}},{v:'东南亚+中国',l:{zh:'核心市场',en:'Core Markets'}},{v:'全球',l:{zh:'快递网络覆盖',en:'Network Coverage'}}],
+tags:[{t:{zh:'🔥 东南亚市占率第一',en:'🔥 #1 in SE Asia'},cls:'hot'},{t:{zh:'与顺丰战略合作',en:'SF Partnership'},cls:'new'}],
+list:[{zh:'东南亚快递市场绝对龙头，市占率32.8%',en:'Absolute leader in SE Asia express, 32.8% market share'},
+{zh:'2026年1月与顺丰交叉持股，优势互补共拓全球',en:'Cross-shareholding with SF in Jan 2026, complementary strengths for global expansion'},
+{zh:'覆盖印尼、越南、马来西亚等东南亚核心国家',en:'Covers Indonesia, Vietnam, Malaysia and other core SE Asian countries'}],
+challenge:{zh:'中国市场竞争白热化，利润率承压；东南亚市场面临本地玩家和Shopee自建物流的挑战；此前烧钱扩张导致的盈利修复仍需时间；各国运营标准不统一，管理复杂度高。',
+en:'Fierce China competition squeezing margins; SE Asia faces local players and Shopee self-built logistics; profitability recovery from cash-burning expansion still underway; varying operational standards across countries.'}},
+{icon:'🏭',iconBg:'rgba(239,68,68,.1)',name:{zh:'京东产发 JINGDONG Property',en:'JD Property'},
+sub:{zh:'京东集团 · 全球供应链基础设施 · 体量#4',en:'JD Group · Global Supply Chain Infrastructure · #4'},
+metrics:[{v:'10国',l:{zh:'海外落地国家',en:'Countries'}},{v:'40+个',l:{zh:'海外物流项目',en:'Projects'}},{v:'15+个',l:{zh:'欧洲项目',en:'EU Projects'}},{v:'港交所',l:{zh:'拟上市地点',en:'IPO Target'}}],
+tags:[{t:{zh:'🔥 递交A1招股书',en:'🔥 Filed A1 Prospectus'},cls:'hot'},{t:{zh:'中企出海"后勤部"',en:'"Logistics HQ" for China Abroad'},cls:'new'}],
+list:[{zh:'2026年1月递交A1招股书，美银、高盛、海通联席保荐',en:'Filed A1 in Jan 2026, BofA/Goldman/Haitai as joint sponsors'},
+{zh:'建面规模国内第二，为希音建成日分拣400万件的肇庆枢纽',en:'#2 in domestic warehouse area, built 4M/day sorting hub for SHEIN'},
+{zh:'在印尼为家电品牌和新茶饮品牌提供仓储支持',en:'Providing warehousing for appliance and tea brands in Indonesia'},
+{zh:'IPO融资重点用于拓展海外关键物流节点基础设施',en:'IPO proceeds focused on overseas logistics infrastructure'}],
+challenge:{zh:'重资产模式资金需求大，海外地产投资面临汇率和政策风险；客户集中度高，对京东系和少数大客户依赖较大；海外物流地产市场竞争激烈，Prologis等巨头占据主导地位。',
+en:'Asset-heavy model requires massive capital; overseas real estate faces FX and policy risks; high client concentration; Prologis and other giants dominate overseas logistics real estate.'}},
+{icon:'🟢',iconBg:'rgba(34,197,94,.1)',name:{zh:'百世集团 BEST Inc',en:'BEST Inc'},
+sub:{zh:'智慧供应链 · 快运+国际 · 体量#5',en:'Smart Supply Chain · Freight + Intl · #5'},
+metrics:[{v:'7国',l:{zh:'海外业务覆盖',en:'Countries'}},{v:'独角兽',l:{zh:'越南媒体评价',en:'Vietnam Media Rating'}},{v:'395个',l:{zh:'云仓数量',en:'Cloud Warehouses'}},{v:'280万㎡',l:{zh:'仓储面积',en:'Warehouse Area'}}],
+tags:[{t:{zh:'🔥 越马媒体聚焦',en:'🔥 VN/MY Media Spotlight'},cls:'new'},{t:{zh:'全链路升级',en:'Full-chain Upgrade'},cls:''}],
+list:[{zh:'越南主流媒体称百世越南为快递界"独角兽"',en:'Vietnamese media calls BEST Vietnam the "unicorn" of express delivery'},
+{zh:'越南和马来西亚全链路物流升级获深度报道',en:'Deep coverage of full-chain logistics upgrade in Vietnam and Malaysia'},
+{zh:'集快运、供应链管理、国际物流于一体的一站式服务',en:'One-stop service combining freight, supply chain management and international logistics'}],
+challenge:{zh:'国内市场已边缘化，份额持续萎缩；海外市场营收占比仍小，尚未形成规模效应；资金链紧张，持续亏损；面临极兔、菜鸟等更强竞争对手的挤压。',
+en:'Domestic market marginalized with shrinking share; overseas revenue still small, no scale effects; tight cash flow, persistent losses; squeezed by stronger competitors like J&T and Cainiao.'}}
+];
+
+/* ===== TRENDS DATA ===== */
+const TRENDS=[
+{n:'01',t:{zh:'全托管→半托管→本地托管',en:'Full → Semi → Local Custody'},
+d:{zh:'平台从包揽一切向商家本地化运营演进，提升时效、降低关税风险。Temu、速卖通率先推进。',en:'Platforms evolving from full control to merchant localization, improving delivery and reducing tariff risk. Temu and AliExpress lead.'}},
+{n:'02',t:{zh:'美国关税政策冲击',en:'US Tariff Policy Impact'},
+d:{zh:'de minimis取消倒逼从"中国直邮"向"海外本地化"转型，供应链重构成本巨大。',en:'De minimis removal forces shift from China-direct to overseas localization, massive supply chain restructuring costs.'}},
+{n:'03',t:{zh:'欧洲成为新战场',en:'Europe: The New Battleground'},
+d:{zh:'美国收紧下欧洲吸引力大增，但GDPR、DSA和可持续法规构成新门槛。',en:'Europe increasingly attractive as US tightens, but GDPR, DSA and sustainability regulations create new barriers.'}},
+{n:'04',t:{zh:'物流基础设施先行',en:'Infrastructure First'},
+d:{zh:'菜鸟40+海外仓、京东产发10国落地、顺丰鄂州枢纽——基建驱动出海。',en:'Cainiao 40+ warehouses, JD Property 10 countries, SF Ezhou hub — infrastructure drives globalization.'}},
+{n:'05',t:{zh:'AI+机器人重塑物流',en:'AI + Robots Reshape Logistics'},
+d:{zh:'菜鸟自研仓储机器人和AI调度系统出海，中国物流科技开始向海外输出。',en:'Cainiao\'s self-developed robots and AI dispatch going overseas — Chinese logistics tech export begins.'}},
+{n:'06',t:{zh:'合规成本急剧上升',en:'Compliance Costs Soaring'},
+d:{zh:'欧盟DSA法案、碳边境税、数据本地化要求——合规正在成为出海的最大隐性成本。',en:'EU DSA, carbon border tax, data localization — compliance is becoming the biggest hidden cost of going global.'}}
+];
+
+/* ===== TIMELINE DATA ===== */
+const TL=[
+{date:'2026-03',tag:'l',title:{zh:'菜鸟海外部署大规模机器人仓储网络',en:'Cainiao Deploys Robot Warehouses Overseas'},
+desc:{zh:'在荷兰、西班牙、法国、德国、美国建成大规模机器人仓库，使用自研仓储机器人+AI调度系统。',en:'Built large-scale robot warehouses in Netherlands, Spain, France, Germany, US with self-developed robots + AI dispatch.'},
+href:'https://news.qq.com/rain/a/20260312A03DQG00'},
+{date:'2026-02',tag:'l',title:{zh:'京东产发被称为中企出海"后勤部"',en:'JD Property Called "Logistics HQ" for China Going Global'},
+desc:{zh:'向港交所递交上市申请，为希音建成日分拣400万件的肇庆枢纽。',en:'Filed for HK IPO, built 4M/day sorting hub for SHEIN in Zhaoqing.'},
+href:'https://www.163.com/dy/article/KLLMDR3905568PVM.html'},
+{date:'2026-02',tag:'l',title:{zh:'百世东南亚获越南、马来西亚主流媒体聚焦',en:'BEST Inc Spotlighted by Vietnam & Malaysia Media'},
+desc:{zh:'百世越南被当地媒体称为快递界"独角兽"。',en:'BEST Vietnam called the "unicorn" of express delivery by local media.'},
+href:'https://news.qq.com/rain/a/20260206A03Y7700'},
+{date:'2026-01',tag:'l',title:{zh:'京东产发递交港交所A1招股书',en:'JD Property Files A1 Prospectus for HK IPO'},
+desc:{zh:'美银、高盛、海通联席保荐。海外10国落地超40个物流项目。',en:'BofA, Goldman, Haitai as sponsors. 40+ projects across 10 countries.'},
+href:'https://finance.sina.com.cn/stock/observe/2026-01-29/doc-inhixqkc6831164.shtml'},
+{date:'2026-01',tag:'l',title:{zh:'菜鸟海外仓订单量同比增32%',en:'Cainiao Warehouse Orders Up 32% YoY'},
+desc:{zh:'18国40+海外仓，覆盖欧洲、北美、亚太。',en:'40+ warehouses in 18 countries across Europe, N. America, Asia-Pacific.'},
+href:'https://news.qq.com/rain/a/20260119A04HZ400'},
+{date:'2026-01',tag:'l',title:{zh:'顺丰×极兔交叉持股，共建全球智慧物流',en:'SF × J&T Cross-shareholding: Building Global Smart Logistics'},
+desc:{zh:'顺丰持极兔10%、极兔持顺丰4.2%。中资快递出海里程碑。',en:'SF holds 10% J&T, J&T holds 4.2% SF. Milestone for Chinese logistics going global.'},
+href:'https://news.qq.com/rain/a/20260115A06C6T00'},
+{date:'2026-01',tag:'l',title:{zh:'顺丰国际鄂州枢纽跨境电商推介',en:'SF International Ezhou Hub Cross-border Promotion'},
+desc:{zh:'"智链全球"主题，在亚洲最大货运枢纽举办推介。',en:'"Smart Global Link" theme, held at Asia\'s largest cargo hub.'},
+href:'https://sw.wuhan.gov.cn/xwdt/mtbd/202601/t20260114_2710962.shtml'},
+{date:'2026-01',tag:'e',title:{zh:'TikTok Shop成为全球增速第一电商平台',en:'TikTok Shop Becomes #1 Fastest-growing E-com Platform'},
+desc:{zh:'GMV约千亿美元，排名第五。预测2030年前跻身全球三大零售商。',en:'GMV ~$100B, ranked #5. Predicted to enter top 3 retailers by 2030.'},
+href:'https://news.qq.com/rain/a/20260108A039HE00'},
+{date:'2025-04',tag:'e',title:{zh:'SHEIN获FCA审批 · 京东推出Joybuy',en:'SHEIN Gets FCA Approval · JD Launches Joybuy'},
+desc:{zh:'SHEIN伦敦IPO获英国FCA批准，估值500亿。京东在欧洲推出Joybuy品牌。',en:'SHEIN London IPO approved by UK FCA, $50B valuation. JD launched Joybuy in Europe.'},
+href:'https://news.qq.com/rain/a/20250411A08HYF00'},
+{date:'2025-05',tag:'e',title:{zh:'Temu弃用中国直邮模式',en:'Temu Abandons China Direct-mail Model'},
+desc:{zh:'应对关税冲击，Temu大规模引入美国本地商家。',en:'Responding to tariffs, Temu massively onboarded US local merchants.'},
+href:'https://database.caixin.com/2025-05-02/102316050.html'},
+{date:'2025',tag:'l',title:{zh:'极兔东南亚市占率32.8%',en:'J&T 32.8% Market Share in SE Asia'},
+desc:{zh:'国金证券确认极兔在东南亚快递市场稳居龙头。',en:'Guojin Securities confirms J&T as SE Asia express leader.'},
+href:'https://www.baogaobox.com/insights/250930000021347.html'},
+{date:'2025-02',tag:'e',title:{zh:'美国取消800美元小额免税政策',en:'US Removes $800 De Minimis Exemption'},
+desc:{zh:'特朗普取消de minimis免税政策，对中国跨境电商冲击巨大。',en:'Trump removes de minimis policy, massive impact on Chinese cross-border e-commerce.'},
+href:'https://news.qq.com/rain/a/20260129A0372V00'},
+{date:'2024',tag:'e',title:{zh:'Temu登顶全球下载榜 · SHEIN提交伦敦IPO',en:'Temu Tops Global Downloads · SHEIN Files London IPO'},
+desc:{zh:'Temu蝉联购物App下载量第一。TikTok Shop覆盖17个市场。',en:'Temu #1 shopping app downloads. TikTok Shop in 17 markets.'},
+href:'https://news.qq.com/rain/a/20260129A0372V00'},
+{date:'2023',tag:'e',title:{zh:'Temu爆发增长 · 三强格局确立',en:'Temu Explosive Growth · Big Three Established'},
+desc:{zh:'Temu进入40+国家。TikTok Shop美国全面开放。',en:'Temu entered 40+ countries. TikTok Shop fully opened in US.'},
+href:'https://www.chinairn.com/news/20250516/144602304.shtml'},
+{date:'2022',tag:'el',title:{zh:'Temu上线美国 · SHEIN估值千亿 · 菜鸟加速出海',en:'Temu Launches in US · SHEIN $100B Valuation · Cainiao Expands'},
+desc:{zh:'拼多多推出Temu。SHEIN估值达1000亿美元。',en:'Pinduoduo launches Temu. SHEIN valued at $100B.'},
+href:'https://finance.sina.cn/tech/2026-01-09/detail-inhfssrv0583065.d.html'},
+{date:'2021',tag:'e',title:{zh:'TikTok Shop上线 · SHEIN超亚马逊下载量',en:'TikTok Shop Launches · SHEIN Surpasses Amazon Downloads'},
+desc:{zh:'字节推出TikTok Shop，"兴趣电商"诞生。SHEIN在美国下载量超越亚马逊。',en:'ByteDance launches TikTok Shop, "Interest Commerce" born. SHEIN surpasses Amazon downloads in US.'},
+href:'https://news.qq.com/rain/a/20260108A039HE00'},
+{date:'2020',tag:'el',title:{zh:'疫情催化跨境电商爆发',en:'COVID Catalyzes Cross-border E-commerce Boom'},
+desc:{zh:'中国跨境电商出口增长40%+。SHEIN营收接近100亿美元。',en:'China cross-border e-com exports grew 40%+. SHEIN revenue approached $10B.'},
+href:'https://m.sohu.com/a/873385035_122066678'},
+{date:'2016',tag:'e',title:{zh:'阿里收购Lazada · 中国电商出海元年',en:'Alibaba Acquires Lazada · Dawn of Chinese E-com Globalization'},
+desc:{zh:'阿里10亿美元收购东南亚最大电商平台Lazada控股权。',en:'Alibaba acquires controlling stake in Lazada, SE Asia\'s largest e-commerce platform, for $1B.'},
+href:'https://www.sohu.com/a/881914422_121885028'}
+];
+
+/* ===== COMPARISON TABLE DATA ===== */
+const CMP_ECOM_COLS=['platform','cover','scale','mode','focus','risk'];
+const CMP_ECOM_ROWS=[
+{name:{zh:'TikTok Shop',en:'TikTok Shop'},href:'https://seller.tiktok.com/',
+cover:{zh:'17国',en:'17 countries'},scale:{zh:'GMV~千亿美元，增速#1',en:'GMV ~$100B, #1 growth'},
+mode:{zh:'兴趣电商·直播带货',en:'Interest commerce · Livestream'},
+focus:{zh:'欧洲10国+韩国·本地托管',en:'10 EU countries + Korea · Local custody'},
+risk:{zh:'美国封禁风险',en:'US ban risk'}},
+{name:{zh:'SHEIN',en:'SHEIN'},href:'https://www.shein.com/',
+cover:{zh:'150+国',en:'150+ countries'},scale:{zh:'目标GMV 806亿美元',en:'Target GMV $80.6B'},
+mode:{zh:'小单快反·柔性供应链',en:'Quick response · Flexible supply'},
+focus:{zh:'伦敦IPO·品类扩展',en:'London IPO · Category expansion'},
+risk:{zh:'ESG审查·IPO不确定',en:'ESG scrutiny · IPO uncertainty'}},
+{name:{zh:'速卖通',en:'AliExpress'},href:'https://www.aliexpress.com/',
+cover:{zh:'200+国',en:'200+ countries'},scale:{zh:'季度营收392亿元',en:'Quarterly revenue ¥39.2B'},
+mode:{zh:'品牌出海·本地化',en:'Brand export · Localization'},
+focus:{zh:'YouTube合作·Brand+',en:'YouTube collab · Brand+'},
+risk:{zh:'品牌升级难度',en:'Brand upgrade difficulty'}},
+{name:{zh:'Temu',en:'Temu'},href:'https://www.temu.com/',
+cover:{zh:'50+国',en:'50+ countries'},scale:{zh:'数百亿美元级',en:'$10B+ scale'},
+mode:{zh:'极致性价比·半托管',en:'Extreme value · Semi-custody'},
+focus:{zh:'欧洲替代增长·美国本地化',en:'Europe growth · US localization'},
+risk:{zh:'数据安全·利润率',en:'Data security · Margins'}},
+{name:{zh:'京东国际',en:'JD International'},href:'https://www.joybuy.com/',
+cover:{zh:'精选市场',en:'Select markets'},scale:{zh:'以进口为主',en:'Primarily imports'},
+mode:{zh:'自建物流·品质路线',en:'Self-built logistics · Quality'},
+focus:{zh:'欧洲Joybuy·供应链',en:'Europe Joybuy · Supply chain'},
+risk:{zh:'起步晚·份额小',en:'Late start · Small share'}}
+];
+
+const CMP_LOGI_COLS=['company','cover','advantage','mode','focus','risk'];
+const CMP_LOGI_ROWS=[
+{name:{zh:'菜鸟网络',en:'Cainiao'},href:'https://www.cainiao.com/',
+cover:{zh:'18国40+海外仓',en:'18 countries, 40+ warehouses'},
+advantage:{zh:'全球最大跨境电商物流',en:'World\'s largest cross-border logistics'},
+mode:{zh:'科技驱动·智慧物流',en:'Tech-driven · Smart logistics'},
+focus:{zh:'美欧机器人仓·AI调度',en:'US/EU robot warehouses · AI dispatch'},
+risk:{zh:'阿里依赖·国际竞争',en:'Alibaba dependence · Intl competition'}},
+{name:{zh:'顺丰速运',en:'SF Express'},href:'https://www.sf-express.com/',
+cover:{zh:'全球',en:'Global'},
+advantage:{zh:'航空网络·鄂州枢纽',en:'Aviation network · Ezhou hub'},
+mode:{zh:'跨境干线·与极兔互补',en:'Cross-border routes · J&T synergy'},
+focus:{zh:'交叉持股·鄂州枢纽推介',en:'Cross-shareholding · Ezhou promotion'},
+risk:{zh:'末端薄弱·长期亏损',en:'Weak last-mile · Chronic losses'}},
+{name:{zh:'极兔速递',en:'J&T Express'},href:'https://www.jet.co.id/',
+cover:{zh:'东南亚+中国+全球',en:'SE Asia + China + Global'},
+advantage:{zh:'东南亚市占率32.8%',en:'32.8% SE Asia market share'},
+mode:{zh:'海外末端·与顺丰互补',en:'Overseas last-mile · SF synergy'},
+focus:{zh:'交叉持股·全球化扩张',en:'Cross-shareholding · Global expansion'},
+risk:{zh:'价格战·盈利修复',en:'Price wars · Profitability recovery'}},
+{name:{zh:'京东产发',en:'JD Property'},href:'https://jdcproperty.com/',
+cover:{zh:'10国40+项目',en:'10 countries, 40+ projects'},
+advantage:{zh:'高标准仓储基础设施',en:'High-standard warehouse infra'},
+mode:{zh:'基建先行·客户协同',en:'Infrastructure first · Client synergy'},
+focus:{zh:'港交所上市·全球扩张',en:'HK IPO · Global expansion'},
+risk:{zh:'重资产·客户集中',en:'Asset-heavy · Client concentration'}},
+{name:{zh:'百世集团',en:'BEST Inc'},href:'https://www.800best.cn/',
+cover:{zh:'海外7国',en:'7 overseas countries'},
+advantage:{zh:'快运+云仓+国际',en:'Freight + Cloud warehouse + Intl'},
+mode:{zh:'全链路供应链',en:'Full-chain supply chain'},
+focus:{zh:'东南亚深耕·越南独角兽',en:'SE Asia deep dive · Vietnam unicorn'},
+risk:{zh:'国内边缘化·资金紧张',en:'Domestic marginalization · Cash crunch'}}
+];
+
+/* ===== COMPANY-REGION MAP ===== */
+const COMPANY_REGIONS={
+'TikTok Shop':{regions:['north-america','europe','southeast-asia','east-asia','jp-kr','middle-east']},
+'SHEIN':{regions:['north-america','europe','south-america','oceania','middle-east']},
+'速卖通':{regions:['europe','east-asia','southeast-asia','south-america','middle-east']},
+'AliExpress':{regions:['europe','east-asia','southeast-asia','south-america','middle-east']},
+'Temu':{regions:['north-america','europe','south-america','oceania']},
+'京东国际':{regions:['europe']},
+'JD International':{regions:['europe']},
+'菜鸟网络':{regions:['north-america','europe','southeast-asia','east-asia','jp-kr','oceania']},
+'Cainiao':{regions:['north-america','europe','southeast-asia','east-asia','jp-kr','oceania']},
+'顺丰速运':{regions:['north-america','europe','east-asia']},
+'SF Express':{regions:['north-america','europe','east-asia']},
+'极兔速递':{regions:['southeast-asia','east-asia','south-america','middle-east']},
+'J&T Express':{regions:['southeast-asia','east-asia','south-america','middle-east']},
+'京东产发':{regions:['europe','east-asia','southeast-asia']},
+'JD Property':{regions:['europe','east-asia','southeast-asia']},
+'百世集团':{regions:['southeast-asia','oceania']},
+'BEST Inc':{regions:['southeast-asia','oceania']}
+};
+
+/* ===== STATE ===== */
+let curLang='zh';
+const L=(d)=>typeof d==='object'?d[curLang]||d.zh||'':d;
+
+/* ===== RENDER FUNCTIONS ===== */
+function renderNews(){
+  const el=document.getElementById('news-list');
+  el.innerHTML=NEWS.map(n=>`
+    <a class="news-item" href="${n.href}" target="_blank" rel="noopener">
+      <div class="news-date"><div class="day">${n.day}</div><div class="month">${L(n.month)}</div></div>
+      <div class="news-body">
+        <div class="news-title">${L(n.title)}</div>
+        <div class="news-sum">${L(n.sum)}</div>
+        <div class="news-src"><span class="ptag ${n.tag}">${L(n.src)}</span> <span data-i18n="news_from">${curLang==='en'?'Source':'来源'}</span>：${curLang==='en'?'View source':'点击查看原文'}</div>
+        <div class="news-ext">${curLang==='en'?'🔗 Click to view →':'🔗 点击查看原文 →'}</div>
+      </div>
+    </a>`).join('');
+}
+
+function renderKeywords(){
+  const el=document.getElementById('kw-cloud');
+  el.innerHTML=KWS.map(k=>{
+    const tip=L(k.tip);
+    return`<span class="kw ${k.cls}" data-kw="${k.key}" tabindex="0" role="button">${L(k.label)}
+      <div class="kw-tip"><div class="kt">${tip.t}</div><div class="km">${tip.m}</div><div class="kr"><strong>${curLang==='en'?'Why selected: ':'入选原因：'}</strong>${tip.r}</div></div>
+    </span>`;
+  }).join('');
+  // Re-bind click handlers
+  document.querySelectorAll('.kw[data-kw]').forEach(kw=>{
+    kw.addEventListener('click',e=>{
+      e.stopPropagation();
+      const was=kw.classList.contains('active');
+      document.querySelectorAll('.kw').forEach(k=>k.classList.remove('active'));
+      if(!was)kw.classList.add('active');
+    });
+    kw.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();kw.click()}});
+  });
+}
+
+function renderCard(c,isEcom){
+  const chTitle=L({zh:'⚠️ 面临的困境',en:'⚠️ Challenges'});
+  return`<div class="pcard" data-company="${L(c.name)}">
+    <div class="pcard-head">
+      <div class="pcard-icon" style="background:${c.iconBg}">${c.icon}</div>
+      <div><div class="pcard-name">${L(c.name)}</div><div class="pcard-sub">${L(c.sub)}</div></div>
+    </div>
+    <div class="pcard-metrics">${c.metrics.map(m=>`<div class="m"><div class="mv">${m.v}</div><div class="ml">${L(m.l)}</div></div>`).join('')}</div>
+    <div class="pcard-tags">${c.tags.map(t=>`<span class="tag ${t.cls}">${L(t.t)}</span>`).join('')}</div>
+    <ul class="pcard-list">${c.list.map(i=>`<li><span class="b">▸</span>${L(i)}</li>`).join('')}</ul>
+    <div class="challenge-box"><h5>${chTitle}</h5><p>${L(c.challenge)}</p></div>
+  </div>`;
+}
+
+function renderCards(){
+  document.getElementById('ecom-grid').innerHTML=ECOM.map(c=>renderCard(c,true)).join('');
+  document.getElementById('logi-grid').innerHTML=LOGI.map(c=>renderCard(c,false)).join('');
+}
+
+function renderTrends(){
+  document.getElementById('trends-grid').innerHTML=TRENDS.map(t=>`
+    <div class="tcard"><div class="tnum">${t.n}</div><div class="ttitle">${L(t.t)}</div><div class="tdesc">${L(t.d)}</div></div>`).join('');
+}
+
+function renderTimeline(){
+  const tagLabels={e:L({zh:'电商',en:'E-com'}),l:L({zh:'物流',en:'Logistics'}),el:L({zh:'电商 物流',en:'E-com Logistics'})};
+  document.getElementById('timeline-list').innerHTML=TL.map(t=>{
+    const tags=t.tag.split('').map(c=>`<span class="tl-tag ${c}">${tagLabels[c]||c}</span>`).join(' ');
+    return`<a class="tl-link" href="${t.href}" target="_blank" rel="noopener">
+      <div class="tl-item"><div class="tl-date">${t.date} ${tags}</div><div class="tl-title">${L(t.title)}</div><div class="tl-desc">${L(t.desc)}</div></div>
+    </a>`;
+  }).join('');
+}
+
+function renderCmpTable(containerId,cols,rows){
+  const d=I[curLang]||I.zh||{};
+  const colLabels=cols.map(c=>d['tbl_'+c]||c);
+  const riskIdx=cols.indexOf('risk');
+  document.getElementById(containerId).innerHTML=`<table class="cmp"><thead><tr>${colLabels.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>{
+    const keys=Object.keys(r).filter(k=>k!=='name'&&k!=='href');
+    return`<tr>${`<td><a href="${r.href}" target="_blank">${L(r.name)}</a></td>`}${keys.map((k,i)=>`<td${riskIdx===i+1?' class="risk-cell"':''}>${L(r[k])}</td>`).join('')}</tr>`;
+  }).join('')}</tbody></table>`;
+}
+
+function renderCmp(){
+  renderCmpTable('cmp-ecom',CMP_ECOM_COLS,CMP_ECOM_ROWS);
+  renderCmpTable('cmp-logi',CMP_LOGI_COLS,CMP_LOGI_ROWS);
+}
+
+function renderLegend(){
+  document.getElementById('map-legend').innerHTML=LEGEND.map(l=>`<span><span class="dot" style="background:${l.color}"></span>${L(l)}</span>`).join('');
+}
+
+function renderAll(){
+  renderNews();renderKeywords();renderCards();renderTrends();renderTimeline();renderCmp();renderLegend();
+  setupCardHover();
+}
+
+/* ===== LANGUAGE ===== */
+function toggleLang(){document.getElementById('lang-dd').style.display=document.getElementById('lang-dd').style.display==='none'?'block':'none'}
+function setLang(lang){
+  curLang=lang;
+  const labels={zh:'简中','zh-TW':'繁中',en:'English'};
+  document.getElementById('lang-label').textContent=labels[lang];
+  document.querySelectorAll('.lang-opt').forEach(o=>{
+    o.style.color=o.textContent===labels[lang]?'var(--accent)':'var(--text-dim)';
+    o.style.fontWeight=o.textContent===labels[lang]?'700':'400';
+  });
+  document.getElementById('lang-dd').style.display='none';
+  // Static i18n
+  const d=I[lang]||{};
+  if(lang==='zh'){
+    document.querySelectorAll('[data-i18n]').forEach(el=>{if(el.dataset.orig)el.textContent=el.dataset.orig});
+  }else{
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      if(!el.dataset.orig)el.dataset.orig=el.textContent;
+      const k=el.getAttribute('data-i18n');
+      if(d[k])el.textContent=d[k];
+    });
+  }
+  // Re-render dynamic content
+  renderAll();
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.lang-swt'))document.getElementById('lang-dd').style.display='none'});
+document.addEventListener('click',e=>{if(!e.target.closest('.kw'))document.querySelectorAll('.kw').forEach(k=>k.classList.remove('active'))});
+
+/* ===== MAP ===== */
+document.querySelectorAll('.map-dot').forEach(dot=>{
+  dot.addEventListener('click',e=>{
+    e.stopPropagation();
+    const key=dot.getAttribute('data-info');
+    const data=MAP_DATA[key];if(!data)return;
+    const info=document.getElementById('map-info');
+    info.innerHTML=`<button class="close-btn" onclick="this.parentElement.classList.remove('show')">✕</button><h4>${L(data.title)}</h4><ul>${data.items.map(i=>`<li>${L(i)}</li>`).join('')}</ul>`;
+    const svg=document.querySelector('.map-svg'),rect=svg.getBoundingClientRect();
+    const cx=parseFloat(dot.getAttribute('cx')),cy=parseFloat(dot.getAttribute('cy'));
+    let left=rect.left+cx*(rect.width/1000)-120,top_=rect.top+cy*(rect.height/500)+20;
+    left=Math.max(10,Math.min(left,window.innerWidth-340));
+    top_=Math.max(10,Math.min(top_,window.innerHeight-250));
+    info.style.left=left+'px';info.style.top=top_+'px';
+    info.classList.add('show');
+  });
+  const key=dot.getAttribute('data-info');
+  dot.addEventListener('mouseenter',()=>document.querySelectorAll('.land[data-region="'+key+'"]').forEach(l=>l.classList.add('hl')));
+  dot.addEventListener('mouseleave',()=>document.querySelectorAll('.land[data-region="'+key+'"]').forEach(l=>l.classList.remove('hl')));
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.map-info')&&!e.target.closest('.map-dot'))document.getElementById('map-info').classList.remove('show')});
+
+/* ===== CARD ↔ MAP CROSS-HIGHLIGHT ===== */
+function setupCardHover(){
+  document.querySelectorAll('.pcard').forEach(card=>{
+    const name=card.dataset.company;
+    const match=COMPANY_REGIONS[name];
+    if(!match)return;
+    card.addEventListener('mouseenter',()=>{
+      match.regions.forEach(reg=>{
+        document.querySelectorAll('.land[data-region="'+reg+'"]').forEach(l=>{l.style.fill='rgba(99,102,241,.15)';l.style.stroke='var(--accent)'});
+        document.querySelectorAll('.map-dot[data-info="'+reg+'"]').forEach(d=>{d.style.filter='brightness(2)';d.style.transform='scale(1.5)';d.style.transition='all .3s'});
+      });
+    });
+    card.addEventListener('mouseleave',()=>{
+      document.querySelectorAll('.land').forEach(l=>{l.style.fill='';l.style.stroke=''});
+      document.querySelectorAll('.map-dot').forEach(d=>{d.style.filter='';d.style.transform=''});
+    });
+  });
+}
+
+/* ===== SCROLL ===== */
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+const secs=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll',()=>{
+  let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-200)c=s.id});
+  nls.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));
+},{passive:true});
+
+const bt=document.getElementById('backTop');
+window.addEventListener('scroll',()=>bt.classList.toggle('vis',window.scrollY>500),{passive:true});
+
+/* ===== MOBILE NAV ===== */
 function toggleNav(){
   const l=document.querySelector('.nav-links'),b=document.querySelector('.hamburger');
   const o=l.classList.toggle('open');b.classList.toggle('open',o);
@@ -954,146 +1019,8 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(a=>a.addEventListen
   document.body.style.overflow='';
 }));
 
-// Scroll reveal
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// Nav highlight
-const secs=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nav-links a[href^="#"]');
-window.addEventListener('scroll',()=>{
-  let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-200)c=s.id});
-  nls.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));
-},{passive:true});
-
-// Back to top
-const bt=document.getElementById('backTop');
-window.addEventListener('scroll',()=>bt.classList.toggle('vis',window.scrollY>500),{passive:true});
-
-// Keyword tooltips
-document.querySelectorAll('.kw[data-kw]').forEach(kw=>{
-  kw.setAttribute('tabindex','0');kw.setAttribute('role','button');
-  kw.addEventListener('click',e=>{
-    e.stopPropagation();
-    const was=kw.classList.contains('active');
-    document.querySelectorAll('.kw').forEach(k=>k.classList.remove('active'));
-    if(!was)kw.classList.add('active');
-  });
-  kw.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();kw.click()}});
-});
-document.addEventListener('click',e=>{if(!e.target.closest('.kw'))document.querySelectorAll('.kw').forEach(k=>k.classList.remove('active'))});
-
-// LANGUAGE SWITCHER
-const i18n={'zh-TW':{hero_badge:'📊 2026 BRIEFING · 數據截至2026年3月',hero_t1:'中國電商與物流',hero_t2:'出海全景',hero_sub:'從TikTok Shop千億美元GMV到菜鳥全球40+海外倉，深度解析電商與物流兩大板塊的全球化戰略、困境與趨勢',s1:'全球跨境電商(美元)',s2:'中國佔比',s3:'出海物流訂單增速',s4:'TikTok Shop年GMV',n_lab:'📰 最新動態',n_tit:'行業資訊',n_upd:'最後更新：2026-03-25',m_lab:'🗺️ 全球佈局',m_tit:'交互式世界地圖',m_desc:'點擊地圖上的標記點，查看各地區的企業佈局詳情。',k_lab:'🏷️ 熱詞雲圖',k_tit:'出海關鍵詞',k_desc:'點擊每個熱詞查看其含義與入選原因。',e_lab:'🛒 板塊一',e_tit:'電商平台出海',e_desc:'按體量排序：TikTok Shop、SHEIN、速賣通、Temu、京東國際。機遇與挑戰並存。',l_lab:'📦 板塊二',l_tit:'物流商出海',l_desc:'按體量排序：菜鳥、順豐、極兔、京東產發、百世。支撐中國電商全球化的基礎設施力量。',t_lab:'🔮 關鍵趨勢',t_tit:'2026年六大趨勢',tl_lab:'📅 關鍵事件',tl_tit:'2016—2026 出海十年大事記',tl_desc:'點擊可查看資訊來源',c1_lab:'📊 電商平台對比',c1_tit:'五大電商平台一覽',c1_desc:'點擊公司名稱可訪問官網',c2_lab:'📊 物流商對比',c2_tit:'五大物流商一覽',c2_desc:'點擊公司名稱可訪問官網',ft:'出海羅盤 · ChinaEcom Atlas · 編制日期：2026年3月25日',fd:'本簡報基於公開資訊整理，數據和觀點僅供參考，不構成投資建議。',nav0:'📰 動態',nav1:'🗺️ 地圖',nav2:'🏷️ 熱詞',nav3:'🛒 電商',nav4:'📦 物流',nav5:'🔮 趨勢',nav6:'📅 大事記',nav7:'📊 對比'},
-'en':{hero_badge:'📊 2026 BRIEFING · Data as of March 2026',hero_t1:'China E-commerce & Logistics',hero_t2:'Global Expansion',hero_sub:'From TikTok Shop\'s hundred-billion GMV to Cainiao\'s 40+ overseas warehouses — deep analysis of e-commerce and logistics globalization, opportunities and challenges',s1:'Global Cross-border E-com (USD)',s2:'China Share',s3:'Logistics Order Growth',s4:'TikTok Shop Annual GMV',n_lab:'📰 Latest Updates',n_tit:'Industry News',n_upd:'Last updated: 2026-03-25',m_lab:'🗺️ Global Map',m_tit:'Interactive World Map',m_desc:'Click markers on the map to see company layouts by region.',k_lab:'🏷️ Keywords',k_tit:'Going Global Keywords',k_desc:'Click each keyword to see its meaning and why it was selected.',e_lab:'🛒 Sector 1',e_tit:'E-commerce Platforms',e_desc:'Sorted by scale: TikTok Shop, SHEIN, AliExpress, Temu, JD International. Opportunities and challenges.',l_lab:'🛒 Sector 2',l_tit:'Logistics Providers',l_desc:'Sorted by scale: Cainiao, SF, J&T, JD Property, BEST. Infrastructure powering Chinese e-commerce globalization.',t_lab:'🔮 Key Trends',t_tit:'6 Trends for 2026',tl_lab:'📅 Key Events',tl_tit:'2016–2026: A Decade of Going Global',tl_desc:'Click to view source',c1_lab:'📊 E-com Comparison',c1_tit:'5 E-commerce Platforms at a Glance',c1_desc:'Click company name to visit official website',c2_lab:'📊 Logistics Comparison',c2_tit:'5 Logistics Providers at a Glance',c2_desc:'Click company name to visit official website',ft:'ChinaEcom Atlas · Compiled: March 25, 2026',fd:'This briefing is based on public information. Data and opinions are for reference only, not investment advice.',nav0:'📰 News',nav1:'🗺️ Map',nav2:'🏷️ Keywords',nav3:'🛒 E-com',nav4:'📦 Logistics',nav5:'🔮 Trends',nav6:'📅 Timeline',nav7:'📊 Compare'}};
-let curLang='zh';
-function toggleLang(){const d=document.getElementById('lang-dd');d.style.display=d.style.display==='none'?'block':'none'}
-function setLang(lang){
-  curLang=lang;
-  const labels={'zh':'简中','zh-TW':'繁中','en':'English'};
-  document.getElementById('lang-label').textContent=labels[lang];
-  document.querySelectorAll('.lang-opt').forEach(o=>{o.style.color=o.textContent===labels[lang]?'var(--accent)':'var(--text-dim)';o.style.fontWeight=o.textContent===labels[lang]?'700':'400'});
-  document.getElementById('lang-dd').style.display='none';
-  if(lang==='zh'){
-    document.querySelectorAll('[data-i18n]').forEach(el=>{if(el.dataset.orig)el.textContent=el.dataset.orig});
-    return;
-  }
-  const d=i18n[lang];if(!d)return;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    if(!el.dataset.orig)el.dataset.orig=el.textContent;
-    const k=el.getAttribute('data-i18n');
-    if(d[k])el.textContent=d[k];
-  });
-}
-document.addEventListener('click',e=>{if(!e.target.closest('.lang-swt'))document.getElementById('lang-dd').style.display='none'});
-
-// MAP INTERACTION
-const mapData={
-  'north-america':{title:'🇺🇸 北美市场',items:['TikTok Shop — 美国核心市场，但面临封禁风险','Temu — 美国本地商家入驻，弃用中国直邮','SHEIN — 美国最大快时尚平台，关税冲击严重','菜鸟 — 2026年将在美国部署机器人仓库','顺丰 — 鄂州枢纽对接北美航线','速卖通 — 美国增速TOP10']},
-  'europe':{title:'🇪🇺 欧洲市场',items:['TikTok Shop — 2026年进军荷兰、比利时、瑞典、波兰','SHEIN — 伦敦IPO进行中，FCA已批准','Temu — 欧洲成为替代增长市场','菜鸟 — 荷兰、西班牙、法国、德国部署机器人仓','京东产发 — 欧洲布局超15个物流项目','顺丰 — 跨境干线覆盖欧洲']},
-  'southeast-asia':{title:'🌏 东南亚市场（中国出海基本盘）',items:['极兔速递 — 市占率32.8%，绝对龙头','百世 — 越南"独角兽"，全链路升级','Lazada（阿里系）— 东南亚最大电商平台','Shopee — 区域霸主（非中资但竞争激烈）','菜鸟 — 东南亚物流网络核心节点','TikTok Shop — 东南亚是其增长最快区域']},
-  'east-asia':{title:'🇨🇳 中国（出海大本营）',items:['所有平台和物流商的总部和供应链核心','全球最大的跨境电商商品生产基地','菜鸟、顺丰、极兔的国内网络基础','京东产发国内建面规模第二']},
-  'jp-kr':{title:'🇯🇵🇰🇷 日韩市场',items:['TikTok Shop — 2026年计划进入韩国','速卖通 — 韩国与YouTube合作','菜鸟 — 日韩海外仓布局','极兔 — 日本市场有布局']},
-  'south-america':{title:'🇧🇷 拉美市场',items:['SHEIN — 巴西市场表现强劲','Temu — 进入拉美多个国家','速卖通 — 拉美传统优势市场','极兔 — 巴西快递网络']},
-  'middle-east':{title:'🌍 中东市场',items:['TikTok Shop — 中东市场活跃','SHEIN — 中东地区快速增长','速卖通 — 中东传统优势市场','极兔 — 沙特等国快递网络']},
-  'oceania':{title:'🇦🇺 大洋洲市场',items:['Temu — 澳大利亚市场增长','菜鸟 — 澳洲海外仓布局','SHEIN — 澳洲快时尚市场','百世 — 东南亚-澳洲航线']}
-};
-
-document.querySelectorAll('.map-dot').forEach(dot=>{
-  dot.addEventListener('click',e=>{
-    e.stopPropagation();
-    const key=dot.getAttribute('data-info');
-    const data=mapData[key];
-    if(!data)return;
-    const info=document.getElementById('map-info');
-    info.innerHTML=`<button class="close-btn" onclick="this.parentElement.classList.remove('show')">✕</button><h4>${data.title}</h4><ul>${data.items.map(i=>'<li>'+i+'</li>').join('')}</ul>`;
-    // Position near the dot
-    const svg=document.querySelector('.map-svg');
-    const rect=svg.getBoundingClientRect();
-    const cx=parseFloat(dot.getAttribute('cx'));
-    const cy=parseFloat(dot.getAttribute('cy'));
-    const scaleX=rect.width/1000;
-    const scaleY=rect.height/500;
-    let left=rect.left+cx*scaleX-120;
-    let top_=rect.top+cy*scaleY+20;
-    // Keep in viewport
-    left=Math.max(10,Math.min(left,window.innerWidth-340));
-    top_=Math.max(10,Math.min(top_,window.innerHeight-250));
-    info.style.left=left+'px';
-    info.style.top=top_+'px';
-    info.classList.add('show');
-  });
-});
-
-document.addEventListener('click',e=>{
-  if(!e.target.closest('.map-info')&&!e.target.closest('.map-dot')){
-    document.getElementById('map-info').classList.remove('show');
-  }
-});
-
-// Highlight map regions on hover
-document.querySelectorAll('.map-dot').forEach(dot=>{
-  const key=dot.getAttribute('data-info');
-  dot.addEventListener('mouseenter',()=>{
-    document.querySelectorAll('.land[data-region="'+key+'"]').forEach(l=>l.classList.add('highlight'));
-  });
-  dot.addEventListener('mouseleave',()=>{
-    document.querySelectorAll('.land[data-region="'+key+'"]').forEach(l=>l.classList.remove('highlight'));
-  });
-});
-
-// Company card ↔ Map cross-highlight
-const companyRegions={
-  'TikTok Shop':{dots:['#ff0050'],regions:['north-america','europe','southeast-asia','east-asia','jp-kr','middle-east']},
-  'SHEIN':{dots:['#ec4899'],regions:['north-america','europe','south-america','oceania','middle-east']},
-  '速卖通':{dots:['#06b6d4'],regions:['europe','east-asia','southeast-asia','south-america','middle-east']},
-  'Temu':{dots:['#f59e0b'],regions:['north-america','europe','south-america','oceania']},
-  '京东国际':{dots:['#ef4444'],regions:['europe']},
-  '菜鸟网络':{dots:['#06b6d4'],regions:['north-america','europe','southeast-asia','east-asia','jp-kr','oceania']},
-  '顺丰速运':{dots:['#6366f1'],regions:['north-america','europe','east-asia']},
-  '极兔速递':{dots:['#ff4444'],regions:['southeast-asia','east-asia','south-america','middle-east']},
-  '京东产发':{dots:['#ef4444'],regions:['europe','east-asia','southeast-asia']},
-  '百世集团':{dots:['#22c55e'],regions:['southeast-asia','oceania']}
-};
-document.querySelectorAll('.pcard').forEach(card=>{
-  const name=card.querySelector('.pcard-name');
-  if(!name)return;
-  const txt=name.textContent.replace(/\s*希音|.*Cainiao|.*SF Express|.*J&T Express|.*BEST Inc|.*JINGDONG Property|.*Joybuy/g,'').trim();
-  // Find matching company
-  let matchKey=null;
-  for(const k of Object.keys(companyRegions)){if(txt.includes(k)){matchKey=k;break;}}
-  if(!matchKey)return;
-  card.addEventListener('mouseenter',()=>{
-    const r=companyRegions[matchKey];
-    r.regions.forEach(reg=>{
-      document.querySelectorAll('.land[data-region="'+reg+'"]').forEach(l=>{l.style.fill='rgba(99,102,241,.15)';l.style.stroke='var(--accent)';});
-      document.querySelectorAll('.map-dot[data-info="'+reg+'"]').forEach(d=>{d.style.filter='brightness(2)';d.style.transform='scale(1.5)';d.style.transition='all .3s';});
-    });
-  });
-  card.addEventListener('mouseleave',()=>{
-    document.querySelectorAll('.land').forEach(l=>{l.style.fill='';l.style.stroke='';});
-    document.querySelectorAll('.map-dot').forEach(d=>{d.style.filter='';d.style.transform='';});
-  });
-});
+/* ===== INIT ===== */
+renderAll();
 </script>
 </body>
 </html>
