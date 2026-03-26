@@ -664,6 +664,30 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
 .back-top:active{transform:scale(.92);transition-duration:.1s}
 .back-top .arrow{font-size:.85rem}
 
+/* Mode FAB — mobile floating toggle */
+.mode-fab{
+  display:none;position:fixed;bottom:1.5rem;left:1.5rem;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--sf);border:1px solid var(--bd);
+  color:var(--tx);font-size:1.1rem;cursor:pointer;
+  align-items:center;justify-content:center;
+  opacity:0;transform:translateY(16px);
+  transition:all .3s var(--ease);z-index:50;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+.mode-fab.vis{opacity:1;transform:translateY(0)}
+.mode-fab:hover{border-color:var(--ac);color:var(--ac)}
+.mode-fab:active{transform:scale(.9);transition-duration:.1s}
+body.compact .mode-fab::after{
+  content:'';position:absolute;top:-2px;right:-2px;
+  width:10px;height:10px;border-radius:50%;background:var(--ac);
+  border:2px solid var(--bg);
+}
+@media(max-width:768px){
+  .mode-fab{display:flex}
+  .mode-toggle{display:none}
+}
+
 /* ===== MOBILE ===== */
 @media(max-width:768px){
   .hero{padding:4.5rem 1rem 2.5rem}
@@ -980,6 +1004,7 @@ section:hover::before{width:min(400px,80%)}
 </div></section>
 
 <button class="back-top" id="backTop" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部"><span class="arrow">↑</span> <span data-i="back_top">顶部</span></button>
+<button class="mode-fab" id="modeFab" onclick="toggleMode()" aria-label="精简/详读"><span id="modeFabLabel">⚡</span></button>
 <footer>
   <p data-i="ft">出海罗盘 · ChinaEcom Atlas · 编制日期：2026年3月25日</p>
   <p class="disclaimer" data-i="fd">本简报基于公开信息整理，数据和观点仅供参考，不构成投资建议。</p>
@@ -1580,11 +1605,14 @@ function toggleMode(){
   document.body.classList.toggle('compact',isCompact);
   const btn=document.getElementById('modeToggle');
   const label=document.getElementById('modeLabel');
+  const fabLabel=document.getElementById('modeFabLabel');
   if(isCompact){
     label.textContent=curLang==='en'?'⚡ Compact':'⚡ 精简';
+    if(fabLabel)fabLabel.textContent='⚡';
     btn.classList.add('active');
   }else{
     label.textContent=curLang==='en'?'📖 Detailed':'📖 详读';
+    if(fabLabel)fabLabel.textContent='📖';
     btn.classList.remove('active');
   }
 }
@@ -1633,7 +1661,8 @@ function cardHTML(c){
   return`<div class="pcard" data-name="${_t(c.name)}" onclick="this.classList.toggle('expanded')">
     <div class="pcard-head">
       <div class="pcard-icon" style="background:${c.iconBg}">${c.icon}</div>
-      <div><div class="pcard-name">${_t(c.name)}</div><div class="pcard-sub">${_t(c.sub)}</div></div>
+      <div style="flex:1;min-width:0"><div class="pcard-name">${_t(c.name)}</div><div class="pcard-sub">${_t(c.sub)}</div></div>
+      <a class="pcard-map-link" title="${curLang==='en'?'View on map':'在地图查看'}" href="javascript:void(0)" style="font-size:.7rem;color:var(--dim);flex-shrink:0;opacity:.5;transition:opacity .2s" onmouseover="this.style.opacity=1;this.style.color='var(--ac)'" onmouseout="this.style.opacity=.5;this.style.color='var(--dim)'">🗺️</a>
     </div>
     <div class="pcard-metrics">${c.metrics.map(m=>`<div class="m"><div class="mv">${m.v}</div><div class="ml">${_t(m.l)}</div></div>`).join('')}</div>
     <div class="pcard-detail">
@@ -2121,10 +2150,14 @@ function bindCardHover(){
         if(co)m.setStyle({fillOpacity:.7,weight:1.5,radius:co.r});
       });
     });
-    // Click → show company on map
-    card.addEventListener('click',()=>{
-      document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});
-      setTimeout(()=>showCompPanel(name),400);
+    // Click → toggle expand (compact mode) or show on map (detailed mode)
+    card.addEventListener('click',(e)=>{
+      if(e.target.closest('.pcard-map-link')){
+        e.stopPropagation();
+        document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});
+        setTimeout(()=>showCompPanel(name),400);
+        return;
+      }
     });
     card.style.cursor='pointer';
   });
@@ -2146,8 +2179,10 @@ function updateNav(){
   let c='';
   secs.forEach(s=>{if(scrollY>=s.offsetTop-200)c=s.id});
   navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));
-  // Back to top
+  // Back to top + mode FAB
   dc('backTop').classList.toggle('vis',scrollY>500);
+  const fab=document.getElementById('modeFab');
+  if(fab)fab.classList.toggle('vis',scrollY>300);
   _navTick=false;
 }
 addEventListener('scroll',()=>{if(!_navTick){_navTick=true;requestAnimationFrame(updateNav)}},{passive:true});
