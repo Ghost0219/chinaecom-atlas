@@ -229,8 +229,38 @@ section+section::before{
 #leafletMap .leaflet-control-zoom a:hover{background:var(--sf2)!important;color:var(--ac)!important}
 
 /* Map dot pulse animation */
-@keyframes leafletDotPulse{0%,100%{stroke-opacity:.85;filter:drop-shadow(0 0 3px currentColor)}50%{stroke-opacity:.5;filter:drop-shadow(0 0 8px currentColor)}}
-.leaflet-dot-pulse{animation:leafletDotPulse 4s ease-in-out infinite}
+@keyframes leafletDotPulse{0%,100%{stroke-opacity:.85;filter:drop-shadow(0 0 4px currentColor)}50%{stroke-opacity:.5;filter:drop-shadow(0 0 12px currentColor)}}
+.leaflet-dot-pulse{animation:leafletDotPulse 3s ease-in-out infinite}
+
+/* Connection line animation */
+@keyframes dashFlow{to{stroke-dashoffset:-40}}
+.leaflet-connection-line{animation:dashFlow 2s linear infinite;pointer-events:none}
+
+/* Map filter bar */
+.map-filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem;align-items:center}
+.map-filter-btn{
+  padding:.3rem .7rem;border-radius:999px;font-size:.68rem;cursor:pointer;
+  background:var(--sf);border:1px solid var(--bd);color:var(--dim);
+  transition:all .25s var(--ease);display:flex;align-items:center;gap:.3rem;
+  min-height:30px;
+}
+.map-filter-btn:hover{border-color:var(--ac);color:var(--ac)}
+.map-filter-btn.active{background:rgba(255,105,0,.1);border-color:var(--ac);color:var(--ac)}
+.map-filter-btn .fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.map-search{
+  flex:1;min-width:140px;max-width:240px;
+  background:var(--sf);border:1px solid var(--bd);border-radius:999px;
+  padding:.35rem .8rem;font-size:.72rem;color:var(--tx);
+  outline:none;transition:border-color .25s;
+}
+.map-search::placeholder{color:var(--dim)}
+.map-search:focus{border-color:var(--ac)}
+
+/* Region hover overlay */
+.leaflet-region-hover{
+  background:rgba(255,105,0,.08)!important;border:1px dashed rgba(255,105,0,.25)!important;
+  border-radius:12px;pointer-events:none;transition:opacity .3s;
+}
 
 /* Map tooltip */
 .map-dot-tooltip{
@@ -498,6 +528,8 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
   .map-layout{flex-direction:column}
   .map-right{width:100%}
   .map-panel-body{max-height:360px}
+  .map-filter-bar{gap:.4rem}
+  .map-search{max-width:none;flex:1 1 100%}
 
   /* Keyword tooltip → fixed bottom on mobile */
   .kw-tip{
@@ -589,6 +621,14 @@ select:focus-visible,a:focus-visible{outline-offset:3px}
   <p class="sec-desc" data-i="m_desc">点击区域或企业圆点，查看各地区的企业布局详情。圆点大小代表市场影响力。</p></div>
   <div class="map-layout reveal">
     <div class="map-left">
+      <div class="map-filter-bar" id="mapFilterBar">
+        <input class="map-search" id="mapSearch" type="text" placeholder="🔍 搜索企业..." aria-label="搜索企业">
+        <button class="map-filter-btn active" data-filter="all" onclick="setMapFilter('all')"><span data-i="mf_all">全部</span></button>
+        <button class="map-filter-btn" data-filter="ecom" onclick="setMapFilter('ecom')"><span class="fdot" style="background:#ff0050"></span><span data-i="mf_ecom">电商</span></button>
+        <button class="map-filter-btn" data-filter="logi" onclick="setMapFilter('logi')"><span class="fdot" style="background:#06b6d4"></span><span data-i="mf_logi">物流</span></button>
+        <button class="map-filter-btn" data-filter="lines" onclick="setMapFilter('lines')"><span data-i="mf_lines">全局连线</span></button>
+        <span id="mapResultCount" style="display:none;font-size:.65rem;color:var(--ac);padding:0 .3rem"></span>
+      </div>
       <div id="leafletMap" style="width:100%;height:480px;border-radius:var(--r);border:1px solid var(--bd);overflow:hidden;box-shadow:inset 0 0 40px rgba(0,0,0,.2);background:#0e0e11"></div>
       <div class="map-legend" id="mapLegend"></div>
     </div>
@@ -672,13 +712,15 @@ const I={
 tbl_company:'企业',tbl_advantage:'核心优势',tbl_overseas:'出海模式',
 ch_title:'⚠️ 面临的困境',news_from:'来源',view_src:'点击查看原文',explore:'🔗 点击查看原文 →',
 kw_why:'入选原因：',src_btn:'来源',
-m_hint:'点击地图区域或企业圆点查看详情',m_panel_region:'区域市场',m_panel_comp:'企业布局',m_share:'市场份额',m_back:'← 返回区域',m_all:'全部区域'},
+m_hint:'点击地图区域或企业圆点查看详情',m_panel_region:'区域市场',m_panel_comp:'企业布局',m_share:'市场份额',m_back:'← 返回区域',m_all:'全部区域',
+mf_all:'全部',mf_ecom:'电商',mf_logi:'物流',mf_lines:'全局连线',m_search_ph:'🔍 搜索企业...',m_visit:'访问官网',m_network:'全球网络'},
 'zh-TW':{nav0:'動態',nav1:'地圖',nav2:'熱詞',nav3:'電商',nav4:'物流',nav5:'趨勢',nav6:'大事記',nav7:'對比',
 hero_badge:'📊 2026 BRIEFING · 數據截至2026年3月',hero_t1:'中國電商與物流',hero_t2:'出海全景',
 hero_sub:'從TikTok Shop千億美元GMV到菜鳥全球40+海外倉，深度解析電商與物流兩大板塊的全球化戰略、困境與趨勢',
 s1:'全球跨境電商(美元)',s2:'中國佔比',s3:'出海物流訂單增速',s4:'覆蓋國家/總市場',scroll_more:'向下探索',
 n_lab:'📰 最新動態',n_tit:'行業資訊',n_upd:'最後更新：2026-03-25',
 m_lab:'🗺️ 全球佈局',m_tit:'交互式世界地圖',m_desc:'點擊區域或企業圓點，查看各地區的企業佈局詳情。圓點大小代表市場影響力。',m_hint:'點擊地圖區域或企業圓點查看詳情',m_panel_region:'區域市場',m_panel_comp:'企業佈局',m_share:'市場份額',m_back:'← 返回區域',m_all:'全部區域',
+mf_all:'全部',mf_ecom:'電商',mf_logi:'物流',mf_lines:'全局連線',m_search_ph:'🔍 搜索企業...',m_visit:'訪問官網',m_network:'全球網絡',
 map_na:'🇺🇸 北美',map_eu:'🇪🇺 歐洲',map_sea:'🌏 東南亞',map_ea:'🇨🇳 東亞',map_jk:'🇯🇵🇰🇷 日韓',map_sa:'🇧🇷 拉美',map_me:'🌍 中東',map_oc:'🇦🇺 大洋洲',
 k_lab:'🏷️ 熱詞雲圖',k_tit:'出海關鍵詞',k_desc:'點擊每個熱詞查看其含義與入選原因。',
 e_lab:'🛒 板塊一',e_tit:'電商平台出海',e_desc:'按體量排序：TikTok Shop、SHEIN、速賣通、Temu、京東國際。機遇與挑戰並存。',
@@ -699,6 +741,7 @@ hero_sub:'From TikTok Shop\'s hundred-billion GMV to Cainiao\'s 40+ overseas war
 s1:'Global Cross-border E-com (USD)',s2:'China Share',s3:'Logistics Order Growth',s4:'Countries Covered / Total',scroll_more:'Explore More',
 n_lab:'📰 Latest Updates',n_tit:'Industry News',n_upd:'Last updated: 2026-03-25',
 m_lab:'🗺️ Global Map',m_tit:'Interactive World Map',m_desc:'Click regions or company dots to see market details. Dot size represents market influence.',m_hint:'Click a region or company dot for details',m_panel_region:'Regional Market',m_panel_comp:'Company Layout',m_share:'Market Share',m_back:'← Back to Region',m_all:'All Regions',
+mf_all:'All',mf_ecom:'E-com',mf_logi:'Logistics',mf_lines:'Network Lines',m_search_ph:'🔍 Search company...',m_visit:'Visit website',m_network:'Global Network',
 map_na:'🇺🇸 N. America',map_eu:'🇪🇺 Europe',map_sea:'🌏 SE Asia',map_ea:'🇨🇳 E. Asia',map_jk:'🇯🇵🇰🇷 Japan/Korea',map_sa:'🇧🇷 LatAm',map_me:'🌍 Mid East',map_oc:'🇦🇺 Oceania',
 k_lab:'🏷️ Keywords',k_tit:'Going Global Keywords',k_desc:'Click each keyword to see its meaning and why it was selected.',
 e_lab:'🛒 Sector 1',e_tit:'E-commerce Platforms',e_desc:'Sorted by scale: TikTok Shop, SHEIN, AliExpress, Temu, JD International.',
@@ -1156,6 +1199,20 @@ const CR={
 '百世集团 BEST Inc':{r:['southeast-asia','oceania']}
 };
 
+// Company type classification
+const CO_TYPE={
+'TikTok Shop':'ecom','SHEIN':'ecom','速卖通 AliExpress':'ecom','Temu':'ecom','京东国际 Joybuy':'ecom',
+'Lazada':'ecom',
+'菜鸟网络 Cainiao':'logi','顺丰速运 SF Express':'logi','极兔速递 J&T Express':'logi',
+'京东产发 JINGDONG Property':'logi','百世集团 BEST Inc':'logi'
+};
+
+// Map filter state
+let mapFilter='all';
+let mapSearchTerm='';
+let connectionLines=[];
+let showLines=false;
+
 /* ==========================================
    RENDERERS — 所有DOM生成集中在此
    ========================================== */
@@ -1242,23 +1299,49 @@ function renderMapDots(){
   // Clear old layers
   circleMarkers.forEach(l=>leafletMap.removeLayer(l));
   regionLabels.forEach(l=>leafletMap.removeLayer(l));
-  circleMarkers=[];regionLabels=[];
+  connectionLines.forEach(l=>leafletMap.removeLayer(l));
+  circleMarkers=[];regionLabels=[];connectionLines=[];
+
+  const searchLower=mapSearchTerm.toLowerCase();
+  let visibleTotal=0;
 
   for(const[regKey,reg]of Object.entries(REGIONS)){
     reg.companies.forEach(co=>{
+      // Apply filters
+      const coType=CO_TYPE[co.name]||'ecom';
+      if(mapFilter==='ecom'&&coType!=='ecom')return;
+      if(mapFilter==='logi'&&coType!=='logi')return;
+      // Apply search
+      if(searchLower&&!co.name.toLowerCase().includes(searchLower))return;
+
+      const isFiltered=mapFilter!=='all'||searchLower;
+      const baseOpacity=isFiltered?.9:.7;
+      const baseWeight=isFiltered?2:1.5;
+
       const marker=L.circleMarker([co.lat,co.lng],{
-        radius:co.r,fillColor:co.color,color:'#fff',weight:1.5,opacity:.85,
-        fillOpacity:.7,className:'leaflet-dot-pulse'
+        radius:co.r,fillColor:co.color,color:'#fff',weight:baseWeight,opacity:.85,
+        fillOpacity:baseOpacity,className:'leaflet-dot-pulse'
       }).addTo(leafletMap);
       marker._compName=co.name;
       marker._regKey=regKey;
+      marker._coColor=co.color;
       marker.on('click',e=>{e.originalEvent.stopPropagation();showCompPanel(co.name)});
-      marker.on('mouseover',function(){this.setStyle({fillOpacity:1,weight:2.5,radius:co.r*1.2})});
-      marker.on('mouseout',function(){this.setStyle({fillOpacity:.7,weight:1.5,radius:co.r})});
+      marker.on('mouseover',function(){this.setStyle({fillOpacity:1,weight:3,radius:co.r*1.25})});
+      marker.on('mouseout',function(){this.setStyle({fillOpacity:baseOpacity,weight:baseWeight,radius:co.r})});
       marker.bindTooltip(co.name,{direction:'top',offset:[0,-co.r-4],className:'map-dot-tooltip'});
       circleMarkers.push(marker);
+      visibleTotal++;
     });
-    // Region label
+    // Region label (skip if filtering and no visible companies)
+    const visibleCount=reg.companies.filter(co=>{
+      const coType=CO_TYPE[co.name]||'ecom';
+      if(mapFilter==='ecom'&&coType!=='ecom')return false;
+      if(mapFilter==='logi'&&coType!=='logi')return false;
+      if(searchLower&&!co.name.toLowerCase().includes(searchLower))return false;
+      return true;
+    }).length;
+    if(visibleCount===0&&(mapFilter!=='all'||searchLower))continue;
+
     const lbl=L.divIcon({
       className:'leaflet-region-label',
       html:`<div style="text-align:center;pointer-events:none"><div style="font-size:11px;font-weight:700;color:#f0f0f2;text-shadow:0 1px 4px rgba(0,0,0,.8)">${L(reg.title)}</div><div style="font-size:8px;color:#9a9aa0;text-shadow:0 1px 3px rgba(0,0,0,.8)">${L(reg.stat)}</div></div>`,
@@ -1267,11 +1350,114 @@ function renderMapDots(){
     const labelMarker=L.marker([reg.labelPos[0],reg.labelPos[1]],{icon:lbl,interactive:false}).addTo(leafletMap);
     regionLabels.push(labelMarker);
   }
+
+  // Connection lines (animated dashed arcs between company locations)
+  if(showLines||(mapFilter!=='all'&&!searchLower)){
+    drawConnectionLines();
+  }
+
+  // Show result count when filtering/searching
+  if(mapFilter!=='all'||searchLower){
+    const countEl=document.getElementById('mapResultCount');
+    if(countEl){
+      countEl.textContent=visibleTotal+(curLang==='en'?' companies':' 家企业');
+      countEl.style.display='inline';
+    }
+    // Show empty state in panel if no results
+    if(visibleTotal===0&&searchLower){
+      $('mapPanelEmpty').style.display='';
+      $('mapPanelEmpty').innerHTML=`<div style="font-size:1.4rem;margin-bottom:.5rem">🔍</div><div>${curLang==='en'?'No results for "'+mapSearchTerm+'"':'未找到 "'+mapSearchTerm+'" 相关企业'}</div>`;
+      $('mapPanelContent').style.display='none';
+    }
+  }else{
+    const countEl=document.getElementById('mapResultCount');
+    if(countEl)countEl.style.display='none';
+  }
+}
+
+// Draw animated bezier connection lines between company locations
+function drawConnectionLines(){
+  connectionLines.forEach(l=>leafletMap.removeLayer(l));
+  connectionLines=[];
+
+  // Group markers by company name
+  const compMarkers={};
+  circleMarkers.forEach(m=>{
+    if(!compMarkers[m._compName])compMarkers[m._compName]=[];
+    compMarkers[m._compName].push(m);
+  });
+
+  // Draw lines connecting same company across regions
+  for(const[compName,markers]of Object.entries(compMarkers)){
+    if(markers.length<2)continue;
+    const color=markers[0]._coColor;
+    // Connect all markers of the same company
+    for(let i=0;i<markers.length-1;i++){
+      for(let j=i+1;j<markers.length;j++){
+        const p1=markers[i].getLatLng();
+        const p2=markers[j].getLatLng();
+        // Create curved line using intermediate point
+        const midLat=(p1.lat+p2.lat)/2;
+        const midLng=(p1.lng+p2.lng)/2;
+        // Curve offset based on distance
+        const dist=Math.sqrt(Math.pow(p2.lat-p1.lat,2)+Math.pow(p2.lng-p1.lng,2));
+        const curveOffset=dist*0.15;
+        const ctrlLat=midLat+curveOffset*(i%2===0?1:-1);
+        const ctrlLng=midLng;
+
+        // Generate points along quadratic bezier
+        const points=[];
+        for(let t=0;t<=1;t+=0.05){
+          const lat=(1-t)*(1-t)*p1.lat+2*(1-t)*t*ctrlLat+t*t*p2.lat;
+          const lng=(1-t)*(1-t)*p1.lng+2*(1-t)*t*ctrlLng+t*t*p2.lng;
+          points.push([lat,lng]);
+        }
+
+        const line=L.polyline(points,{
+          color:color,weight:1.2,opacity:.35,
+          dashArray:'6,8',className:'leaflet-connection-line'
+        }).addTo(leafletMap);
+        connectionLines.push(line);
+      }
+    }
+  }
+}
+
+// Map filter function
+function setMapFilter(filter){
+  if(filter==='lines'){
+    showLines=!showLines;
+    document.querySelectorAll('.map-filter-btn[data-filter="lines"]').forEach(b=>b.classList.toggle('active',showLines));
+    if(leafletMap)renderMapDots();
+    return;
+  }
+  mapFilter=filter;
+  // Update button states
+  document.querySelectorAll('.map-filter-btn[data-filter]').forEach(b=>{
+    if(b.dataset.filter!=='lines')b.classList.toggle('active',b.dataset.filter===filter);
+  });
+  if(leafletMap)renderMapDots();
+}
+
+// Search handler
+function initMapSearch(){
+  const searchInput=document.getElementById('mapSearch');
+  if(!searchInput)return;
+  const d=I[curLang]||{};
+  searchInput.placeholder=d.m_search_ph||'🔍 搜索企业...';
+  let debounceTimer;
+  searchInput.oninput=function(e){
+    clearTimeout(debounceTimer);
+    debounceTimer=setTimeout(()=>{
+      mapSearchTerm=e.target.value.trim();
+      if(leafletMap)renderMapDots();
+    },200);
+  };
 }
 
 function renderMapLabels(){/* merged into renderMapDots */}
 
-function renderAll(){renderNews();renderKW();renderCards();renderTrends();renderTL();renderCmp('cmpEcom',CMP_ECOM);renderCmp('cmpLogi',CMP_LOGI);renderLegend();bindCardHover();resetMapPanel();if(leafletMap){renderMapDots()}}
+function renderAll(){renderNews();renderKW();renderCards();renderTrends();renderTL();renderCmp('cmpEcom',CMP_ECOM);renderCmp('cmpLogi',CMP_LOGI);renderLegend();bindCardHover();resetMapPanel();if(leafletMap){renderMapDots()}initMapSearch()}
 
 /* ==========================================
    INTERACTIONS
@@ -1296,6 +1482,9 @@ function setLang(lang){
     if(!el._orig)el._orig=el.textContent;
     el.textContent=d[k]?d[k]:el._orig;
   });
+  // Update search placeholder
+  const searchInput=document.getElementById('mapSearch');
+  if(searchInput)searchInput.placeholder=d.m_search_ph||'🔍 搜索企业...';
   $('langDD').style.display='none';
   renderAll();
 }
@@ -1320,13 +1509,22 @@ function resetMapPanel(){
   $('mapPanelEmpty').style.display='';
   $('mapPanelContent').style.display='none';
   $('mapPanelContent').innerHTML='';
-  // Reset Leaflet markers to normal style
+  // Remove region highlight
+  if(regionHighlight&&leafletMap)leafletMap.removeLayer(regionHighlight);
+  regionHighlight=null;
+  // Reset filter visual state on markers
   circleMarkers.forEach(m=>{
-    const r=m._regKey;
-    const co=Object.values(REGIONS).flatMap(reg=>reg.companies).find(c=>c.name===m._compName);
+    const co=Object.values(REGIONS).flatMap(r=>r.companies).find(c=>c.name===m._compName);
     if(co)m.setStyle({fillOpacity:.7,weight:1.5,radius:co.r});
   });
+  // Clear connection lines (unless filter is active)
+  if(mapFilter==='all'&&!showLines){
+    connectionLines.forEach(l=>leafletMap&&leafletMap.removeLayer(l));
+    connectionLines=[];
+  }
 }
+
+let regionHighlight=null;
 
 function showRegionPanel(regKey){
   const reg=REGIONS[regKey];if(!reg)return;
@@ -1335,6 +1533,10 @@ function showRegionPanel(regKey){
   const content=$('mapPanelContent');
   content.style.display='';
 
+  // Remove old region highlight
+  if(regionHighlight&&leafletMap)leafletMap.removeLayer(regionHighlight);
+  regionHighlight=null;
+
   // Highlight this region's markers, dim others
   circleMarkers.forEach(m=>{
     const co=Object.values(REGIONS).flatMap(r=>r.companies).find(c=>c.name===m._compName);
@@ -1342,9 +1544,18 @@ function showRegionPanel(regKey){
     if(m._regKey===regKey){
       m.setStyle({fillOpacity:1,weight:3,radius:co.r*1.3});
     }else{
-      m.setStyle({fillOpacity:.2,weight:1,radius:co.r*.7});
+      m.setStyle({fillOpacity:.15,weight:1,radius:co.r*.6});
     }
   });
+
+  // Draw region highlight rectangle
+  if(leafletMap){
+    const bounds=L.latLngBounds(reg.companies.map(c=>[c.lat,c.lng]));
+    regionHighlight=L.rectangle(bounds.pad(0.5),{
+      color:'rgba(255,105,0,.3)',weight:1.5,fillColor:'rgba(255,105,0,.06)',fillOpacity:1,
+      dashArray:'4,6'
+    }).addTo(leafletMap);
+  }
 
   // Fly to region
   if(leafletMap)leafletMap.flyTo([reg.labelPos[0],reg.labelPos[1]],3,{duration:.8});
@@ -1353,9 +1564,12 @@ function showRegionPanel(regKey){
   html+=`<div class="region-title">${L(reg.title)} <span class="region-tag">${L(reg.stat)}</span></div>`;
   html+=`<div class="region-companies">`;
   reg.companies.forEach(co=>{
+    const coType=CO_TYPE[co.name]||'ecom';
+    const typeLabel=coType==='ecom'?{zh:'电商',en:'E-com'}:{zh:'物流',en:'Logistics'};
     html+=`<div class="region-co" data-comp="${co.name}" onclick="showCompPanel('${co.name}')">
       <span class="co-dot" style="background:${co.color}"></span>
       <span class="co-name">${co.name}</span>
+      <span class="co-tag">${L(typeLabel)}</span>
       <span class="co-share">${L(co.share)}</span>
     </div>`;
   });
@@ -1393,6 +1607,36 @@ function showCompPanel(compName){
   if(leafletMap&&regions.length>0){
     const bounds=L.latLngBounds(regions.map(r=>[r.co.lat,r.co.lng]));
     leafletMap.flyToBounds(bounds.pad(.5),{duration:.8});
+  }
+
+  // Draw connection lines for this company
+  connectionLines.forEach(l=>leafletMap&&leafletMap.removeLayer(l));
+  connectionLines=[];
+  if(regions.length>=2&&leafletMap){
+    const coColor2=regions[0].co.color;
+    for(let i=0;i<regions.length-1;i++){
+      for(let j=i+1;j<regions.length;j++){
+        const p1=L.latLng(regions[i].co.lat,regions[i].co.lng);
+        const p2=L.latLng(regions[j].co.lat,regions[j].co.lng);
+        const midLat=(p1.lat+p2.lat)/2;
+        const midLng=(p1.lng+p2.lng)/2;
+        const dist=Math.sqrt(Math.pow(p2.lat-p1.lat,2)+Math.pow(p2.lng-p1.lng,2));
+        const curveOffset=dist*0.15;
+        const ctrlLat=midLat+curveOffset*(i%2===0?1:-1);
+        const ctrlLng=midLng;
+        const points=[];
+        for(let t=0;t<=1;t+=0.04){
+          const lat=(1-t)*(1-t)*p1.lat+2*(1-t)*t*ctrlLat+t*t*p2.lat;
+          const lng=(1-t)*(1-t)*p1.lng+2*(1-t)*t*ctrlLng+t*t*p2.lng;
+          points.push([lat,lng]);
+        }
+        const line=L.polyline(points,{
+          color:coColor2,weight:1.8,opacity:.5,
+          dashArray:'6,8',className:'leaflet-connection-line'
+        }).addTo(leafletMap);
+        connectionLines.push(line);
+      }
+    }
   }
 
   // Find company color
@@ -1512,8 +1756,12 @@ function initLeafletMap(){
   }).addTo(leafletMap);
   // Zoom control position
   leafletMap.zoomControl.setPosition('topleft');
+  // Click on empty map area → reset panel
+  leafletMap.on('click',()=>{resetMapPanel()});
   // Initial render
   renderMapDots();
+  // Init search
+  initMapSearch();
 }
 
 // Lazy-init: only when map section enters viewport
