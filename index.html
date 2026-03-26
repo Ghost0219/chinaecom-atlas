@@ -627,6 +627,10 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
 
 // i18n static strings
 const I={
+'zh':{tbl_platform:'平台',tbl_cover:'覆盖市场',tbl_scale:'规模',tbl_mode:'核心模式',tbl_focus:'2026重点',tbl_risk:'主要风险',
+tbl_company:'企业',tbl_advantage:'核心优势',tbl_overseas:'出海模式',
+ch_title:'⚠️ 面临的困境',news_from:'来源',view_src:'点击查看原文',explore:'🔗 点击查看原文 →',
+kw_why:'入选原因：',src_btn:'来源'},
 'zh-TW':{nav0:'動態',nav1:'地圖',nav2:'熱詞',nav3:'電商',nav4:'物流',nav5:'趨勢',nav6:'大事記',nav7:'對比',
 hero_badge:'📊 2026 BRIEFING · 數據截至2026年3月',hero_t1:'中國電商與物流',hero_t2:'出海全景',
 hero_sub:'從TikTok Shop千億美元GMV到菜鳥全球40+海外倉，深度解析電商與物流兩大板塊的全球化戰略、困境與趨勢',
@@ -1073,7 +1077,7 @@ const CR={
    ========================================== */
 
 function renderNews(){
-  const d=I[curLang]||I.zh||{};
+  const d=I[curLang]||{};
   $('newsList').innerHTML=NEWS.map(n=>`
     <a class="news-item" href="${n.href}" target="_blank" rel="noopener">
       <div class="news-date"><div class="day">${n.day}</div><div class="month">${L(n.month)}</div></div>
