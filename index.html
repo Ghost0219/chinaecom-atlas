@@ -11,14 +11,14 @@
 <meta name="theme-color" content="#080810">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
 <style>
-/* ===== TOKENS ===== */
+/* ===== TOKENS — Apple-inspired dark ===== */
 :root{
-  --bg:#080810;--sf:#10101a;--sf2:#181828;--bd:#252540;
-  --tx:#e4e4f0;--dim:#7878a0;
-  --ac:#6366f1;--ac2:#818cf8;--ac3:#38bdf8;
-  --red:#f43f5e;--org:#f59e0b;--grn:#22c55e;--pnk:#ec4899;
-  --grd:linear-gradient(135deg,#6366f1,#a78bfa,#38bdf8);
-  --r:12px;--rs:8px;
+  --bg:#000000;--sf:#1c1c1e;--sf2:#2c2c2e;--bd:#38383a;
+  --tx:#f5f5f7;--dim:#8e8e93;
+  --ac:#0a84ff;--ac2:#5e5ce6;--ac3:#64d2ff;
+  --red:#ff453a;--org:#ff9f0a;--grn:#30d158;--pnk:#ff375f;
+  --grd:linear-gradient(135deg,#0a84ff,#5e5ce6,#64d2ff);
+  --r:16px;--rs:12px;
   --ease:cubic-bezier(.4,0,.2,1);
 }
 /* ===== RESET ===== */
@@ -50,9 +50,9 @@ img{display:block;max-width:100%}
   pointer-events:none;z-index:0;will-change:transform;
   animation:glow 25s ease-in-out infinite alternate;
 }
-.glow.g1{width:500px;height:500px;background:#6366f1;top:-150px;left:-80px}
-.glow.g2{width:400px;height:400px;background:#38bdf8;bottom:-100px;right:-60px;animation-delay:-12s}
-.glow.g3{width:300px;height:300px;background:#ec4899;top:50%;left:60%;animation-delay:-6s}
+.glow.g1{width:500px;height:500px;background:#0a84ff;top:-150px;left:-80px}
+.glow.g2{width:400px;height:400px;background:#64d2ff;bottom:-100px;right:-60px;animation-delay:-12s}
+.glow.g3{width:300px;height:300px;background:#bf5af2;top:50%;left:60%;animation-delay:-6s}
 @keyframes glow{
   0%{transform:translate(0,0) scale(1)}
   50%{transform:translate(40px,-50px) scale(1.08)}
@@ -63,9 +63,9 @@ img{display:block;max-width:100%}
 /* ===== NAV ===== */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(8,8,16,.88);backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--bd);padding:0 1.5rem;
+  background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);padding:0 1.5rem;
 }
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
 .nav-logo{font-weight:800;font-size:1rem;background:var(--grd);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.02em}
@@ -166,7 +166,7 @@ section+section::before{
 /* ===== NEWS ===== */
 .news-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.8rem}
 .news-time{font-size:.72rem;color:var(--dim);background:var(--sf);padding:.35rem .8rem;border-radius:var(--rs);border:1px solid var(--bd)}
-.news-time .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--grn);margin-right:.3rem;animation:pulse 2s ease-in-out infinite}
+.news-time .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--grn);margin-right:.3rem;animation:none}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 .news-list{display:flex;flex-direction:column;gap:.8rem}
@@ -205,17 +205,17 @@ section+section::before{
 .ptag.cn{background:rgba(245,158,11,.08);color:#f59e0b}
 .ptag.best{background:rgba(34,197,94,.08);color:#22c55e}
 .ptag.jdprop{background:rgba(239,68,68,.1);color:#ef4444}
-.ptag.pship{background:rgba(139,92,246,.1);color:#a78bfa}
+.ptag.pship{background:rgba(94,92,230,.1);color:#bf5af2}
 
 /* ===== MAP ===== */
 .map-layout{display:flex;gap:1.2rem;align-items:flex-start}
 .map-left{flex:1;min-width:0}
 .map-right{width:320px;flex-shrink:0}
-.map-svg{width:100%;height:auto;display:block;background:rgba(0,0,0,.15);border-radius:var(--r);border:1px solid var(--bd)}
-.map-svg .land{fill:#151528;stroke:#252545;stroke-width:.6;transition:fill .3s,stroke .3s,filter .3s;cursor:pointer}
-.map-svg .land:hover{fill:#1e1e3a;stroke:#3a3a60}
-.map-svg .land.hl{fill:rgba(99,102,241,.15);stroke:var(--ac);stroke-width:1.2;filter:drop-shadow(0 0 6px rgba(99,102,241,.2))}
-.map-svg .land.dim{fill:#0e0e1a;stroke:#1a1a30;opacity:.4}
+.map-svg{width:100%;height:auto;display:block;background:rgba(0,0,0,.3);border-radius:var(--r);border:1px solid var(--bd)}
+.map-svg .land{fill:#1c1c1e;stroke:#38383a;stroke-width:.6;transition:fill .3s,stroke .3s,filter .3s;cursor:pointer}
+.map-svg .land:hover{fill:#2c2c2e;stroke:#48484a}
+.map-svg .land.hl{fill:rgba(10,132,255,.15);stroke:var(--ac);stroke-width:1.2;filter:drop-shadow(0 0 6px rgba(10,132,255,.2))}
+.map-svg .land.dim{fill:#0a0a0a;stroke:#1c1c1e;opacity:.4}
 .map-dot{cursor:pointer;transition:all .3s var(--ease)}
 .map-dot:hover,.map-dot:focus{filter:brightness(1.6);outline:none}
 .map-dot.pulse{animation:dotPulse 4s ease-in-out infinite}
@@ -344,7 +344,7 @@ section+section::before{
 .pcard-list .b{color:var(--ac);flex-shrink:0;font-size:.7rem}
 
 /* Challenge box */
-.challenge-box{background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:var(--r);padding:1rem 1.2rem;margin-top:.8rem}
+.challenge-box{background:rgba(255,159,10,.04);border:1px solid rgba(255,159,10,.15);border-radius:var(--r);padding:1rem 1.2rem;margin-top:.8rem}
 .challenge-box h5{font-size:.76rem;font-weight:700;color:var(--org);margin-bottom:.4rem;display:flex;align-items:center;gap:.3rem}
 .challenge-box p{font-size:.72rem;color:var(--dim);line-height:1.55}
 
@@ -436,8 +436,8 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
   .hamburger{display:flex}
   .nav-links{
     display:none;position:fixed;top:60px;left:0;right:0;bottom:0;
-    background:rgba(8,8,16,.97);backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+    background:rgba(0,0,0,.97);backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
     flex-direction:column;padding:1.5rem;gap:.3rem;z-index:99;overflow-y:auto;
   }
   .nav-links.open{display:flex}
@@ -547,13 +547,13 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
     <div class="map-left">
       <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="世界地图">
         <defs>
-          <linearGradient id="gNA" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a1a40"/><stop offset="100%" stop-color="#141430"/></linearGradient>
-          <linearGradient id="gEU" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#181840"/><stop offset="100%" stop-color="#121230"/></linearGradient>
-          <linearGradient id="gAsia" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a1a38"/><stop offset="100%" stop-color="#141428"/></linearGradient>
+          <linearGradient id="gNA" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c1c1e"/><stop offset="100%" stop-color="#141416"/></linearGradient>
+          <linearGradient id="gEU" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c1c1e"/><stop offset="100%" stop-color="#141416"/></linearGradient>
+          <linearGradient id="gAsia" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c1c1e"/><stop offset="100%" stop-color="#141416"/></linearGradient>
         </defs>
         <rect width="1000" height="500" fill="transparent"/>
         <!-- Grid lines -->
-        <g opacity=".04" stroke="#6366f1" stroke-width=".5" fill="none">
+        <g opacity=".04" stroke="#0a84ff" stroke-width=".5" fill="none">
           <line x1="0" y1="125" x2="1000" y2="125"/><line x1="0" y1="250" x2="1000" y2="250"/><line x1="0" y1="375" x2="1000" y2="375"/>
           <line x1="250" y1="0" x2="250" y2="500"/><line x1="500" y1="0" x2="500" y2="500"/><line x1="750" y1="0" x2="750" y2="500"/>
         </g>
