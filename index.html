@@ -760,7 +760,7 @@ kw_why:'Why selected: ',src_btn:'Source'}
 
 // Helper: multilingual getter
 let curLang='zh';
-const L=(d)=>typeof d==='object'?(d[curLang]||d.zh||''):d;
+const _t=(d)=>typeof d==='object'?(d[curLang]||d.zh||''):d;
 
 // NEWS
 const NEWS=[
@@ -1222,11 +1222,11 @@ function renderNews(){
   const d=I[curLang]||{};
   $('newsList').innerHTML=NEWS.map(n=>`
     <a class="news-item" href="${n.href}" target="_blank" rel="noopener">
-      <div class="news-date"><div class="day">${n.day}</div><div class="month">${L(n.month)}</div></div>
+      <div class="news-date"><div class="day">${n.day}</div><div class="month">${_t(n.month)}</div></div>
       <div class="news-body">
-        <div class="news-title">${L(n.title)}</div>
-        <div class="news-sum">${L(n.sum)}</div>
-        <div class="news-src"><span class="ptag ${n.tag}">${L(n.src)}</span> ${d.src_btn||'来源'}：${d.view_src||'点击查看原文'}</div>
+        <div class="news-title">${_t(n.title)}</div>
+        <div class="news-sum">${_t(n.sum)}</div>
+        <div class="news-src"><span class="ptag ${n.tag}">${_t(n.src)}</span> ${d.src_btn||'来源'}：${d.view_src||'点击查看原文'}</div>
         <div class="news-ext">${d.explore||'🔗 点击查看原文 →'}</div>
       </div>
     </a>`).join('');
@@ -1235,8 +1235,8 @@ function renderNews(){
 function renderKW(){
   const d=I[curLang]||{};
   $('kwCloud').innerHTML=KWS.map(k=>{
-    const tip=L(k.tip);
-    return`<span class="kw ${k.cls}" data-key="${k.key}" tabindex="0" role="button">${L(k.label)}
+    const tip=_t(k.tip);
+    return`<span class="kw ${k.cls}" data-key="${k.key}" tabindex="0" role="button">${_t(k.label)}
       <div class="kw-tip"><div class="kt">${tip.t}</div><div class="km">${tip.m}</div><div class="kr"><strong>${d.kw_why||'入选原因：'}</strong>${tip.r}</div></div>
     </span>`;
   }).join('');
@@ -1244,15 +1244,15 @@ function renderKW(){
 
 function cardHTML(c){
   const d=I[curLang]||{};
-  return`<div class="pcard" data-name="${L(c.name)}">
+  return`<div class="pcard" data-name="${_t(c.name)}">
     <div class="pcard-head">
       <div class="pcard-icon" style="background:${c.iconBg}">${c.icon}</div>
-      <div><div class="pcard-name">${L(c.name)}</div><div class="pcard-sub">${L(c.sub)}</div></div>
+      <div><div class="pcard-name">${_t(c.name)}</div><div class="pcard-sub">${_t(c.sub)}</div></div>
     </div>
-    <div class="pcard-metrics">${c.metrics.map(m=>`<div class="m"><div class="mv">${m.v}</div><div class="ml">${L(m.l)}</div></div>`).join('')}</div>
-    <div class="pcard-tags">${c.tags.map(t=>`<span class="tag ${t.cls}">${L(t.t)}</span>`).join('')}</div>
-    <ul class="pcard-list">${c.list.map(i=>`<li><span class="b">▸</span>${L(i)}</li>`).join('')}</ul>
-    <div class="challenge-box"><h5>${d.ch_title||'⚠️ 面临的困境'}</h5><p>${L(c.challenge)}</p></div>
+    <div class="pcard-metrics">${c.metrics.map(m=>`<div class="m"><div class="mv">${m.v}</div><div class="ml">${_t(m.l)}</div></div>`).join('')}</div>
+    <div class="pcard-tags">${c.tags.map(t=>`<span class="tag ${t.cls}">${_t(t.t)}</span>`).join('')}</div>
+    <ul class="pcard-list">${c.list.map(i=>`<li><span class="b">▸</span>${_t(i)}</li>`).join('')}</ul>
+    <div class="challenge-box"><h5>${d.ch_title||'⚠️ 面临的困境'}</h5><p>${_t(c.challenge)}</p></div>
   </div>`;
 }
 
@@ -1263,15 +1263,15 @@ function renderCards(){
 
 function renderTrends(){
   $('trendsGrid').innerHTML=TRENDS.map(t=>`
-    <div class="tcard"><div class="tnum">${t.n}</div><div class="ttitle">${L(t.t)}</div><div class="tdesc">${L(t.d)}</div></div>`).join('');
+    <div class="tcard"><div class="tnum">${t.n}</div><div class="ttitle">${_t(t.t)}</div><div class="tdesc">${_t(t.d)}</div></div>`).join('');
 }
 
 function renderTL(){
-  const tagLbl={e:L({zh:'电商',en:'E-com'}),l:L({zh:'物流',en:'Logistics'}),el:L({zh:'电商 物流',en:'E-com Logistics'})};
+  const tagLbl={e:_t({zh:'电商',en:'E-com'}),l:_t({zh:'物流',en:'Logistics'}),el:_t({zh:'电商 物流',en:'E-com Logistics'})};
   $('tlList').innerHTML=TL.map(t=>{
     const tags=t.tag.split('').map(c=>`<span class="tl-tag ${c}">${tagLbl[c]||c}</span>`).join(' ');
     return`<a class="tl-link" href="${t.href}" target="_blank" rel="noopener">
-      <div class="tl-item"><div class="tl-date">${t.date} ${tags}</div><div class="tl-title">${L(t.title)}</div><div class="tl-desc">${L(t.desc)}</div></div>
+      <div class="tl-item"><div class="tl-date">${t.date} ${tags}</div><div class="tl-title">${_t(t.title)}</div><div class="tl-desc">${_t(t.desc)}</div></div>
     </a>`;
   }).join('');
 }
@@ -1283,7 +1283,7 @@ function renderCmp(elId,data){
   $(elId).innerHTML=`<table class="cmp"><thead><tr>${hdrs.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${data.rows.map(r=>{
     const ks=data.cols;
     return`<tr>${ks.map((k,i)=>{
-      const v=k===ks[0]?`<a href="${r.href}" target="_blank">${L(r.name)}</a>`:L(r[k]);
+      const v=k===ks[0]?`<a href="${r.href}" target="_blank">${_t(r.name)}</a>`:_t(r[k]);
       return`<td${riskI===i?' class="risk-cell"':''}>${v}</td>`;
     }).join('')}</tr>`;
   }).join('')}</tbody></table>`;
@@ -1291,7 +1291,7 @@ function renderCmp(elId,data){
 
 function renderLegend(){
   const sizeHint=curLang==='en'?'Dot size = market share':'圆点大小 = 市场份额';
-  $('mapLegend').innerHTML=LEGEND.map(l=>`<span><span class="dot" style="background:${l.color}"></span>${L(l)}</span>`).join('')
+  $('mapLegend').innerHTML=LEGEND.map(l=>`<span><span class="dot" style="background:${l.color}"></span>${_t(l)}</span>`).join('')
     +`<span class="size-demo"><span class="size-dot" style="width:6px;height:6px"></span><span class="size-dot" style="width:10px;height:10px"></span><span class="size-dot" style="width:14px;height:14px"></span><span style="font-size:.62rem;margin-left:2px">${sizeHint}</span></span>`;
 }
 
@@ -1345,7 +1345,7 @@ function renderMapDots(){
 
     const lbl=L.divIcon({
       className:'leaflet-region-label',
-      html:`<div style="text-align:center;pointer-events:none"><div style="font-size:11px;font-weight:700;color:#f0f0f2;text-shadow:0 1px 4px rgba(0,0,0,.8)">${L(reg.title)}</div><div style="font-size:8px;color:#9a9aa0;text-shadow:0 1px 3px rgba(0,0,0,.8)">${L(reg.stat)}</div></div>`,
+      html:`<div style="text-align:center;pointer-events:none"><div style="font-size:11px;font-weight:700;color:#f0f0f2;text-shadow:0 1px 4px rgba(0,0,0,.8)">${_t(reg.title)}</div><div style="font-size:8px;color:#9a9aa0;text-shadow:0 1px 3px rgba(0,0,0,.8)">${_t(reg.stat)}</div></div>`,
       iconSize:[140,30],iconAnchor:[70,15]
     });
     const labelMarker=L.marker([reg.labelPos[0],reg.labelPos[1]],{icon:lbl,interactive:false}).addTo(leafletMap);
@@ -1562,7 +1562,7 @@ function showRegionPanel(regKey){
   if(leafletMap)leafletMap.flyTo([reg.labelPos[0],reg.labelPos[1]],3,{duration:.8});
 
   let html=`<div class="map-panel-head"><h3>${d.m_panel_region||'区域市场'}</h3><button class="map-panel-close" onclick="resetMapPanel()" aria-label="关闭">✕</button></div><div class="map-panel-body">`;
-  html+=`<div class="region-title">${L(reg.title)} <span class="region-tag">${L(reg.stat)}</span></div>`;
+  html+=`<div class="region-title">${_t(reg.title)} <span class="region-tag">${_t(reg.stat)}</span></div>`;
   html+=`<div class="region-companies">`;
   reg.companies.forEach(co=>{
     const coType=CO_TYPE[co.name]||'ecom';
@@ -1570,8 +1570,8 @@ function showRegionPanel(regKey){
     html+=`<div class="region-co" data-comp="${co.name}" onclick="showCompPanel('${co.name}')">
       <span class="co-dot" style="background:${co.color}"></span>
       <span class="co-name">${co.name}</span>
-      <span class="co-tag">${L(typeLabel)}</span>
-      <span class="co-share">${L(co.share)}</span>
+      <span class="co-tag">${_t(typeLabel)}</span>
+      <span class="co-share">${_t(co.share)}</span>
     </div>`;
   });
   html+=`</div></div>`;
@@ -1650,15 +1650,15 @@ function showCompPanel(compName){
   let html=`<div class="map-panel-head"><h3>${d.m_panel_comp||'企业布局'}</h3><button class="map-panel-close" onclick="resetMapPanel()" aria-label="关闭">✕</button></div><div class="map-panel-body">`;
   html+=`<div class="comp-title"><span class="co-dot" style="background:${coColor};width:12px;height:12px;border-radius:50%;display:inline-block"></span>${compName}</div>`;
   if(compLink)html+=`<a class="comp-link" href="${compLink}" target="_blank" rel="noopener">🔗 ${curLang==='en'?'Visit website':'访问官网'}</a>`;
-  html+=`<div class="comp-regions">${regions.map(r=>`<span class="comp-region-tag" onclick="showRegionPanel('${r.regKey}')">${L(r.reg.title)}</span>`).join('')}</div>`;
+  html+=`<div class="comp-regions">${regions.map(r=>`<span class="comp-region-tag" onclick="showRegionPanel('${r.regKey}')">${_t(r.reg.title)}</span>`).join('')}</div>`;
   html+=`<div class="region-companies">`;
   regions.forEach(r=>{
     html+=`<div class="region-co">
       <span class="co-dot" style="background:${r.co.color}"></span>
-      <span class="co-name">${L(r.reg.title).replace(/🇺🇸|🇪🇺|🌏|🇨🇳|🇯🇵🇰🇷|🇧🇷|🌍|🇦🇺/g,'').trim()}</span>
-      <span class="co-share">${L(r.co.share)}</span>
+      <span class="co-name">${_t(r.reg.title).replace(/🇺🇸|🇪🇺|🌏|🇨🇳|🇯🇵🇰🇷|🇧🇷|🌍|🇦🇺/g,'').trim()}</span>
+      <span class="co-share">${_t(r.co.share)}</span>
     </div>
-    <div class="co-detail" style="display:block">${L(r.co.detail)}</div>`;
+    <div class="co-detail" style="display:block">${_t(r.co.detail)}</div>`;
   });
   html+=`</div></div>`;
   content.innerHTML=html;
