@@ -229,9 +229,7 @@ section+section::before{
 #leafletMap .leaflet-control-zoom a{background:var(--sf)!important;color:var(--tx)!important;border-color:var(--bd)!important}
 #leafletMap .leaflet-control-zoom a:hover{background:var(--sf2)!important;color:var(--ac)!important}
 
-/* Map dot pulse animation */
-@keyframes leafletDotPulse{0%,100%{stroke-opacity:.85;filter:drop-shadow(0 0 4px currentColor)}50%{stroke-opacity:.5;filter:drop-shadow(0 0 12px currentColor)}}
-.leaflet-dot-pulse{animation:leafletDotPulse 3s ease-in-out infinite}
+/* Map dot — subtle glow only, no pulse */
 
 /* Connection line animation */
 @keyframes dashFlow{to{stroke-dashoffset:-40}}
@@ -248,14 +246,59 @@ section+section::before{
 .map-filter-btn:hover{border-color:var(--ac);color:var(--ac)}
 .map-filter-btn.active{background:rgba(255,105,0,.1);border-color:var(--ac);color:var(--ac)}
 .map-filter-btn .fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.map-search{
-  flex:1;min-width:140px;max-width:240px;
-  background:var(--sf);border:1px solid var(--bd);border-radius:999px;
-  padding:.35rem .8rem;font-size:.72rem;color:var(--tx);
-  outline:none;transition:border-color .25s;
+
+/* Company checkbox filter */
+.map-company-filter{position:relative}
+.map-company-trigger{
+  display:flex;align-items:center;gap:.35rem;
+  padding:.3rem .7rem;border-radius:999px;font-size:.68rem;cursor:pointer;
+  background:var(--sf);border:1px solid var(--bd);color:var(--dim);
+  transition:all .25s var(--ease);min-height:30px;
 }
-.map-search::placeholder{color:var(--dim)}
-.map-search:focus{border-color:var(--ac)}
+.map-company-trigger:hover{border-color:var(--ac);color:var(--ac)}
+.map-company-trigger svg{opacity:.5}
+.map-company-count{
+  background:var(--ac);color:#fff;font-size:.58rem;font-weight:700;
+  min-width:16px;height:16px;border-radius:8px;display:inline-flex;
+  align-items:center;justify-content:center;padding:0 4px;
+}
+.map-company-dropdown{
+  position:absolute;top:calc(100% + 4px);left:0;z-index:1000;
+  background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);
+  padding:.4rem;min-width:200px;max-height:320px;overflow-y:auto;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+}
+.map-company-dropdown label{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.35rem .5rem;border-radius:8px;cursor:pointer;
+  font-size:.72rem;color:var(--tx);transition:background .15s;
+}
+.map-company-dropdown label:hover{background:var(--sf2)}
+.map-company-dropdown input[type=checkbox]{
+  appearance:none;-webkit-appearance:none;
+  width:15px;height:15px;border:1.5px solid var(--bd);border-radius:4px;
+  background:var(--bg);cursor:pointer;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+}
+.map-company-dropdown input[type=checkbox]:checked{
+  background:var(--ac);border-color:var(--ac);
+}
+.map-company-dropdown input[type=checkbox]:checked::after{
+  content:'✓';color:#fff;font-size:10px;font-weight:700;
+}
+.map-company-dropdown .company-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.map-company-dropdown .dropdown-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.3rem .5rem;margin-bottom:.2rem;border-bottom:1px solid var(--bd);
+}
+.map-company-dropdown .dropdown-head span{font-size:.65rem;color:var(--dim)}
+.map-company-dropdown .dropdown-head button{
+  background:none;border:none;color:var(--ac);font-size:.65rem;cursor:pointer;
+}
+.map-company-dropdown .dropdown-head button:hover{text-decoration:underline}
 
 /* Region hover overlay */
 .leaflet-region-hover{
@@ -530,7 +573,7 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
   .map-right{width:100%}
   .map-panel-body{max-height:360px}
   .map-filter-bar{gap:.4rem}
-  .map-search{max-width:none;flex:1 1 100%}
+  .map-company-dropdown{min-width:180px;left:auto;right:0}
 
   /* Keyword tooltip → fixed bottom on mobile */
   .kw-tip{
@@ -623,11 +666,18 @@ select:focus-visible,a:focus-visible{outline-offset:3px}
   <div class="map-layout reveal">
     <div class="map-left">
       <div class="map-filter-bar" id="mapFilterBar">
-        <input class="map-search" id="mapSearch" type="text" placeholder="🔍 搜索企业..." aria-label="搜索企业">
+        <div class="map-company-filter" id="mapCompanyFilter">
+          <button class="map-company-trigger" id="mapCompanyTrigger" onclick="toggleCompanyDropdown()">
+            <span data-i="mf_companies">筛选企业</span>
+            <span class="map-company-count" id="mapCompanyCount" style="display:none">0</span>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="map-company-dropdown" id="mapCompanyDropdown" style="display:none"></div>
+        </div>
         <button class="map-filter-btn active" data-filter="all" onclick="setMapFilter('all')"><span data-i="mf_all">全部</span></button>
         <button class="map-filter-btn" data-filter="ecom" onclick="setMapFilter('ecom')"><span class="fdot" style="background:#ff0050"></span><span data-i="mf_ecom">电商</span></button>
         <button class="map-filter-btn" data-filter="logi" onclick="setMapFilter('logi')"><span class="fdot" style="background:#06b6d4"></span><span data-i="mf_logi">物流</span></button>
-        <button class="map-filter-btn" data-filter="lines" onclick="setMapFilter('lines')"><span data-i="mf_lines">全局连线</span></button>
+        <button class="map-filter-btn" data-filter="lines" onclick="setMapFilter('lines')"><span data-i="mf_lines">连线</span></button>
         <span id="mapResultCount" style="display:none;font-size:.65rem;color:var(--ac);padding:0 .3rem"></span>
       </div>
       <div id="leafletMap" style="width:100%;height:480px;border-radius:var(--r);border:1px solid var(--bd);overflow:hidden;box-shadow:inset 0 0 40px rgba(0,0,0,.2);background:#0e0e11"></div>
@@ -714,14 +764,14 @@ tbl_company:'企业',tbl_advantage:'核心优势',tbl_overseas:'出海模式',
 ch_title:'⚠️ 面临的困境',news_from:'来源',view_src:'点击查看原文',explore:'🔗 点击查看原文 →',
 kw_why:'入选原因：',src_btn:'来源',
 m_hint:'点击地图区域或企业圆点查看详情',m_panel_region:'区域市场',m_panel_comp:'企业布局',m_share:'市场份额',m_back:'← 返回区域',m_all:'全部区域',
-mf_all:'全部',mf_ecom:'电商',mf_logi:'物流',mf_lines:'全局连线',m_search_ph:'🔍 搜索企业...',m_visit:'访问官网',m_network:'全球网络'},
+mf_all:'全部',mf_ecom:'电商',mf_logi:'物流',mf_lines:'连线',mf_companies:'筛选企业',m_visit:'访问官网',m_network:'全球网络'},
 'zh-TW':{nav0:'動態',nav1:'地圖',nav2:'熱詞',nav3:'電商',nav4:'物流',nav5:'趨勢',nav6:'大事記',nav7:'對比',
 hero_badge:'📊 2026 BRIEFING · 數據截至2026年3月',hero_t1:'中國電商與物流',hero_t2:'出海全景',
 hero_sub:'從TikTok Shop千億美元GMV到菜鳥全球40+海外倉，深度解析電商與物流兩大板塊的全球化戰略、困境與趨勢',
 s1:'全球跨境電商(美元)',s2:'中國佔比',s3:'出海物流訂單增速',s4:'覆蓋國家/總市場',scroll_more:'向下探索',
 n_lab:'📰 最新動態',n_tit:'行業資訊',n_upd:'最後更新：2026-03-25',
 m_lab:'🗺️ 全球佈局',m_tit:'交互式世界地圖',m_desc:'點擊區域或企業圓點，查看各地區的企業佈局詳情。圓點大小代表市場影響力。',m_hint:'點擊地圖區域或企業圓點查看詳情',m_panel_region:'區域市場',m_panel_comp:'企業佈局',m_share:'市場份額',m_back:'← 返回區域',m_all:'全部區域',
-mf_all:'全部',mf_ecom:'電商',mf_logi:'物流',mf_lines:'全局連線',m_search_ph:'🔍 搜索企業...',m_visit:'訪問官網',m_network:'全球網絡',
+mf_all:'全部',mf_ecom:'電商',mf_logi:'物流',mf_lines:'連線',mf_companies:'篩選企業',m_visit:'訪問官網',m_network:'全球網絡',
 map_na:'🇺🇸 北美',map_eu:'🇪🇺 歐洲',map_sea:'🌏 東南亞',map_ea:'🇨🇳 東亞',map_jk:'🇯🇵🇰🇷 日韓',map_sa:'🇧🇷 拉美',map_me:'🌍 中東',map_oc:'🇦🇺 大洋洲',
 k_lab:'🏷️ 熱詞雲圖',k_tit:'出海關鍵詞',k_desc:'點擊每個熱詞查看其含義與入選原因。',
 e_lab:'🛒 板塊一',e_tit:'電商平台出海',e_desc:'按體量排序：TikTok Shop、SHEIN、速賣通、Temu、京東國際。機遇與挑戰並存。',
@@ -742,7 +792,7 @@ hero_sub:'From TikTok Shop\'s hundred-billion GMV to Cainiao\'s 40+ overseas war
 s1:'Global Cross-border E-com (USD)',s2:'China Share',s3:'Logistics Order Growth',s4:'Countries Covered / Total',scroll_more:'Explore More',
 n_lab:'📰 Latest Updates',n_tit:'Industry News',n_upd:'Last updated: 2026-03-25',
 m_lab:'🗺️ Global Map',m_tit:'Interactive World Map',m_desc:'Click regions or company dots to see market details. Dot size represents market influence.',m_hint:'Click a region or company dot for details',m_panel_region:'Regional Market',m_panel_comp:'Company Layout',m_share:'Market Share',m_back:'← Back to Region',m_all:'All Regions',
-mf_all:'All',mf_ecom:'E-com',mf_logi:'Logistics',mf_lines:'Network Lines',m_search_ph:'🔍 Search company...',m_visit:'Visit website',m_network:'Global Network',
+mf_all:'All',mf_ecom:'E-com',mf_logi:'Logistics',mf_lines:'Lines',mf_companies:'Filter Companies',m_visit:'Visit website',m_network:'Global Network',
 map_na:'🇺🇸 N. America',map_eu:'🇪🇺 Europe',map_sea:'🌏 SE Asia',map_ea:'🇨🇳 E. Asia',map_jk:'🇯🇵🇰🇷 Japan/Korea',map_sa:'🇧🇷 LatAm',map_me:'🌍 Mid East',map_oc:'🇦🇺 Oceania',
 k_lab:'🏷️ Keywords',k_tit:'Going Global Keywords',k_desc:'Click each keyword to see its meaning and why it was selected.',
 e_lab:'🛒 Sector 1',e_tit:'E-commerce Platforms',e_desc:'Sorted by scale: TikTok Shop, SHEIN, AliExpress, Temu, JD International.',
@@ -855,66 +905,66 @@ const REGIONS={
   stat:{zh:'全球最大消费市场，但政策收紧中',en:'Largest consumer market, policy tightening'},
   labelPos:[40.5,-100],
   companies:[
-    {name:'TikTok Shop',color:'#ff0050',lat:37.4,lng:-122.1,r:14,share:{zh:'核心市场',en:'Core market'},detail:{zh:'美国是TikTok Shop最大海外市场，但面临强制出售或封禁风险',en:'US is TikTok Shop\'s largest overseas market but faces ban risk'}},
-    {name:'Temu',color:'#f59e0b',lat:42.4,lng:-71.1,r:12,share:{zh:'第二大市场',en:'#2 market'},detail:{zh:'弃用中国直邮，转向美国本地商家运营',en:'Shifted from China-direct to US local merchants'}},
-    {name:'SHEIN',color:'#ec4899',lat:34.1,lng:-118.2,r:12,share:{zh:'总部所在地',en:'HQ location'},detail:{zh:'美国是SHEIN最大市场，de minimis取消冲击巨大',en:'US is SHEIN\'s biggest market, severely impacted by de minimis removal'}},
-    {name:'Cainiao',color:'#06b6d4',lat:33.9,lng:-118.4,r:10,share:{zh:'2026部署机器人仓',en:'2026 Robot warehouses'},detail:{zh:'2026年将在美国部署自研仓储机器人+AI调度系统',en:'Deploying self-developed robots + AI dispatch in US in 2026'}},
+    {name:'TikTok Shop',color:'#ff0050',lat:37.4,lng:-122.1,r:20,share:{zh:'核心市场',en:'Core market'},detail:{zh:'美国是TikTok Shop最大海外市场，但面临强制出售或封禁风险',en:'US is TikTok Shop\'s largest overseas market but faces ban risk'}},
+    {name:'Temu',color:'#f59e0b',lat:42.4,lng:-71.1,r:16,share:{zh:'第二大市场',en:'#2 market'},detail:{zh:'弃用中国直邮，转向美国本地商家运营',en:'Shifted from China-direct to US local merchants'}},
+    {name:'SHEIN',color:'#ec4899',lat:34.1,lng:-118.2,r:16,share:{zh:'总部所在地',en:'HQ location'},detail:{zh:'美国是SHEIN最大市场，de minimis取消冲击巨大',en:'US is SHEIN\'s biggest market, severely impacted by de minimis removal'}},
+    {name:'Cainiao',color:'#06b6d4',lat:33.9,lng:-118.4,r:12,share:{zh:'2026部署机器人仓',en:'2026 Robot warehouses'},detail:{zh:'2026年将在美国部署自研仓储机器人+AI调度系统',en:'Deploying self-developed robots + AI dispatch in US in 2026'}},
     {name:'SF Express',color:'#6366f1',lat:40.6,lng:-73.8,r:8,share:{zh:'鄂州枢纽对接',en:'Ezhou hub link'},detail:{zh:'鄂州花湖机场货运航线覆盖北美',en:'Ezhou Huahu Airport cargo routes cover N. America'}},
-    {name:'AliExpress',color:'#06b6d4',lat:37.8,lng:-96.0,r:9,share:{zh:'增速TOP10',en:'Top 10 growth'},detail:{zh:'Similarweb数据显示美国访问量增长18.7%',en:'US visit growth 18.7% per Similarweb'}}
+    {name:'AliExpress',color:'#06b6d4',lat:37.8,lng:-96.0,r:10,share:{zh:'增速TOP10',en:'Top 10 growth'},detail:{zh:'Similarweb数据显示美国访问量增长18.7%',en:'US visit growth 18.7% per Similarweb'}}
   ]},
 'europe':{
   title:{zh:'🇪🇺 欧洲市场',en:'🇪🇺 Europe'},
   stat:{zh:'2026年出海新热土，各平台密集布局',en:'2026\'s new frontier, dense platform expansion'},
   labelPos:[52.0,10.0],
   companies:[
-    {name:'TikTok Shop',color:'#ff0050',lat:52.4,lng:4.9,r:13,share:{zh:'2026进4国',en:'2026: 4 countries'},detail:{zh:'计划进军荷兰、比利时、瑞典、波兰',en:'Entering Netherlands, Belgium, Sweden, Poland'}},
-    {name:'SHEIN',color:'#ec4899',lat:51.5,lng:-0.1,r:12,share:{zh:'伦敦IPO',en:'London IPO'},detail:{zh:'伦敦IPO进行中，FCA已批准，估值500亿美元',en:'London IPO underway, FCA approved, $50B valuation'}},
-    {name:'Cainiao',color:'#06b6d4',lat:48.9,lng:2.3,r:11,share:{zh:'5国机器人仓',en:'5-country robot warehouses'},detail:{zh:'荷兰、西班牙、法国、德国部署机器人仓',en:'Robot warehouses in Netherlands, Spain, France, Germany'}},
-    {name:'JD Property',color:'#ef4444',lat:52.4,lng:13.4,r:11,share:{zh:'15+项目',en:'15+ projects'},detail:{zh:'欧洲布局超15个物流项目，IPO融资重点',en:'15+ logistics projects, IPO proceeds focused here'}},
-    {name:'Temu',color:'#f59e0b',lat:50.8,lng:4.4,r:9,share:{zh:'替代增长市场',en:'Alt growth market'},detail:{zh:'欧洲成为美国之外最重要的替代增长市场',en:'Most important alternative growth market outside US'}},
+    {name:'TikTok Shop',color:'#ff0050',lat:52.4,lng:4.9,r:18,share:{zh:'2026进4国',en:'2026: 4 countries'},detail:{zh:'计划进军荷兰、比利时、瑞典、波兰',en:'Entering Netherlands, Belgium, Sweden, Poland'}},
+    {name:'SHEIN',color:'#ec4899',lat:51.5,lng:-0.1,r:16,share:{zh:'伦敦IPO',en:'London IPO'},detail:{zh:'伦敦IPO进行中，FCA已批准，估值500亿美元',en:'London IPO underway, FCA approved, $50B valuation'}},
+    {name:'Cainiao',color:'#06b6d4',lat:48.9,lng:2.3,r:14,share:{zh:'5国机器人仓',en:'5-country robot warehouses'},detail:{zh:'荷兰、西班牙、法国、德国部署机器人仓',en:'Robot warehouses in Netherlands, Spain, France, Germany'}},
+    {name:'JD Property',color:'#ef4444',lat:52.4,lng:13.4,r:14,share:{zh:'15+项目',en:'15+ projects'},detail:{zh:'欧洲布局超15个物流项目，IPO融资重点',en:'15+ logistics projects, IPO proceeds focused here'}},
+    {name:'Temu',color:'#f59e0b',lat:50.8,lng:4.4,r:10,share:{zh:'替代增长市场',en:'Alt growth market'},detail:{zh:'欧洲成为美国之外最重要的替代增长市场',en:'Most important alternative growth market outside US'}},
     {name:'AliExpress',color:'#06b6d4',lat:40.4,lng:-3.7,r:8,share:{zh:'传统市场',en:'Traditional market'},detail:{zh:'欧洲是速卖通传统优势市场',en:'Europe is AliExpress\' traditional stronghold'}},
-    {name:'SF Express',color:'#6366f1',lat:50.1,lng:8.7,r:7,share:{zh:'跨境干线覆盖',en:'Cross-border routes'},detail:{zh:'跨境干线网络覆盖欧洲主要国家',en:'Cross-border routes cover major European countries'}}
+    {name:'SF Express',color:'#6366f1',lat:50.1,lng:8.7,r:6,share:{zh:'跨境干线覆盖',en:'Cross-border routes'},detail:{zh:'跨境干线网络覆盖欧洲主要国家',en:'Cross-border routes cover major European countries'}}
   ]},
 'southeast-asia':{
   title:{zh:'🌏 东南亚市场',en:'🌏 Southeast Asia'},
   stat:{zh:'中国电商出海基本盘，增长最快区域',en:'Core market for China, fastest-growing region'},
   labelPos:[5.0,108.0],
   companies:[
-    {name:'J&T Express',color:'#ff4444',lat:-6.2,lng:106.8,r:16,share:{zh:'32.8%市占率',en:'32.8% share'},detail:{zh:'东南亚快递市场绝对龙头，覆盖印尼、越南、马来西亚等',en:'Absolute leader in SE Asia express, covers Indonesia, Vietnam, Malaysia etc.'}},
-    {name:'TikTok Shop',color:'#ff0050',lat:1.3,lng:103.8,r:13,share:{zh:'增长最快区域',en:'Fastest growth'},detail:{zh:'东南亚是TikTok Shop全球增长最快的区域',en:'SE Asia is TikTok Shop\'s fastest-growing region globally'}},
-    {name:'Cainiao',color:'#06b6d4',lat:13.8,lng:100.5,r:11,share:{zh:'核心物流节点',en:'Core logistics node'},detail:{zh:'东南亚物流网络核心节点，支撑阿里系出海',en:'Core logistics network node powering Alibaba ecosystem'}},
-    {name:'BEST Inc',color:'#22c55e',lat:10.8,lng:106.6,r:10,share:{zh:'越南"独角兽"',en:'Vietnam "unicorn"'},detail:{zh:'越南媒体称百世越南为快递界"独角兽"',en:'Vietnamese media calls it the "unicorn" of express delivery'}},
-    {name:'Lazada',color:'#06b6d4',lat:3.1,lng:101.7,r:12,share:{zh:'最大电商平台',en:'Largest e-com platform'},detail:{zh:'阿里系Lazada是东南亚最大电商平台',en:'Alibaba\'s Lazada is the largest e-commerce platform in SE Asia'}}
+    {name:'J&T Express',color:'#ff4444',lat:-6.2,lng:106.8,r:24,share:{zh:'32.8%市占率',en:'32.8% share'},detail:{zh:'东南亚快递市场绝对龙头，覆盖印尼、越南、马来西亚等',en:'Absolute leader in SE Asia express, covers Indonesia, Vietnam, Malaysia etc.'}},
+    {name:'TikTok Shop',color:'#ff0050',lat:1.3,lng:103.8,r:18,share:{zh:'增长最快区域',en:'Fastest growth'},detail:{zh:'东南亚是TikTok Shop全球增长最快的区域',en:'SE Asia is TikTok Shop\'s fastest-growing region globally'}},
+    {name:'Cainiao',color:'#06b6d4',lat:13.8,lng:100.5,r:14,share:{zh:'核心物流节点',en:'Core logistics node'},detail:{zh:'东南亚物流网络核心节点，支撑阿里系出海',en:'Core logistics network node powering Alibaba ecosystem'}},
+    {name:'BEST Inc',color:'#22c55e',lat:10.8,lng:106.6,r:12,share:{zh:'越南"独角兽"',en:'Vietnam "unicorn"'},detail:{zh:'越南媒体称百世越南为快递界"独角兽"',en:'Vietnamese media calls it the "unicorn" of express delivery'}},
+    {name:'Lazada',color:'#06b6d4',lat:3.1,lng:101.7,r:16,share:{zh:'最大电商平台',en:'Largest e-com platform'},detail:{zh:'阿里系Lazada是东南亚最大电商平台',en:'Alibaba\'s Lazada is the largest e-commerce platform in SE Asia'}}
   ]},
 'east-asia':{
   title:{zh:'🇨🇳 中国（出海大本营）',en:'🇨🇳 China (Home Base)'},
   stat:{zh:'全球最大的跨境电商商品生产基地',en:'World\'s largest cross-border e-com production base'},
   labelPos:[35.0,105.0],
   companies:[
-    {name:'Cainiao',color:'#06b6d4',lat:30.3,lng:120.2,r:13,share:{zh:'总部+核心网络',en:'HQ + core network'},detail:{zh:'菜鸟总部杭州，国内仓储网络覆盖全国',en:'Cainiao HQ in Hangzhou, nationwide warehouse network'}},
-    {name:'SF Express',color:'#6366f1',lat:30.5,lng:114.9,r:13,share:{zh:'国内最大独立快递',en:'Largest independent courier'},detail:{zh:'鄂州花湖机场是亚洲最大专业货运枢纽',en:'Ezhou Huahu Airport: Asia\'s largest cargo hub'}},
-    {name:'J&T Express',color:'#ff4444',lat:39.9,lng:116.4,r:11,share:{zh:'中国市场激烈竞争',en:'Fierce China competition'},detail:{zh:'中国快递市场竞争白热化，利润率承压',en:'Fierce competition squeezing margins'}},
-    {name:'JD Property',color:'#ef4444',lat:39.9,lng:116.5,r:11,share:{zh:'建面规模第二',en:'#2 in warehouse area'},detail:{zh:'国内建面规模第二，为希音建成肇庆枢纽',en:'#2 in domestic warehouse area, Zhaoqing hub for SHEIN'}},
-    {name:'AliExpress',color:'#06b6d4',lat:30.3,lng:120.1,r:11,share:{zh:'总部（阿里系）',en:'HQ (Alibaba)'},detail:{zh:'阿里巴巴总部杭州，速卖通+菜鸟+Lazada形成出海矩阵',en:'Alibaba HQ Hangzhou, AliExpress+Cainiao+Lazada form global matrix'}},
-    {name:'TikTok Shop',color:'#ff0050',lat:39.9,lng:116.3,r:11,share:{zh:'字节跳动总部',en:'ByteDance HQ'},detail:{zh:'字节跳动总部北京，TikTok Shop供应链核心',en:'ByteDance HQ Beijing, core supply chain for TikTok Shop'}}
+    {name:'Cainiao',color:'#06b6d4',lat:30.3,lng:120.2,r:18,share:{zh:'总部+核心网络',en:'HQ + core network'},detail:{zh:'菜鸟总部杭州，国内仓储网络覆盖全国',en:'Cainiao HQ in Hangzhou, nationwide warehouse network'}},
+    {name:'SF Express',color:'#6366f1',lat:30.5,lng:114.9,r:18,share:{zh:'国内最大独立快递',en:'Largest independent courier'},detail:{zh:'鄂州花湖机场是亚洲最大专业货运枢纽',en:'Ezhou Huahu Airport: Asia\'s largest cargo hub'}},
+    {name:'J&T Express',color:'#ff4444',lat:39.9,lng:116.4,r:14,share:{zh:'中国市场激烈竞争',en:'Fierce China competition'},detail:{zh:'中国快递市场竞争白热化，利润率承压',en:'Fierce competition squeezing margins'}},
+    {name:'JD Property',color:'#ef4444',lat:39.9,lng:116.5,r:14,share:{zh:'建面规模第二',en:'#2 in warehouse area'},detail:{zh:'国内建面规模第二，为希音建成肇庆枢纽',en:'#2 in domestic warehouse area, Zhaoqing hub for SHEIN'}},
+    {name:'AliExpress',color:'#06b6d4',lat:30.3,lng:120.1,r:14,share:{zh:'总部（阿里系）',en:'HQ (Alibaba)'},detail:{zh:'阿里巴巴总部杭州，速卖通+菜鸟+Lazada形成出海矩阵',en:'Alibaba HQ Hangzhou, AliExpress+Cainiao+Lazada form global matrix'}},
+    {name:'TikTok Shop',color:'#ff0050',lat:39.9,lng:116.3,r:14,share:{zh:'字节跳动总部',en:'ByteDance HQ'},detail:{zh:'字节跳动总部北京，TikTok Shop供应链核心',en:'ByteDance HQ Beijing, core supply chain for TikTok Shop'}}
   ]},
 'japan-korea':{
   title:{zh:'🇯🇵🇰🇷 日韩市场',en:'🇯🇵🇰🇷 Japan & Korea'},
   stat:{zh:'高消费力市场，电商渗透率持续提升',en:'High-spending market, rising e-com penetration'},
   labelPos:[36.5,130.0],
   companies:[
-    {name:'TikTok Shop',color:'#ff0050',lat:37.6,lng:127.0,r:11,share:{zh:'2026计划进入韩国',en:'2026: Korea entry'},detail:{zh:'2026年计划进入韩国市场',en:'Planning Korea market entry in 2026'}},
-    {name:'AliExpress',color:'#06b6d4',lat:35.7,lng:139.7,r:10,share:{zh:'韩国YouTube合作',en:'Korea YouTube collab'},detail:{zh:'首个在韩国与YouTube合作的中国电商平台',en:'First Chinese e-com to partner with YouTube in Korea'}},
+    {name:'TikTok Shop',color:'#ff0050',lat:37.6,lng:127.0,r:14,share:{zh:'2026计划进入韩国',en:'2026: Korea entry'},detail:{zh:'2026年计划进入韩国市场',en:'Planning Korea market entry in 2026'}},
+    {name:'AliExpress',color:'#06b6d4',lat:35.7,lng:139.7,r:12,share:{zh:'韩国YouTube合作',en:'Korea YouTube collab'},detail:{zh:'首个在韩国与YouTube合作的中国电商平台',en:'First Chinese e-com to partner with YouTube in Korea'}},
     {name:'Cainiao',color:'#06b6d4',lat:34.7,lng:135.5,r:8,share:{zh:'日韩海外仓',en:'Japan/Korea warehouses'},detail:{zh:'日韩海外仓布局，服务跨境物流',en:'Japan/Korea warehouse network for cross-border logistics'}},
-    {name:'J&T Express',color:'#ff4444',lat:35.0,lng:135.8,r:7,share:{zh:'日本市场布局',en:'Japan presence'},detail:{zh:'在日本市场有快递网络布局',en:'Delivery network presence in Japan'}}
+    {name:'J&T Express',color:'#ff4444',lat:35.0,lng:135.8,r:6,share:{zh:'日本市场布局',en:'Japan presence'},detail:{zh:'在日本市场有快递网络布局',en:'Delivery network presence in Japan'}}
   ]},
 'south-america':{
   title:{zh:'🇧🇷 拉美市场',en:'🇧🇷 Latin America'},
   stat:{zh:'新兴增长市场，巴西为核心',en:'Emerging growth market, Brazil is core'},
   labelPos:[-15.0,-55.0],
   companies:[
-    {name:'SHEIN',color:'#ec4899',lat:-23.6,lng:-46.6,r:11,share:{zh:'巴西市场强劲',en:'Strong in Brazil'},detail:{zh:'SHEIN在巴西市场表现强劲',en:'SHEIN performing strongly in Brazil'}},
-    {name:'Temu',color:'#f59e0b',lat:-12.0,lng:-52.0,r:9,share:{zh:'进入多国',en:'Multiple countries'},detail:{zh:'已进入拉美多个主要国家',en:'Entered multiple major LatAm countries'}},
+    {name:'SHEIN',color:'#ec4899',lat:-23.6,lng:-46.6,r:14,share:{zh:'巴西市场强劲',en:'Strong in Brazil'},detail:{zh:'SHEIN在巴西市场表现强劲',en:'SHEIN performing strongly in Brazil'}},
+    {name:'Temu',color:'#f59e0b',lat:-12.0,lng:-52.0,r:10,share:{zh:'进入多国',en:'Multiple countries'},detail:{zh:'已进入拉美多个主要国家',en:'Entered multiple major LatAm countries'}},
     {name:'AliExpress',color:'#06b6d4',lat:-19.9,lng:-43.9,r:8,share:{zh:'传统优势市场',en:'Traditional strength'},detail:{zh:'拉美是速卖通传统优势市场',en:'LatAm is AliExpress\' traditional stronghold'}},
     {name:'J&T Express',color:'#ff4444',lat:-22.9,lng:-43.2,r:8,share:{zh:'巴西快递网络',en:'Brazil delivery network'},detail:{zh:'在巴西建立了快递网络',en:'Established delivery network in Brazil'}}
   ]},
@@ -923,20 +973,20 @@ const REGIONS={
   stat:{zh:'高客单价市场，消费力强',en:'High AOV market, strong spending power'},
   labelPos:[25.0,48.0],
   companies:[
-    {name:'TikTok Shop',color:'#ff0050',lat:25.2,lng:55.3,r:10,share:{zh:'市场活跃',en:'Active market'},detail:{zh:'TikTok Shop在中东市场活跃',en:'TikTok Shop active in Middle East'}},
-    {name:'SHEIN',color:'#ec4899',lat:24.5,lng:54.4,r:9,share:{zh:'快速增长',en:'Rapid growth'},detail:{zh:'SHEIN在中东地区快速增长',en:'SHEIN growing rapidly in Middle East'}},
+    {name:'TikTok Shop',color:'#ff0050',lat:25.2,lng:55.3,r:12,share:{zh:'市场活跃',en:'Active market'},detail:{zh:'TikTok Shop在中东市场活跃',en:'TikTok Shop active in Middle East'}},
+    {name:'SHEIN',color:'#ec4899',lat:24.5,lng:54.4,r:10,share:{zh:'快速增长',en:'Rapid growth'},detail:{zh:'SHEIN在中东地区快速增长',en:'SHEIN growing rapidly in Middle East'}},
     {name:'AliExpress',color:'#06b6d4',lat:25.3,lng:51.5,r:8,share:{zh:'传统优势',en:'Traditional strength'},detail:{zh:'速卖通在中东有传统优势',en:'AliExpress has traditional strength in Middle East'}},
-    {name:'J&T Express',color:'#ff4444',lat:24.7,lng:46.7,r:7,share:{zh:'沙特等国布局',en:'Saudi presence'},detail:{zh:'极兔在沙特等国建立了快递网络',en:'J&T delivery network in Saudi Arabia etc.'}}
+    {name:'J&T Express',color:'#ff4444',lat:24.7,lng:46.7,r:6,share:{zh:'沙特等国布局',en:'Saudi presence'},detail:{zh:'极兔在沙特等国建立了快递网络',en:'J&T delivery network in Saudi Arabia etc.'}}
   ]},
 'oceania':{
   title:{zh:'🇦🇺 大洋洲市场',en:'🇦🇺 Oceania'},
   stat:{zh:'成熟消费市场，客单价高',en:'Mature market, high AOV'},
   labelPos:[-28.0,135.0],
   companies:[
-    {name:'Temu',color:'#f59e0b',lat:-33.9,lng:151.2,r:10,share:{zh:'澳洲市场增长',en:'Growing in Australia'},detail:{zh:'Temu在澳大利亚市场持续增长',en:'Temu growing in Australia'}},
-    {name:'Cainiao',color:'#06b6d4',lat:-37.8,lng:145.0,r:9,share:{zh:'澳洲海外仓',en:'Australia warehouses'},detail:{zh:'菜鸟在澳洲布局海外仓网络',en:'Cainiao warehouse network in Australia'}},
+    {name:'Temu',color:'#f59e0b',lat:-33.9,lng:151.2,r:12,share:{zh:'澳洲市场增长',en:'Growing in Australia'},detail:{zh:'Temu在澳大利亚市场持续增长',en:'Temu growing in Australia'}},
+    {name:'Cainiao',color:'#06b6d4',lat:-37.8,lng:145.0,r:10,share:{zh:'澳洲海外仓',en:'Australia warehouses'},detail:{zh:'菜鸟在澳洲布局海外仓网络',en:'Cainiao warehouse network in Australia'}},
     {name:'SHEIN',color:'#ec4899',lat:-31.9,lng:115.9,r:8,share:{zh:'快时尚市场',en:'Fast-fashion market'},detail:{zh:'SHEIN在澳洲快时尚市场份额领先',en:'SHEIN leads in Australia fast-fashion market'}},
-    {name:'BEST Inc',color:'#22c55e',lat:-33.7,lng:151.0,r:7,share:{zh:'东南亚-澳洲航线',en:'SE Asia-Aus routes'},detail:{zh:'百世通过东南亚-澳洲航线拓展市场',en:'BEST expanding via SE Asia-Australia routes'}}
+    {name:'BEST Inc',color:'#22c55e',lat:-33.7,lng:151.0,r:6,share:{zh:'东南亚-澳洲航线',en:'SE Asia-Aus routes'},detail:{zh:'百世通过东南亚-澳洲航线拓展市场',en:'BEST expanding via SE Asia-Australia routes'}}
   ]}
 };
 
@@ -1212,7 +1262,7 @@ const CO_TYPE={
 
 // Map filter state
 let mapFilter='all';
-let mapSearchTerm='';
+let selectedCompanies=new Set(); // company filter
 let connectionLines=[];
 let showLines=false;
 
@@ -1292,9 +1342,9 @@ function renderCmp(elId,data){
 }
 
 function renderLegend(){
-  const sizeHint=curLang==='en'?'Dot size = market share':'圆点大小 = 市场份额';
+  const sizeHint=curLang==='en'?'Influence':'影响力';
   $('mapLegend').innerHTML=LEGEND.map(l=>`<span><span class="dot" style="background:${l.color}"></span>${_t(l)}</span>`).join('')
-    +`<span class="size-demo"><span class="size-dot" style="width:6px;height:6px"></span><span class="size-dot" style="width:10px;height:10px"></span><span class="size-dot" style="width:14px;height:14px"></span><span style="font-size:.62rem;margin-left:2px">${sizeHint}</span></span>`;
+    +`<span class="size-demo"><span class="size-dot" style="width:6px;height:6px"></span><span style="font-size:.58rem;color:var(--dim)">${curLang==='en'?'Low':'低'}</span><span class="size-dot" style="width:12px;height:12px"></span><span class="size-dot" style="width:20px;height:20px"></span><span style="font-size:.58rem;color:var(--dim)">${curLang==='en'?'High':'高'}</span></span>`;
 }
 
 function renderMapDots(){
@@ -1305,31 +1355,30 @@ function renderMapDots(){
   connectionLines.forEach(l=>leafletMap.removeLayer(l));
   circleMarkers=[];regionLabels=[];connectionLines=[];
 
-  const searchLower=mapSearchTerm.toLowerCase();
+  const hasCompanyFilter=selectedCompanies.size>0;
   let visibleTotal=0;
 
   for(const[regKey,reg]of Object.entries(REGIONS)){
     reg.companies.forEach(co=>{
-      // Apply filters
+      // Apply category filters
       const coType=CO_TYPE[co.name]||'ecom';
       if(mapFilter==='ecom'&&coType!=='ecom')return;
       if(mapFilter==='logi'&&coType!=='logi')return;
-      // Apply search
-      if(searchLower&&!co.name.toLowerCase().includes(searchLower))return;
+      // Apply company checkbox filter
+      if(hasCompanyFilter&&!selectedCompanies.has(co.name))return;
 
-      const isFiltered=mapFilter!=='all'||searchLower;
-      const baseOpacity=isFiltered?.9:.7;
-      const baseWeight=isFiltered?2:1.5;
+      const baseOpacity=hasCompanyFilter?.85:.6;
+      const baseWeight=1;
 
       const marker=L.circleMarker([co.lat,co.lng],{
-        radius:co.r,fillColor:co.color,color:'#fff',weight:baseWeight,opacity:.85,
-        fillOpacity:baseOpacity,className:'leaflet-dot-pulse'
+        radius:co.r,fillColor:co.color,color:co.color,weight:baseWeight,opacity:.5,
+        fillOpacity:baseOpacity
       }).addTo(leafletMap);
       marker._compName=co.name;
       marker._regKey=regKey;
       marker._coColor=co.color;
       marker.on('click',e=>{e.originalEvent.stopPropagation();showCompPanel(co.name)});
-      marker.on('mouseover',function(){this.setStyle({fillOpacity:1,weight:3,radius:co.r*1.25})});
+      marker.on('mouseover',function(){this.setStyle({fillOpacity:1,weight:2,radius:co.r*1.15})});
       marker.on('mouseout',function(){this.setStyle({fillOpacity:baseOpacity,weight:baseWeight,radius:co.r})});
       marker.bindTooltip(co.name,{direction:'top',offset:[0,-co.r-4],className:'map-dot-tooltip'});
       circleMarkers.push(marker);
@@ -1340,10 +1389,10 @@ function renderMapDots(){
       const coType=CO_TYPE[co.name]||'ecom';
       if(mapFilter==='ecom'&&coType!=='ecom')return false;
       if(mapFilter==='logi'&&coType!=='logi')return false;
-      if(searchLower&&!co.name.toLowerCase().includes(searchLower))return false;
+      if(hasCompanyFilter&&!selectedCompanies.has(co.name))return false;
       return true;
     }).length;
-    if(visibleCount===0&&(mapFilter!=='all'||searchLower))continue;
+    if(visibleCount===0&&(mapFilter!=='all'||hasCompanyFilter))continue;
 
     const lbl=L.divIcon({
       className:'leaflet-region-label',
@@ -1355,22 +1404,16 @@ function renderMapDots(){
   }
 
   // Connection lines (animated dashed arcs between company locations)
-  if(showLines||(mapFilter!=='all'&&!searchLower)){
+  if(showLines||(mapFilter!=='all'&&!hasCompanyFilter)){
     drawConnectionLines();
   }
 
-  // Show result count when filtering/searching
-  if(mapFilter!=='all'||searchLower){
+  // Show result count when filtering
+  if(mapFilter!=='all'||hasCompanyFilter){
     const countEl=document.getElementById('mapResultCount');
     if(countEl){
       countEl.textContent=visibleTotal+(curLang==='en'?' companies':' 家企业');
       countEl.style.display='inline';
-    }
-    // Show empty state in panel if no results
-    if(visibleTotal===0&&searchLower){
-      $('mapPanelEmpty').style.display='';
-      $('mapPanelEmpty').innerHTML=`<div style="font-size:1.4rem;margin-bottom:.5rem">🔍</div><div>${curLang==='en'?'No results for "'+mapSearchTerm+'"':'未找到 "'+mapSearchTerm+'" 相关企业'}</div>`;
-      $('mapPanelContent').style.display='none';
     }
   }else{
     const countEl=document.getElementById('mapResultCount');
@@ -1443,24 +1486,84 @@ function setMapFilter(filter){
 }
 
 // Search handler
-function initMapSearch(){
-  const searchInput=document.getElementById('mapSearch');
-  if(!searchInput)return;
-  const d=I[curLang]||{};
-  searchInput.placeholder=d.m_search_ph||'🔍 搜索企业...';
-  let debounceTimer;
-  searchInput.oninput=function(e){
-    clearTimeout(debounceTimer);
-    debounceTimer=setTimeout(()=>{
-      mapSearchTerm=e.target.value.trim();
-      if(leafletMap)renderMapDots();
-    },200);
-  };
+function initCompanyFilter(){
+  const dropdown=document.getElementById('mapCompanyDropdown');
+  if(!dropdown)return;
+  // Collect all unique companies with their colors
+  const allCompanies=[];
+  const seen=new Set();
+  for(const reg of Object.values(REGIONS)){
+    reg.companies.forEach(co=>{
+      if(!seen.has(co.name)){
+        seen.add(co.name);
+        allCompanies.push({name:co.name,color:co.color,type:CO_TYPE[co.name]||'ecom'});
+      }
+    });
+  }
+  // Sort: ecom first, then logi
+  allCompanies.sort((a,b)=>a.type.localeCompare(b.type)||a.name.localeCompare(b.name));
+
+  let html=`<div class="dropdown-head"><span>${curLang==='en'?'Select companies':'选择企业'}</span><button onclick="clearCompanyFilter()">${curLang==='en'?'Clear':'清除'}</button></div>`;
+  allCompanies.forEach(co=>{
+    const checked=selectedCompanies.has(co.name)?'checked':'';
+    html+=`<label><input type="checkbox" value="${co.name}" ${checked} onchange="toggleCompany('${co.name}')"><span class="company-dot" style="background:${co.color}"></span>${co.name}</label>`;
+  });
+  dropdown.innerHTML=html;
+  updateCompanyCount();
+}
+
+function toggleCompany(name){
+  if(selectedCompanies.has(name))selectedCompanies.delete(name);
+  else selectedCompanies.add(name);
+  updateCompanyCount();
+  if(leafletMap)renderMapDots();
+}
+
+function clearCompanyFilter(){
+  selectedCompanies.clear();
+  updateCompanyCount();
+  if(leafletMap)renderMapDots();
+  // Uncheck all
+  document.querySelectorAll('#mapCompanyDropdown input[type=checkbox]').forEach(cb=>cb.checked=false);
+}
+
+function updateCompanyCount(){
+  const count=selectedCompanies.size;
+  const el=document.getElementById('mapCompanyCount');
+  const trigger=document.getElementById('mapCompanyTrigger');
+  if(el){
+    if(count>0){el.style.display='inline-flex';el.textContent=count;}
+    else el.style.display='none';
+  }
+  if(trigger){
+    const d=I[curLang]||{};
+    const label=count>0?(curLang==='en'?`Companies (${count})`:`已选 ${count} 家`):(d.mf_companies||'筛选企业');
+    trigger.querySelector('span').textContent=label;
+  }
+}
+
+function toggleCompanyDropdown(){
+  const dd=document.getElementById('mapCompanyDropdown');
+  if(!dd)return;
+  const isOpen=dd.style.display!=='none';
+  dd.style.display=isOpen?'none':'block';
+  if(!isOpen){
+    // Close when clicking outside
+    setTimeout(()=>{
+      const handler=(e)=>{
+        if(!dd.contains(e.target)&&!document.getElementById('mapCompanyTrigger').contains(e.target)){
+          dd.style.display='none';
+          document.removeEventListener('click',handler);
+        }
+      };
+      document.addEventListener('click',handler);
+    },10);
+  }
 }
 
 function renderMapLabels(){/* merged into renderMapDots */}
 
-function renderAll(){renderNews();renderKW();renderCards();renderTrends();renderTL();renderCmp('cmpEcom',CMP_ECOM);renderCmp('cmpLogi',CMP_LOGI);renderLegend();bindCardHover();resetMapPanel();if(leafletMap){renderMapDots()}initMapSearch()}
+function renderAll(){renderNews();renderKW();renderCards();renderTrends();renderTL();renderCmp('cmpEcom',CMP_ECOM);renderCmp('cmpLogi',CMP_LOGI);renderLegend();bindCardHover();resetMapPanel();if(leafletMap){renderMapDots()}initCompanyFilter()}
 
 /* ==========================================
    INTERACTIONS
@@ -1485,9 +1588,8 @@ function setLang(lang){
     if(!el._orig)el._orig=el.textContent;
     el.textContent=d[k]?d[k]:el._orig;
   });
-  // Update search placeholder
-  const searchInput=document.getElementById('mapSearch');
-  if(searchInput)searchInput.placeholder=d.m_search_ph||'🔍 搜索企业...';
+  // Update company filter labels
+  updateCompanyCount();
   $('langDD').style.display='none';
   renderAll();
 }
@@ -1779,8 +1881,8 @@ function initLeafletMap(){
   leafletMap.on('click',()=>{resetMapPanel()});
   // Initial render
   renderMapDots();
-  // Init search
-  initMapSearch();
+  // Init company filter
+  initCompanyFilter();
 }
 
 // Lazy-init: only when map section enters viewport
