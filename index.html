@@ -147,7 +147,86 @@ nav{
   50%{transform:translate(-55%,-45%) scale(.95)}
   75%{transform:translate(-48%,-52%) scale(1.05)}
 }
-.hero .subtitle{font-size:1rem;color:var(--dim);max-width:560px;margin:0 auto 2rem}
+.hero .subtitle{font-size:1rem;color:var(--dim);max-width:560px;margin:0 auto 1.5rem}
+
+/* Executive TL;DR */
+.tldr{
+  max-width:640px;margin:0 auto 1.8rem;text-align:left;
+  background:rgba(255,105,0,.04);border:1px solid rgba(255,105,0,.12);
+  border-radius:var(--r);padding:1rem 1.3rem;
+  animation:fadeUp .8s var(--ease) both;animation-delay:.4s;
+}
+.tldr-head{font-size:.75rem;font-weight:700;color:var(--ac);margin-bottom:.5rem;letter-spacing:.04em}
+.tldr-list{list-style:none;padding:0}
+.tldr-list li{
+  font-size:.78rem;color:var(--tx);line-height:1.6;padding:.3rem 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  padding-left:1rem;position:relative;
+}
+.tldr-list li:last-child{border-bottom:none}
+.tldr-list li::before{
+  content:'▸';position:absolute;left:0;color:var(--ac);font-size:.7rem;
+}
+
+/* Compact mode toggle */
+.mode-toggle{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:var(--sf);border:1px solid var(--bd);border-radius:999px;
+  padding:.3rem .7rem;font-size:.68rem;color:var(--dim);cursor:pointer;
+  transition:all .25s var(--ease);min-height:30px;
+}
+.mode-toggle:hover{border-color:var(--ac);color:var(--ac)}
+.mode-toggle.active{background:rgba(255,105,0,.08);border-color:var(--ac);color:var(--ac)}
+
+/* Compact mode — hide details */
+body.compact .pcard-detail{display:none}
+body.compact .news-sum,body.compact .news-ext{display:none}
+body.compact .tl-desc{display:none}
+body.compact .tdesc{display:none}
+body.compact .challenge-box{display:none}
+body.compact .pcard-tags{display:none}
+
+/* Expand indicator on cards */
+.pcard-expand-hint{
+  display:none;font-size:.62rem;color:var(--dim);text-align:center;
+  padding:.3rem 0;border-top:1px solid rgba(255,255,255,.03);margin-top:.5rem;
+  transition:color .2s;
+}
+body.compact .pcard-expand-hint{display:block}
+body.compact .pcard:hover .pcard-expand-hint{color:var(--ac)}
+body.compact .pcard.expanded .pcard-detail{display:block!important}
+body.compact .pcard.expanded .pcard-tags{display:flex!important}
+body.compact .pcard.expanded .challenge-box{display:block!important}
+body.compact .pcard.expanded .pcard-expand-hint .hint-text{display:none}
+body.compact .pcard.expanded .pcard-expand-hint .collapse-text{display:inline}
+.pcard-expand-hint .collapse-text{display:none}
+
+/* News expand in compact mode */
+body.compact .news-item .news-sum{display:none}
+body.compact .news-item.expanded .news-sum{display:block}
+body.compact .news-item .news-ext{display:none}
+body.compact .news-item.expanded .news-ext{display:block}
+.news-expand-hint{
+  display:none;font-size:.6rem;color:var(--dim);margin-top:.2rem;
+}
+body.compact .news-expand-hint{display:block}
+body.compact .news-item.expanded .news-expand-hint{display:none}
+
+/* Timeline expand in compact mode */
+body.compact .tl-item .tl-desc{display:none}
+body.compact .tl-link.expanded .tl-desc{display:block}
+.tl-expand-hint{
+  display:none;font-size:.6rem;color:var(--dim);
+}
+body.compact .tl-expand-hint{display:block}
+body.compact .tl-link.expanded .tl-expand-hint{display:none}
+
+/* Trends in compact mode */
+body.compact .tnum{display:none}
+body.compact .tcard{padding:1rem 1.2rem}
+body.compact .ttitle{font-size:.82rem}
+body.compact .tdesc{display:none}
+body.compact .tcard.expanded .tdesc{display:block}
 
 /* Stats */
 .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:640px;margin:0 auto}
@@ -755,6 +834,7 @@ section:hover::before{width:min(400px,80%)}
     <a href="#trends">🔮 <span data-i="nav5">趋势</span></a>
     <a href="#timeline">📅 <span data-i="nav6">大事记</span></a>
     <a href="#compare">📊 <span data-i="nav7">对比</span></a>
+    <button class="mode-toggle active" id="modeToggle" onclick="toggleMode()" title="精简/详读切换"><span id="modeLabel">⚡ 精简</span></button>
     <div class="lang-swt">
       <button class="lang-btn" id="langBtn"><span id="langLabel">简中</span> <span style="font-size:.55rem">▼</span></button>
       <div class="lang-dd" id="langDD">
@@ -778,6 +858,17 @@ section:hover::before{width:min(400px,80%)}
       <div class="stat"><div class="num">35%+</div><div class="label" data-i="s2">中国占比</div></div>
       <div class="stat"><div class="num">+58%</div><div class="label" data-i="s3">出海物流订单增速</div></div>
       <div class="stat"><div class="num">150+/200+</div><div class="label" data-i="s4">覆盖国家/总市场</div></div>
+    </div>
+    <!-- Executive TL;DR -->
+    <div class="tldr" id="tldrBlock">
+      <div class="tldr-head" data-i="tldr_head">⚡ 30秒速览</div>
+      <ul class="tldr-list">
+        <li data-i="tldr1">TikTok Shop GMV 约千亿美元，增速全球第一，2026 年进入欧洲四国+韩国</li>
+        <li data-i="tldr2">美国取消 de minimis 免税，倒逼全行业从"中国直邮"转向"海外本地化"</li>
+        <li data-i="tldr3">欧洲成新战场：TikTok Shop 四国扩张、SHEIN 伦敦 IPO、菜鸟机器人仓入五国</li>
+        <li data-i="tldr4">物流基建先行：菜鸟 40+ 海外仓、京东产发递表港交所、顺丰×极兔交叉持股</li>
+        <li data-i="tldr5">合规成本飙升：GDPR / DSA / 碳边境税正成为出海最大隐性成本</li>
+      </ul>
     </div>
     <a href="#daily" class="scroll-hint"><span data-i="scroll_more">向下探索</span><div class="arrow"></div></a>
   </div>
@@ -906,7 +997,13 @@ tbl_company:'企业',tbl_advantage:'核心优势',tbl_overseas:'出海模式',
 ch_title:'⚠️ 面临的困境',news_from:'来源',view_src:'点击查看原文',explore:'🔗 点击查看原文 →',
 kw_why:'入选原因：',src_btn:'来源',
 m_hint:'点击地图区域或企业圆点查看详情',m_panel_region:'区域市场',m_panel_comp:'企业布局',m_share:'市场份额',m_back:'← 返回区域',m_all:'全部区域',
-mf_all:'全部',mf_ecom:'电商',mf_logi:'物流',mf_lines:'连线',mf_companies:'筛选企业',mf_clear:'清除',m_visit:'访问官网',m_network:'全球网络',nf_all:'全部',back_top:'顶部'},
+mf_all:'全部',mf_ecom:'电商',mf_logi:'物流',mf_lines:'连线',mf_companies:'筛选企业',mf_clear:'清除',m_visit:'访问官网',m_network:'全球网络',nf_all:'全部',back_top:'顶部',
+tldr_head:'⚡ 30秒速览',
+tldr1:'TikTok Shop GMV 约千亿美元，增速全球第一，2026 年进入欧洲四国+韩国',
+tldr2:'美国取消 de minimis 免税，倒逼全行业从"中国直邮"转向"海外本地化"',
+tldr3:'欧洲成新战场：TikTok Shop 四国扩张、SHEIN 伦敦 IPO、菜鸟机器人仓入五国',
+tldr4:'物流基建先行：菜鸟 40+ 海外仓、京东产发递表港交所、顺丰×极兔交叉持股',
+tldr5:'合规成本飙升：GDPR / DSA / 碳边境税正成为出海最大隐性成本'},
 'zh-TW':{nav0:'動態',nav1:'地圖',nav2:'熱詞',nav3:'電商',nav4:'物流',nav5:'趨勢',nav6:'大事記',nav7:'對比',
 hero_badge:'📊 2026 BRIEFING · 數據截至2026年3月',hero_t1:'中國電商與物流',hero_t2:'出海全景',
 hero_sub:'從TikTok Shop千億美元GMV到菜鳥全球40+海外倉，深度解析電商與物流兩大板塊的全球化戰略、困境與趨勢',
@@ -927,7 +1024,13 @@ fd:'本簡報基於公開資訊整理，數據和觀點僅供參考，不構成�
 tbl_platform:'平台',tbl_cover:'覆蓋市場',tbl_scale:'規模',tbl_mode:'核心模式',tbl_focus:'2026重點',tbl_risk:'主要風險',
 tbl_company:'企業',tbl_advantage:'核心優勢',tbl_overseas:'出海模式',
 ch_title:'⚠️ 面臨的困境',news_from:'來源',view_src:'點擊查看原文',explore:'🔗 點擊查看原文 →',
-kw_why:'入選原因：',src_btn:'來源'},
+kw_why:'入選原因：',src_btn:'來源',
+tldr_head:'⚡ 30秒速覽',
+tldr1:'TikTok Shop GMV 約千億美元，增速全球第一，2026年進入歐洲四國+韓國',
+tldr2:'美國取消 de minimis 免稅，倒逼全行業從"中國直郵"轉向"海外本地化"',
+tldr3:'歐洲成新戰場：TikTok Shop四國擴張、SHEIN倫敦IPO、菜鳥機器人倉入五國',
+tldr4:'物流基建先行：菜鳥40+海外倉、京東產發遞表港交所、順豐×極兔交叉持股',
+tldr5:'合規成本飆升：GDPR / DSA / 碳邊境稅正成為出海最大隱性成本'},
 'en':{nav0:'News',nav1:'Map',nav2:'Keywords',nav3:'E-com',nav4:'Logistics',nav5:'Trends',nav6:'Timeline',nav7:'Compare',
 hero_badge:'📊 2026 BRIEFING · Data as of March 2026',hero_t1:'China E-commerce & Logistics',hero_t2:'Global Expansion',
 hero_sub:'From TikTok Shop\'s hundred-billion GMV to Cainiao\'s 40+ overseas warehouses — deep analysis of e-commerce and logistics globalization',
@@ -947,7 +1050,13 @@ ft:'ChinaEcom Atlas · Compiled: March 25, 2026',fd:'Based on public information
 tbl_platform:'Platform',tbl_cover:'Coverage',tbl_scale:'Scale',tbl_mode:'Core Model',tbl_focus:'2026 Focus',tbl_risk:'Key Risks',
 tbl_company:'Company',tbl_advantage:'Edge',tbl_overseas:'Model',
 ch_title:'⚠️ Challenges',news_from:'Source',view_src:'View source',explore:'🔗 View source →',
-kw_why:'Why selected: ',src_btn:'Source'}
+kw_why:'Why selected: ',src_btn:'Source',
+tldr_head:'⚡ 30-Second Briefing',
+tldr1:'TikTok Shop GMV ~$100B, #1 growth globally, entering 4 EU countries + Korea in 2026',
+tldr2:'US removes de minimis exemption — forcing industry-wide shift from China-direct to local operations',
+tldr3:'Europe is the new frontier: TikTok Shop 4-country expansion, SHEIN London IPO, Cainiao robot warehouses in 5 countries',
+tldr4:'Infrastructure leads: Cainiao 40+ overseas warehouses, JD Property HK IPO filing, SF × J&T cross-shareholding',
+tldr5:'Compliance costs soaring: GDPR / DSA / Carbon Border Tax becoming the biggest hidden cost of going global'}
 };
 
 // Helper: multilingual getter
@@ -1464,6 +1573,24 @@ function updateReadingProgress(){
 }
 window.addEventListener('scroll',updateReadingProgress,{passive:true});
 
+// Mode toggle (compact / detailed)
+let isCompact=true;
+function toggleMode(){
+  isCompact=!isCompact;
+  document.body.classList.toggle('compact',isCompact);
+  const btn=document.getElementById('modeToggle');
+  const label=document.getElementById('modeLabel');
+  if(isCompact){
+    label.textContent=curLang==='en'?'⚡ Compact':'⚡ 精简';
+    btn.classList.add('active');
+  }else{
+    label.textContent=curLang==='en'?'📖 Detailed':'📖 详读';
+    btn.classList.remove('active');
+  }
+}
+// Default to compact
+document.body.classList.add('compact');
+
 // Map filter state
 let mapFilter='all';
 let selectedCompanies=new Set(); // company filter
@@ -1477,11 +1604,12 @@ let showLines=false;
 function renderNews(){
   const d=I[curLang]||{};
   $('newsList').innerHTML=NEWS.map(n=>`
-    <a class="news-item" href="${n.href}" target="_blank" rel="noopener" data-tag="${n.tag}">
+    <a class="news-item" href="${n.href}" target="_blank" rel="noopener" data-tag="${n.tag}" onclick="if(event.ctrlKey||event.metaKey)return;event.preventDefault();this.classList.toggle('expanded')">
       <div class="news-date"><div class="day">${n.day}</div><div class="month">${_t(n.month)}</div></div>
       <div class="news-body">
         <div class="news-title">${_t(n.title)}</div>
         <div class="news-sum">${_t(n.sum)}</div>
+        <div class="news-expand-hint">${curLang==='en'?'▼ tap to expand':'▼ 点击展开'}</div>
         <div class="news-src"><span class="ptag ${n.tag}">${_t(n.src)}</span> ${d.src_btn||'来源'}：${d.view_src||'点击查看原文'}</div>
         <div class="news-ext">${d.explore||'🔗 点击查看原文 →'}</div>
       </div>
@@ -1502,15 +1630,18 @@ function renderKW(){
 
 function cardHTML(c){
   const d=I[curLang]||{};
-  return`<div class="pcard" data-name="${_t(c.name)}">
+  return`<div class="pcard" data-name="${_t(c.name)}" onclick="this.classList.toggle('expanded')">
     <div class="pcard-head">
       <div class="pcard-icon" style="background:${c.iconBg}">${c.icon}</div>
       <div><div class="pcard-name">${_t(c.name)}</div><div class="pcard-sub">${_t(c.sub)}</div></div>
     </div>
     <div class="pcard-metrics">${c.metrics.map(m=>`<div class="m"><div class="mv">${m.v}</div><div class="ml">${_t(m.l)}</div></div>`).join('')}</div>
-    <div class="pcard-tags">${c.tags.map(t=>`<span class="tag ${t.cls}">${_t(t.t)}</span>`).join('')}</div>
-    <ul class="pcard-list">${c.list.map(i=>`<li><span class="b">▸</span>${_t(i)}</li>`).join('')}</ul>
-    <div class="challenge-box"><h5>${d.ch_title||'⚠️ 面临的困境'}</h5><p>${_t(c.challenge)}</p></div>
+    <div class="pcard-detail">
+      <div class="pcard-tags">${c.tags.map(t=>`<span class="tag ${t.cls}">${_t(t.t)}</span>`).join('')}</div>
+      <ul class="pcard-list">${c.list.map(i=>`<li><span class="b">▸</span>${_t(i)}</li>`).join('')}</ul>
+      <div class="challenge-box"><h5>${d.ch_title||'⚠️ 面临的困境'}</h5><p>${_t(c.challenge)}</p></div>
+    </div>
+    <div class="pcard-expand-hint"><span class="hint-text">${curLang==='en'?'▼ Tap for details':'▼ 点击展开详情'}</span><span class="collapse-text">${curLang==='en'?'▲ Collapse':'▲ 收起'}</span></div>
   </div>`;
 }
 
@@ -1521,15 +1652,16 @@ function renderCards(){
 
 function renderTrends(){
   $('trendsGrid').innerHTML=TRENDS.map(t=>`
-    <div class="tcard"><div class="tnum">${t.n}</div><div class="ttitle">${_t(t.t)}</div><div class="tdesc">${_t(t.d)}</div></div>`).join('');
+    <div class="tcard" onclick="this.classList.toggle('expanded')"><div class="tnum">${t.n}</div><div class="ttitle">${_t(t.t)}</div><div class="tdesc">${_t(t.d)}</div></div>`).join('');
 }
 
 function renderTL(){
   const tagLbl={e:_t({zh:'电商',en:'E-com'}),l:_t({zh:'物流',en:'Logistics'}),el:_t({zh:'电商 物流',en:'E-com Logistics'})};
   $('tlList').innerHTML=TL.map(t=>{
     const tags=t.tag.split('').map(c=>`<span class="tl-tag ${c}">${tagLbl[c]||c}</span>`).join(' ');
-    return`<a class="tl-link" href="${t.href}" target="_blank" rel="noopener">
-      <div class="tl-item"><div class="tl-date">${t.date} ${tags}</div><div class="tl-title">${_t(t.title)}</div><div class="tl-desc">${_t(t.desc)}</div></div>
+    return`<a class="tl-link" href="${t.href}" target="_blank" rel="noopener" onclick="if(event.ctrlKey||event.metaKey)return;event.preventDefault();this.classList.toggle('expanded')">
+      <div class="tl-item"><div class="tl-date">${t.date} ${tags}</div><div class="tl-title">${_t(t.title)}</div><div class="tl-desc">${_t(t.desc)}</div>
+      <div class="tl-expand-hint">${curLang==='en'?'▼ tap for detail':'▼ 点击展开'}</div></div>
     </a>`;
   }).join('');
 }
