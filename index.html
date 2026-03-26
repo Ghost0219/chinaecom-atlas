@@ -655,6 +655,84 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
 .pcard:focus-visible,.tcard:focus-visible,.news-item:focus-visible{outline-offset:4px}
 button:focus-visible{outline-offset:3px}
 select:focus-visible,a:focus-visible{outline-offset:3px}
+.news-filter-btn:focus-visible,.map-filter-btn:focus-visible{outline-offset:2px}
+
+/* Smooth section reveal with glow divider */
+section+section::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:min(240px,60%);height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,105,0,.12),var(--bd),rgba(255,105,0,.12),transparent);
+  transition:width .6s var(--ease);
+}
+section+section::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:min(240px,60%);height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,105,0,.12),var(--bd),rgba(255,105,0,.12),transparent);
+  transition:width .6s var(--ease);
+}
+section:hover::before{width:min(400px,80%)}
+
+/* News item enter animation */
+.news-item{
+  animation:newsSlideIn .4s var(--ease) both;
+}
+@keyframes newsSlideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+.news-item:nth-child(1){animation-delay:.05s}
+.news-item:nth-child(2){animation-delay:.1s}
+.news-item:nth-child(3){animation-delay:.15s}
+.news-item:nth-child(4){animation-delay:.2s}
+.news-item:nth-child(5){animation-delay:.25s}
+.news-item:nth-child(6){animation-delay:.3s}
+.news-item:nth-child(7){animation-delay:.35s}
+.news-item:nth-child(8){animation-delay:.4s}
+.news-item:nth-child(9){animation-delay:.45s}
+.news-item:nth-child(10){animation-delay:.5s}
+
+/* Keyword pill ripple on click */
+.kw:active{transform:scale(.95);transition-duration:.1s}
+
+/* Tooltip z-index stacking fix */
+.kw-tip{z-index:60}
+
+/* Nav link active indicator */
+.nav-links a.active::after{
+  content:'';display:block;width:100%;height:2px;
+  background:var(--grd);border-radius:1px;margin-top:2px;
+  animation:navUnderline .3s var(--ease);
+}
+@keyframes navUnderline{from{width:0;opacity:0}to{width:100%;opacity:1}}
+
+/* Stat card subtle shimmer */
+.stat::after{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,105,0,.04),transparent);
+  transition:left .6s;pointer-events:none;
+}
+.stat{position:relative;overflow:hidden}
+.stat:hover::after{left:100%}
+
+/* Challenge box expand on hover */
+.challenge-box{transition:all .3s var(--ease)}
+.pcard:hover .challenge-box{border-color:rgba(255,159,10,.3);background:rgba(255,159,10,.06)}
+
+/* Timeline item hover glow */
+.tl-item:hover::before{
+  transform:translateX(-3.5px) scale(1.5);
+  box-shadow:0 0 16px rgba(255,105,0,.4);
+}
+
+/* Compare table row highlight animation */
+.cmp tr{transition:background .2s}
+.cmp tr:hover td{background:rgba(255,105,0,.04)!important}
+
+/* Mobile: enhance touch targets */
+@media(max-width:768px){
+  .news-filter-btn{padding:.4rem .7rem;font-size:.7rem;min-height:34px}
+  .kw{min-height:36px;padding:.4rem .9rem}
+  .nav-links a.active::after{display:none}
+  .hero-orb{width:300px;height:300px}
+  .stat::after{display:none}
+}
 </style>
 </head>
 <body>
