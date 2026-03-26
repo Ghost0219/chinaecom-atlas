@@ -635,7 +635,7 @@ select:focus-visible,a:focus-visible{outline-offset:3px}
     </div>
     <div class="map-right">
       <div class="map-panel" id="mapPanel">
-        <div class="map-panel-empty" id="mapPanelEmpty">
+        <div class="map-panel-empty" id="mapPanelEmpty" style="display:none">
           <div style="font-size:1.6rem;margin-bottom:.5rem">👆</div>
           <div data-i="m_hint">点击地图区域或企业圆点查看详情</div>
         </div>
@@ -1202,10 +1202,12 @@ const CR={
 
 // Company type classification
 const CO_TYPE={
-'TikTok Shop':'ecom','SHEIN':'ecom','速卖通 AliExpress':'ecom','Temu':'ecom','京东国际 Joybuy':'ecom',
+'TikTok Shop':'ecom','SHEIN':'ecom','AliExpress':'ecom','速卖通 AliExpress':'ecom','Temu':'ecom','京东国际 Joybuy':'ecom',
 'Lazada':'ecom',
-'菜鸟网络 Cainiao':'logi','顺丰速运 SF Express':'logi','极兔速递 J&T Express':'logi',
-'京东产发 JINGDONG Property':'logi','百世集团 BEST Inc':'logi'
+'Cainiao':'logi','菜鸟网络 Cainiao':'logi','SF Express':'logi','顺丰速运 SF Express':'logi',
+'J&T Express':'logi','极兔速递 J&T Express':'logi',
+'JD Property':'logi','京东产发 JINGDONG Property':'logi',
+'BEST Inc':'logi','百世集团 BEST Inc':'logi'
 };
 
 // Map filter state
@@ -1507,7 +1509,7 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(a=>a.addEventListen
 
 // --- Map Panel ---
 function resetMapPanel(){
-  $('mapPanelEmpty').style.display='';
+  $('mapPanelEmpty').style.display='none';
   $('mapPanelContent').style.display='none';
   $('mapPanelContent').innerHTML='';
   // Remove region highlight
