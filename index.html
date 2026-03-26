@@ -10,8 +10,21 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#111114">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- Fallback: if bootcdn fails, try cdnjs -->
+<script>
+(function(){
+  if(typeof L==='undefined'){
+    var s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';
+    document.head.appendChild(s);
+    var l=document.createElement('link');
+    l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+    document.head.appendChild(l);
+  }
+})();
+</script>
 <style>
 /* ===== TOKENS — Xiaomi-inspired light/dark ===== */
 :root{
@@ -223,6 +236,7 @@ section+section::before{
 #leafletMap{z-index:1}
 
 /* Leaflet overrides for dark theme */
+#leafletMap .leaflet-tile-pane{filter:brightness(.45) contrast(1.2) saturate(.3) hue-rotate(180deg) invert(1)}
 #leafletMap .leaflet-control-attribution{background:rgba(0,0,0,.6)!important;color:#666!important;font-size:.6rem!important}
 #leafletMap .leaflet-control-attribution a{color:#ff8c33!important}
 #leafletMap .leaflet-control-zoom a{background:var(--sf)!important;color:var(--tx)!important;border-color:var(--bd)!important}
@@ -1749,11 +1763,27 @@ function initLeafletMap(){
     zoomControl:true,scrollWheelZoom:true,
     attributionControl:true
   });
-  // Dark tile layer (CartoDB dark_all)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-    subdomains:'abcd',maxZoom:19
-  }).addTo(leafletMap);
+  // Dark tile layer with fallbacks (OSM primary, multiple alternatives)
+  const tileUrls=[
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    'https://tile.openstreetmap.de/{z}/{x}/{y}.png',
+    'https://tiles.wmflabs.org/osm/{z}/{x}/{y}.png'
+  ];
+  const tileOpts={
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+    subdomains:'abc',maxZoom:19
+  };
+  // Add primary tile layer
+  const primaryTile=L.tileLayer(tileUrls[0],tileOpts).addTo(leafletMap);
+  // Fallback: if tiles fail to load, try next URL
+  let fallbackUsed=false;
+  primaryTile.on('tileerror',function(){
+    if(!fallbackUsed){
+      fallbackUsed=true;
+      leafletMap.removeLayer(primaryTile);
+      L.tileLayer(tileUrls[1],tileOpts).addTo(leafletMap);
+    }
+  });
   // Zoom control position
   leafletMap.zoomControl.setPosition('topleft');
   // Click on empty map area → reset panel
@@ -1777,6 +1807,8 @@ const mapObs=new IntersectionObserver(entries=>{
 },{rootMargin:'200px'});
 const mapSec=document.getElementById('map');
 if(mapSec)mapObs.observe(mapSec);
+// Fallback: if observer doesn't fire within 3s, init anyway
+setTimeout(()=>{if(!leafletMap)initLeafletMap()},3000);
 
 // Initial render (map dots deferred)
 renderNews();renderKW();renderCards();renderTrends();renderTL();renderCmp('cmpEcom',CMP_ECOM);renderCmp('cmpLogi',CMP_LOGI);renderLegend();
