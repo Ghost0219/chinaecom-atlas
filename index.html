@@ -37,6 +37,13 @@ a{color:inherit;text-decoration:none}
 button{font:inherit}
 ul{list-style:none}
 img{display:block;max-width:100%}
+/* Reading progress bar */
+.reading-progress{
+  position:fixed;top:0;left:0;height:3px;z-index:200;
+  background:var(--grd);width:0;transition:width .15s ease-out;
+  box-shadow:0 0 10px rgba(255,105,0,.4);
+}
+
 /* Reduced motion */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -123,7 +130,23 @@ nav{
   font-size:.72rem;color:var(--ac);margin-bottom:1.2rem;letter-spacing:.06em;
 }
 .hero h1{font-size:clamp(2rem,5.5vw,3.6rem);font-weight:900;line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em}
-.hero h1 .grad{background:var(--grd);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .grad{background:var(--grd);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200% 200%;animation:gradShift 4s ease-in-out infinite}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* Hero floating orb */
+.hero-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,105,0,.08) 0%,transparent 70%);
+  width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:orbFloat 8s ease-in-out infinite;
+}
+@keyframes orbFloat{
+  0%,100%{transform:translate(-50%,-50%) scale(1)}
+  25%{transform:translate(-45%,-55%) scale(1.1)}
+  50%{transform:translate(-55%,-45%) scale(.95)}
+  75%{transform:translate(-48%,-52%) scale(1.05)}
+}
 .hero .subtitle{font-size:1rem;color:var(--dim);max-width:560px;margin:0 auto 2rem}
 
 /* Stats */
@@ -137,11 +160,12 @@ nav{
 .stat:nth-child(3){animation-delay:.4s}.stat:nth-child(4){animation-delay:.5s}
 @keyframes statPop{from{opacity:0;transform:scale(.9) translateY(15px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .stat:hover{border-color:rgba(255,105,0,.4);transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,105,0,.1)}
-.stat .num{transition:transform .3s var(--ease)}.stat:hover .num{transform:scale(1.05)}
+.stat .num{transition:transform .3s var(--ease)}.stat:hover .num{transform:scale(1.08)}
 .stat .num{
   font-size:1.25rem;font-weight:800;
   background:var(--grd);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
+.stat:active{transform:translateY(-2px) scale(.97);transition-duration:.1s}
 .stat .label{font-size:.65rem;color:var(--dim);margin-top:.15rem}
 
 /* Scroll hint */
@@ -177,6 +201,18 @@ section+section::before{
 .news-time{font-size:.72rem;color:var(--dim);background:var(--sf);padding:.35rem .8rem;border-radius:var(--rs);border:1px solid var(--bd)}
 .news-time .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--grn);margin-right:.3rem;animation:none}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.news-filter-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.news-filter-btn{
+  padding:.3rem .65rem;border-radius:999px;font-size:.66rem;cursor:pointer;
+  background:var(--sf);border:1px solid var(--bd);color:var(--dim);
+  transition:all .25s var(--ease);display:flex;align-items:center;gap:.25rem;
+  min-height:28px;white-space:nowrap;
+}
+.news-filter-btn:hover{border-color:var(--ac);color:var(--ac)}
+.news-filter-btn.active{background:rgba(255,105,0,.1);border-color:var(--ac);color:var(--ac)}
+.news-filter-btn .fdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.news-filter-count{font-size:.6rem;color:var(--ac);padding:0 .3rem;opacity:.7}
 
 .news-list{display:flex;flex-direction:column;gap:.8rem}
 .news-item{
@@ -229,7 +265,16 @@ section+section::before{
 #leafletMap .leaflet-control-zoom a{background:var(--sf)!important;color:var(--tx)!important;border-color:var(--bd)!important}
 #leafletMap .leaflet-control-zoom a:hover{background:var(--sf2)!important;color:var(--ac)!important}
 
-/* Map dot — subtle glow only, no pulse */
+/* Map dot pulse */
+@keyframes dotPulse{
+  0%{transform:scale(1);opacity:.6}
+  50%{transform:scale(1.8);opacity:0}
+  100%{transform:scale(1);opacity:0}
+}
+.leaflet-pulse-ring{
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation:dotPulse 2.5s ease-out infinite;
+}
 
 /* Connection line animation */
 @keyframes dashFlow{to{stroke-dashoffset:-40}}
@@ -397,6 +442,7 @@ section+section::before{
 .kw-tip .kr{font-size:.7rem;color:var(--dim);line-height:1.5}
 .kw-tip .kr strong{color:var(--org)}
 .kw.active .kw-tip{display:block}
+.kw:hover .kw-tip{display:block}
 
 /* ===== CARDS (E-com & Logistics) ===== */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.2rem}
@@ -413,6 +459,18 @@ section+section::before{
 .pcard:hover{transform:translateY(-6px) scale(1.008);border-color:rgba(255,105,0,.25);box-shadow:0 20px 60px rgba(255,105,0,.06)}
 .pcard:hover::before{opacity:1}
 .pcard:active{transform:translateY(-2px) scale(.995);transition-duration:.1s}
+
+/* Card stagger animation */
+.pgrid.reveal.vis .pcard,.tgrid.reveal.vis .tcard{
+  animation:cardStagger .5s var(--ease) both;
+}
+.pgrid.reveal.vis .pcard:nth-child(1),.tgrid.reveal.vis .tcard:nth-child(1){animation-delay:.05s}
+.pgrid.reveal.vis .pcard:nth-child(2),.tgrid.reveal.vis .tcard:nth-child(2){animation-delay:.12s}
+.pgrid.reveal.vis .pcard:nth-child(3),.tgrid.reveal.vis .tcard:nth-child(3){animation-delay:.19s}
+.pgrid.reveal.vis .pcard:nth-child(4),.tgrid.reveal.vis .tcard:nth-child(4){animation-delay:.26s}
+.pgrid.reveal.vis .pcard:nth-child(5),.tgrid.reveal.vis .tcard:nth-child(5){animation-delay:.33s}
+.pgrid.reveal.vis .pcard:nth-child(6){animation-delay:.4s}
+@keyframes cardStagger{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 .pcard-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
 .pcard-icon{
   width:40px;height:40px;border-radius:10px;
@@ -514,16 +572,18 @@ footer .disclaimer{margin-top:.4rem;opacity:.5;font-size:.65rem}
 
 /* Back to top */
 .back-top{
-  position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;
-  border-radius:50%;background:var(--sf);border:1px solid var(--bd);
-  color:var(--tx);font-size:1rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  border-radius:999px;background:var(--sf);border:1px solid var(--bd);
+  color:var(--tx);cursor:pointer;
+  display:flex;align-items:center;gap:.4rem;
+  padding:.5rem .9rem;font-size:.72rem;
   opacity:0;transform:translateY(16px);transition:all .3s var(--ease);
   z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.3);
 }
 .back-top.vis{opacity:1;transform:translateY(0)}
-.back-top:hover{border-color:var(--ac);color:var(--ac);box-shadow:0 6px 20px rgba(255,105,0,.15)}
+.back-top:hover{border-color:var(--ac);color:var(--ac);box-shadow:0 6px 20px rgba(255,105,0,.15);transform:translateY(-2px)}
 .back-top:active{transform:scale(.92);transition-duration:.1s}
+.back-top .arrow{font-size:.85rem}
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
@@ -598,6 +658,7 @@ select:focus-visible,a:focus-visible{outline-offset:3px}
 </style>
 </head>
 <body>
+<div class="reading-progress" id="readingProgress"></div>
 <div class="bg-grid"></div>
 <div class="glow g1"></div>
 <div class="glow g2"></div>
@@ -629,6 +690,7 @@ select:focus-visible,a:focus-visible{outline-offset:3px}
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-orb"></div>
   <div class="hero-inner">
     <div class="hero-badge" data-i="hero_badge">📊 2026 BRIEFING · 数据截至2026年3月</div>
     <h1><span data-i="hero_t1">中国电商与物流</span><br><span class="grad" data-i="hero_t2">出海全景</span></h1>
@@ -649,6 +711,19 @@ select:focus-visible,a:focus-visible{outline-offset:3px}
     <div><div class="sec-label" data-i="n_lab">📰 最新动态</div><h2 class="sec-title" data-i="n_tit">行业资讯</h2></div>
     <div class="news-time"><span class="dot"></span><span data-i="n_upd">最后更新：2026-03-25</span></div>
   </div></div>
+  <div class="news-filter-bar reveal" id="newsFilterBar">
+    <button class="news-filter-btn active" data-ntag="all" onclick="filterNews('all')"><span data-i="nf_all">全部</span></button>
+    <button class="news-filter-btn" data-ntag="tiktok" onclick="filterNews('tiktok')"><span class="fdot" style="background:#ff0050"></span>TikTok Shop</button>
+    <button class="news-filter-btn" data-ntag="shein" onclick="filterNews('shein')"><span class="fdot" style="background:#ec4899"></span>SHEIN</button>
+    <button class="news-filter-btn" data-ntag="temu" onclick="filterNews('temu')"><span class="fdot" style="background:#f59e0b"></span>Temu</button>
+    <button class="news-filter-btn" data-ntag="cn" onclick="filterNews('cn')"><span class="fdot" style="background:#f59e0b"></span>菜鸟</button>
+    <button class="news-filter-btn" data-ntag="sf" onclick="filterNews('sf')"><span class="fdot" style="background:#6366f1"></span>顺丰</button>
+    <button class="news-filter-btn" data-ntag="jt" onclick="filterNews('jt')"><span class="fdot" style="background:#ff4444"></span>极兔</button>
+    <button class="news-filter-btn" data-ntag="jdprop" onclick="filterNews('jdprop')"><span class="fdot" style="background:#ef4444"></span>京东产发</button>
+    <button class="news-filter-btn" data-ntag="best" onclick="filterNews('best')"><span class="fdot" style="background:#22c55e"></span>百世</button>
+    <button class="news-filter-btn" data-ntag="pship" onclick="filterNews('pship')"><span class="fdot" style="background:#ff8c33"></span>合作</button>
+    <span class="news-filter-count" id="newsFilterCount"></span>
+  </div>
   <div class="news-list reveal" id="newsList"></div>
 </div></section>
 
@@ -735,7 +810,7 @@ select:focus-visible,a:focus-visible{outline-offset:3px}
   <div class="cmp-wrap" id="cmpLogi"></div></div>
 </div></section>
 
-<button class="back-top" id="backTop" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+<button class="back-top" id="backTop" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部"><span class="arrow">↑</span> <span data-i="back_top">顶部</span></button>
 <footer>
   <p data-i="ft">出海罗盘 · ChinaEcom Atlas · 编制日期：2026年3月25日</p>
   <p class="disclaimer" data-i="fd">本简报基于公开信息整理，数据和观点仅供参考，不构成投资建议。</p>
@@ -753,14 +828,14 @@ tbl_company:'企业',tbl_advantage:'核心优势',tbl_overseas:'出海模式',
 ch_title:'⚠️ 面临的困境',news_from:'来源',view_src:'点击查看原文',explore:'🔗 点击查看原文 →',
 kw_why:'入选原因：',src_btn:'来源',
 m_hint:'点击地图区域或企业圆点查看详情',m_panel_region:'区域市场',m_panel_comp:'企业布局',m_share:'市场份额',m_back:'← 返回区域',m_all:'全部区域',
-mf_all:'全部',mf_ecom:'电商',mf_logi:'物流',mf_lines:'连线',mf_companies:'筛选企业',mf_clear:'清除',m_visit:'访问官网',m_network:'全球网络'},
+mf_all:'全部',mf_ecom:'电商',mf_logi:'物流',mf_lines:'连线',mf_companies:'筛选企业',mf_clear:'清除',m_visit:'访问官网',m_network:'全球网络',nf_all:'全部',back_top:'顶部'},
 'zh-TW':{nav0:'動態',nav1:'地圖',nav2:'熱詞',nav3:'電商',nav4:'物流',nav5:'趨勢',nav6:'大事記',nav7:'對比',
 hero_badge:'📊 2026 BRIEFING · 數據截至2026年3月',hero_t1:'中國電商與物流',hero_t2:'出海全景',
 hero_sub:'從TikTok Shop千億美元GMV到菜鳥全球40+海外倉，深度解析電商與物流兩大板塊的全球化戰略、困境與趨勢',
 s1:'全球跨境電商(美元)',s2:'中國佔比',s3:'出海物流訂單增速',s4:'覆蓋國家/總市場',scroll_more:'向下探索',
 n_lab:'📰 最新動態',n_tit:'行業資訊',n_upd:'最後更新：2026-03-25',
 m_lab:'🗺️ 全球佈局',m_tit:'交互式世界地圖',m_desc:'點擊區域或企業圓點，查看各地區的企業佈局詳情。圓點大小代表市場影響力。',m_hint:'點擊地圖區域或企業圓點查看詳情',m_panel_region:'區域市場',m_panel_comp:'企業佈局',m_share:'市場份額',m_back:'← 返回區域',m_all:'全部區域',
-mf_all:'全部',mf_ecom:'電商',mf_logi:'物流',mf_lines:'連線',mf_companies:'篩選企業',mf_clear:'清除',m_visit:'訪問官網',m_network:'全球網絡',
+mf_all:'全部',mf_ecom:'電商',mf_logi:'物流',mf_lines:'連線',mf_companies:'篩選企業',mf_clear:'清除',m_visit:'訪問官網',m_network:'全球網絡',nf_all:'全部',back_top:'頂部',
 map_na:'🇺🇸 北美',map_eu:'🇪🇺 歐洲',map_sea:'🌏 東南亞',map_ea:'🇨🇳 東亞',map_jk:'🇯🇵🇰🇷 日韓',map_sa:'🇧🇷 拉美',map_me:'🌍 中東',map_oc:'🇦🇺 大洋洲',
 k_lab:'🏷️ 熱詞雲圖',k_tit:'出海關鍵詞',k_desc:'點擊每個熱詞查看其含義與入選原因。',
 e_lab:'🛒 板塊一',e_tit:'電商平台出海',e_desc:'按體量排序：TikTok Shop、SHEIN、速賣通、Temu、京東國際。機遇與挑戰並存。',
@@ -781,7 +856,7 @@ hero_sub:'From TikTok Shop\'s hundred-billion GMV to Cainiao\'s 40+ overseas war
 s1:'Global Cross-border E-com (USD)',s2:'China Share',s3:'Logistics Order Growth',s4:'Countries Covered / Total',scroll_more:'Explore More',
 n_lab:'📰 Latest Updates',n_tit:'Industry News',n_upd:'Last updated: 2026-03-25',
 m_lab:'🗺️ Global Map',m_tit:'Interactive World Map',m_desc:'Click regions or company dots to see market details. Dot size represents market influence.',m_hint:'Click a region or company dot for details',m_panel_region:'Regional Market',m_panel_comp:'Company Layout',m_share:'Market Share',m_back:'← Back to Region',m_all:'All Regions',
-mf_all:'All',mf_ecom:'E-com',mf_logi:'Logistics',mf_lines:'Lines',mf_companies:'Filter Companies',mf_clear:'Clear',m_visit:'Visit website',m_network:'Global Network',
+mf_all:'All',mf_ecom:'E-com',mf_logi:'Logistics',mf_lines:'Lines',mf_companies:'Filter Companies',mf_clear:'Clear',m_visit:'Visit website',m_network:'Global Network',nf_all:'All',back_top:'Top',
 map_na:'🇺🇸 N. America',map_eu:'🇪🇺 Europe',map_sea:'🌏 SE Asia',map_ea:'🇨🇳 E. Asia',map_jk:'🇯🇵🇰🇷 Japan/Korea',map_sa:'🇧🇷 LatAm',map_me:'🌍 Mid East',map_oc:'🇦🇺 Oceania',
 k_lab:'🏷️ Keywords',k_tit:'Going Global Keywords',k_desc:'Click each keyword to see its meaning and why it was selected.',
 e_lab:'🛒 Sector 1',e_tit:'E-commerce Platforms',e_desc:'Sorted by scale: TikTok Shop, SHEIN, AliExpress, Temu, JD International.',
@@ -1249,6 +1324,68 @@ const CO_TYPE={
 'BEST Inc':'logi','百世集团 BEST Inc':'logi'
 };
 
+// News filter
+let activeNewsTag='all';
+function filterNews(tag){
+  activeNewsTag=tag;
+  document.querySelectorAll('.news-filter-btn[data-ntag]').forEach(b=>b.classList.toggle('active',b.dataset.ntag===tag));
+  let visibleCount=0;
+  document.querySelectorAll('.news-item').forEach(item=>{
+    const itemTag=item.dataset.tag;
+    const show=tag==='all'||itemTag===tag;
+    item.style.display=show?'':'none';
+    if(show)visibleCount++;
+    if(show&&tag!=='all'){
+      item.style.animation='none';
+      item.offsetHeight;
+      item.style.animation='fadeUp .4s ease-out both';
+    }
+  });
+  const countEl=document.getElementById('newsFilterCount');
+  if(countEl){
+    countEl.textContent=tag==='all'?'':visibleCount+(curLang==='en'?' articles':' 条');
+  }
+}
+
+// Counter animation
+function animateCounters(){
+  document.querySelectorAll('.stat .num').forEach(el=>{
+    const text=el.textContent;
+    const match=text.match(/^([\d,.]+)/);
+    if(!match)return;
+    const target=parseFloat(match[1].replace(/,/g,''));
+    const suffix=text.replace(match[1],'');
+    const isFloat=target%1!==0;
+    const duration=1500;
+    const start=performance.now();
+
+    function update(now){
+      const elapsed=now-start;
+      const progress=Math.min(elapsed/duration,1);
+      // Ease out cubic
+      const eased=1-Math.pow(1-progress,3);
+      const current=eased*target;
+      if(isFloat){
+        el.textContent=current.toFixed(1)+suffix;
+      }else{
+        el.textContent=Math.round(current).toLocaleString()+suffix;
+      }
+      if(progress<1)requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+// Reading progress bar
+function updateReadingProgress(){
+  const scrollTop=window.scrollY;
+  const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+  const progress=docHeight>0?(scrollTop/docHeight)*100:0;
+  const bar=document.getElementById('readingProgress');
+  if(bar)bar.style.width=progress+'%';
+}
+window.addEventListener('scroll',updateReadingProgress,{passive:true});
+
 // Map filter state
 let mapFilter='all';
 let selectedCompanies=new Set(); // company filter
@@ -1262,7 +1399,7 @@ let showLines=false;
 function renderNews(){
   const d=I[curLang]||{};
   $('newsList').innerHTML=NEWS.map(n=>`
-    <a class="news-item" href="${n.href}" target="_blank" rel="noopener">
+    <a class="news-item" href="${n.href}" target="_blank" rel="noopener" data-tag="${n.tag}">
       <div class="news-date"><div class="day">${n.day}</div><div class="month">${_t(n.month)}</div></div>
       <div class="news-body">
         <div class="news-title">${_t(n.title)}</div>
@@ -1271,6 +1408,8 @@ function renderNews(){
         <div class="news-ext">${d.explore||'🔗 点击查看原文 →'}</div>
       </div>
     </a>`).join('');
+  // Re-apply active filter
+  if(activeNewsTag!=='all')filterNews(activeNewsTag);
 }
 
 function renderKW(){
@@ -1864,9 +2003,19 @@ if(mapSec)mapObs.observe(mapSec);
 // Fallback: if observer doesn't fire within 3s, init anyway
 setTimeout(()=>{if(!leafletMap)initLeafletMap()},3000);
 
+// Counter animation when hero visible
+const heroObs=new IntersectionObserver(entries=>{
+  entries.forEach(x=>{if(x.isIntersecting){animateCounters();heroObs.disconnect()}});
+},{threshold:.3});
+const heroEl=document.querySelector('.hero');
+if(heroEl)heroObs.observe(heroEl);
+// Fallback
+setTimeout(()=>{if(document.querySelector('.stat .num')&&!document.querySelector('.stat .num')._animated)animateCounters()},2000);
+
 // Initial render (map dots deferred)
 renderNews();renderKW();renderCards();renderTrends();renderTL();renderCmp('cmpEcom',CMP_ECOM);renderCmp('cmpLogi',CMP_LOGI);renderLegend();
 bindCardHover();resetMapPanel();
+updateReadingProgress();
 </script>
 </body>
 </html>
